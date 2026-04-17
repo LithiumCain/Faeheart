@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banister Whitis — Of Stormsalt & Smoke</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cormorant+SC:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+
+  /* ── TOKENS ─────────────────────────────────────────────────── */
+  :root {
+    --cream:        #FAF7F2;
+    --cream-mid:    #F3EDE3;
+    --cream-deep:   #EDE4D6;
+    --ink:          #1C1915;
+    --ink-soft:     #3D3730;
+    --muted:        #8C7F72;
+    --gold:         #B8955A;
+    --gold-light:   #D4AE72;
+    --gold-pale:    #F0E4C8;
+    --auric:        #C9A84C;
+    --auric-glow:   #E8D08A;
+    --auric-dim:    #7A6030;
+    --star:         #2C3A5E;
+    --border:       #DDD5C4;
+    --border-light: #EDE7DA;
+    --font-display: 'Cormorant SC', serif;
+    --font-body:    'Cormorant Garamond', serif;
+    --font-alt:     'EB Garamond', serif;
+  }
+
+  /* ── RESET ──────────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ── PAGE ───────────────────────────────────────────────────── */
+  body {
+    background-color: var(--cream);
+    color: var(--ink-soft);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 80px 60px 120px;
+  }
+
+  /* ── SERIES HEADER ──────────────────────────────────────────── */
+  .series-header {
+    text-align: center;
+    letter-spacing: 0.25em;
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 300;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 52px;
+  }
+
+  /* ── HERO ───────────────────────────────────────────────────── */
+  .hero {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .hero-name {
+    font-family: var(--font-display);
+    font-size: clamp(56px, 10vw, 88px);
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 24px;
+  }
+
+  .hero-tagline {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--auric);
+    letter-spacing: 0.02em;
+    margin-bottom: 28px;
+  }
+
+  .hero-diamond {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 24px;
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+  }
+
+  .hero-diamond::before,
+  .hero-diamond::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .diamond-symbol {
+    color: var(--auric);
+    font-size: 14px;
+  }
+
+  .hero-meta {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* ── DIVIDERS ───────────────────────────────────────────────── */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    margin: 48px 0;
+  }
+
+  .divider-thin {
+    width: 100%;
+    height: 1px;
+    background: var(--border-light);
+    margin: 32px 0;
+  }
+
+  /* ── SECTION LABEL ──────────────────────────────────────────── */
+  .section-label {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.28em;
+    color: var(--auric);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-light);
+  }
+
+  /* ── LOCKED BADGE ───────────────────────────────────────────── */
+  .locked-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-display);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 4px 12px;
+    text-transform: uppercase;
+    margin-left: 12px;
+  }
+
+  .locked-badge .dot {
+    width: 5px;
+    height: 5px;
+    background: var(--auric);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* ── TRAIT GRID ─────────────────────────────────────────────── */
+  .trait-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid var(--border);
+    margin-bottom: 12px;
+  }
+
+  .trait-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .trait-cell {
+    padding: 22px 24px 26px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .trait-cell:nth-child(3n) { border-right: none; }
+  .trait-grid-2 .trait-cell:nth-child(2n) { border-right: none; }
+  .trait-cell:nth-last-child(-n+3) { border-bottom: none; }
+  .trait-grid-2 .trait-cell:nth-last-child(-n+2) { border-bottom: none; }
+
+  .trait-label {
+    font-family: var(--font-display);
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .trait-value {
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+
+  .trait-note {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  /* ── BODY TEXT ──────────────────────────────────────────────── */
+  .body-text {
+    font-family: var(--font-body);
+    font-size: 17px;
+    color: var(--ink-soft);
+    line-height: 1.85;
+    margin-bottom: 20px;
+  }
+
+  .body-text + .body-text {
+    margin-top: 4px;
+  }
+
+  /* ── QUOTE BLOCK ────────────────────────────────────────────── */
+  .quote-block {
+    border-left: 2px solid var(--auric);
+    padding: 16px 28px;
+    margin: 28px 0;
+    background: var(--cream-mid);
+  }
+
+  .quote-block p {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--star);
+    line-height: 1.8;
+  }
+
+  /* ── HERO QUOTE ─────────────────────────────────────────────── */
+  .hero-quote {
+    text-align: center;
+    padding: 36px 60px;
+    background: var(--cream-mid);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin: 40px 0;
+  }
+
+  .hero-quote p {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--star);
+    line-height: 1.65;
+    letter-spacing: 0.01em;
+  }
+
+  .hero-quote .attribution {
+    margin-top: 14px;
+    font-family: var(--font-display);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* ── BULLET LIST ────────────────────────────────────────────── */
+  .bullet-list {
+    list-style: none;
+    margin: 0 0 24px 0;
+    padding: 0;
+  }
+
+  .bullet-list li {
+    display: flex;
+    gap: 16px;
+    padding: 8px 0;
+    font-family: var(--font-body);
+    font-size: 17px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .bullet-list li:last-child { border-bottom: none; }
+
+  .bullet-list li::before {
+    content: '◆';
+    color: var(--auric);
+    font-size: 8px;
+    margin-top: 8px;
+    flex-shrink: 0;
+  }
+
+  /* ── KEY-VALUE TABLE ────────────────────────────────────────── */
+  .kv-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 24px;
+  }
+
+  .kv-table tr {
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .kv-table td {
+    padding: 12px 0;
+    font-family: var(--font-body);
+    font-size: 17px;
+    vertical-align: top;
+  }
+
+  .kv-table td:first-child {
+    font-family: var(--font-display);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--auric);
+    text-transform: uppercase;
+    width: 180px;
+    padding-right: 24px;
+    padding-top: 14px;
+  }
+
+  .kv-table td:last-child {
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+
+  /* ── RELATIONSHIP BLOCK ─────────────────────────────────────── */
+  .relationship {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border-light);
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 24px;
+  }
+
+  .relationship:last-child { border-bottom: none; }
+
+  .rel-name {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+
+  .rel-role {
+    font-family: var(--font-display);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 3px;
+  }
+
+  .rel-note {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  /* ── CALLOUT BOX ────────────────────────────────────────────── */
+  .callout {
+    background: var(--cream-deep);
+    border: 1px solid var(--border);
+    padding: 24px 30px;
+    margin: 28px 0;
+  }
+
+  .callout-label {
+    font-family: var(--font-display);
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    color: var(--auric);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .callout p {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--ink-soft);
+    line-height: 1.8;
+  }
+
+  /* ── SHIMMER SECTION ────────────────────────────────────────── */
+  .shimmer-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .shimmer-row:last-child { border-bottom: none; }
+
+  .shimmer-label {
+    font-family: var(--font-display);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--auric);
+    text-transform: uppercase;
+    width: 160px;
+    flex-shrink: 0;
+    padding-top: 4px;
+  }
+
+  .shimmer-text {
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    font-style: italic;
+  }
+
+  /* ── NOTE BLOCK ─────────────────────────────────────────────── */
+  .note-block {
+    border: 1px dashed var(--border);
+    padding: 20px 28px;
+    margin: 28px 0;
+  }
+
+  .note-block p {
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .note-block strong {
+    color: var(--ink);
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  /* ── FOOTER ─────────────────────────────────────────────────── */
+  .page-footer {
+    margin-top: 100px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .page-footer span {
+    font-family: var(--font-display);
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .footer-diamond {
+    color: var(--auric);
+    font-size: 8px;
+  }
+
+  /* ── SECTION SPACING ────────────────────────────────────────── */
+  .section { margin-bottom: 52px; }
+
+  /* ── PRINT / PDF ────────────────────────────────────────────── */
+  @media print {
+    body { background: #FAF7F2; }
+    .page { padding: 40px; }
+  }
+
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- SERIES HEADER -->
+  <div class="series-header">
+    Of Stormsalt &amp; Smoke &nbsp;—&nbsp; Faeblood Chronicles
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1 class="hero-name">Banister</h1>
+    <div class="hero-tagline">"He is not comic relief. He is cosmic relief."</div>
+    <div class="hero-diamond">
+      <span class="diamond-symbol">◆</span>
+      <span>Character Canon &nbsp;·&nbsp; Faculty &nbsp;·&nbsp; Headmaster</span>
+    </div>
+    <div class="hero-meta">Visual Canon &nbsp;·&nbsp; Book 1 &nbsp;·&nbsp; Selenari Nexus</div>
+  </div>
+
+  <!-- SIGNATURE QUOTE -->
+  <div class="hero-quote">
+    <p>"Shimmer, shimmer, shimmer."</p>
+    <div class="attribution">Signature Phrase &nbsp;·&nbsp; Canon</div>
+  </div>
+
+  <!-- BASIC INFO -->
+  <div class="section">
+    <div class="section-label">
+      Basic Info
+      <span class="locked-badge"><span class="dot"></span> Locked</span>
+    </div>
+    <table class="kv-table">
+      <tr>
+        <td>Full Name</td>
+        <td>Banister Whitis</td>
+      </tr>
+      <tr>
+        <td>Role</td>
+        <td>Headmaster of Selenari Nexus University</td>
+      </tr>
+      <tr>
+        <td>Species</td>
+        <td>Faerie — Font-Powered, Auric</td>
+      </tr>
+      <tr>
+        <td>Court / Origin</td>
+        <td>Unknown. Intentionally mysterious. Don't ask.</td>
+      </tr>
+      <tr>
+        <td>Age</td>
+        <td>Appears mid-40s. Almost certainly far older. The math doesn't work and he knows it.</td>
+      </tr>
+      <tr>
+        <td>Alignment</td>
+        <td>Chaotic Good</td>
+      </tr>
+      <tr>
+        <td>Archetype</td>
+        <td>Dumbledore if Dumbledore surfed</td>
+      </tr>
+      <tr>
+        <td>Author Casting</td>
+        <td>Matthew McConaughey — original face, golden-toned, ageless</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PHYSICAL CANON -->
+  <div class="section">
+    <div class="section-label">
+      Physical Canon
+      <span class="locked-badge"><span class="dot"></span> Locked</span>
+    </div>
+
+    <div class="trait-grid">
+      <div class="trait-cell">
+        <div class="trait-label">Build</div>
+        <div class="trait-value">Tall, rangy</div>
+        <div class="trait-note">Takes up space the way weather does — not aggressively, just inevitably.</div>
+      </div>
+      <div class="trait-cell">
+        <div class="trait-label">Skin</div>
+        <div class="trait-value">Sun-touched, warm</div>
+        <div class="trait-note">Looks like someone who has spent a lot of time somewhere beautiful. You don't know where.</div>
+      </div>
+      <div class="trait-cell">
+        <div class="trait-label">Hair</div>
+        <div class="trait-value">Wind-styled</div>
+        <div class="trait-note">Looks wind-styled even indoors. Probably is. Nobody has ever seen him fix it.</div>
+      </div>
+      <div class="trait-cell">
+        <div class="trait-label">Eyes</div>
+        <div class="trait-value">Starlight and mischief</div>
+        <div class="trait-note">They shift depending on what he's about to say. The mischief always arrives first.</div>
+      </div>
+      <div class="trait-cell">
+        <div class="trait-label">Clothing</div>
+        <div class="trait-value">Constellation-stitched</div>
+        <div class="trait-note">Always slightly askew. Always somehow perfect. You cannot explain why both are true.</div>
+      </div>
+      <div class="trait-cell">
+        <div class="trait-label">Movement</div>
+        <div class="trait-value">Unhurried</div>
+        <div class="trait-note">Moves like he's listening to music no one else can hear. Has never, in recorded memory, rushed.</div>
+      </div>
+    </div>
+
+    <!-- WINGS -->
+    <div class="callout">
+      <div class="callout-label">Wings — The Shimmer</div>
+      <p>Iridescent. Translucent. Long. They trail light like a living aurora — and they crackle when he's pleased, when he's making a point, or when the world needs to pay attention. Students call it "the shimmer." He calls it "shimmer." It has become, inexplicably, a full sentence.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PERSONALITY -->
+  <div class="section">
+    <div class="section-label">Personality</div>
+
+    <p class="body-text">Banister Whitis operates on a frequency slightly to the left of everyone else. He says things that sound like nonsense and turn out to be prophecy. He wanders campus at odd hours. His chaos is intentional, not random — every apparently offhand comment lands somewhere specific, usually in the exact place it was needed most.</p>
+
+    <p class="body-text">He gives students the advice they need, never the advice they want. He is deeply kind beneath the cosmic static. He is a little unhinged in a way that is somehow comforting rather than alarming. He has <em>"I know more than I'm saying"</em> energy in every interaction, and he never denies it.</p>
+
+    <p class="body-text">Half the faculty adore him. The other half are afraid of him. Most are both. He is aware of all three camps and finds each of them entirely reasonable.</p>
+
+    <div class="quote-block">
+      <p>"You were brought here because something in you stirred. A spark. A whisper. A pull you couldn't name. Your parents didn't tell you everything. That's alright. Secrets are just stories waiting for the right moment."</p>
+    </div>
+
+    <div class="note-block">
+      <p><strong>Writer's note:</strong> He is <em>not</em> comic relief — he is <em>cosmic</em> relief. The distinction matters. His humor is not there to deflate tension. It is there to reframe it. When Banister laughs, something shifts. That's the point.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- MAGIC -->
+  <div class="section">
+    <div class="section-label">Magic &amp; Abilities</div>
+
+    <p class="body-text">Banister is extremely powerful and rarely shows it. His magic feels like starlight, wind, and intuition — not sharp or violent, but vast. It does not announce itself. It has already arrived.</p>
+
+    <div class="trait-grid trait-grid-2" style="margin-bottom:24px;">
+      <div class="trait-cell">
+        <div class="trait-label">Font Type</div>
+        <div class="trait-value">Auric</div>
+        <div class="trait-note">Light, resonance, probability. The rarest of the Fae fonts. He does not discuss how he came to have it.</div>
+      </div>
+      <div class="trait-cell">
+        <div class="trait-label">Signature</div>
+        <div class="trait-value">The Shimmer</div>
+        <div class="trait-note">Wings crackle with light as punctuation. Each shimmer means something different. The dragon eggs shimmer back.</div>
+      </div>
+    </div>
+
+    <ul class="bullet-list">
+      <li>Appears in places he should not logically be able to reach</li>
+      <li>May see multiple timelines or probabilities — unconfirmed, very strongly suspected</li>
+      <li>Presence makes the air feel older and more awake</li>
+      <li>Students whisper he can "bend reality a little." He neither confirms nor denies this.</li>
+      <li>His magic does not feel dangerous. That is itself a kind of danger.</li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- THE SHIMMER — CANON BREAKDOWN -->
+  <div class="section">
+    <div class="section-label">The Shimmer &nbsp;— Canon Breakdown</div>
+
+    <p class="body-text">At the Opening Convergence Ceremony, Banister uses "shimmer" as living punctuation — a pause, a revelation, a signal. Each one lands differently. His wings crackle on each iteration. The sequence below is from the manuscript.</p>
+
+    <div style="margin-top: 24px;">
+      <div class="shimmer-row">
+        <div class="shimmer-label">Shimmer 1</div>
+        <div class="shimmer-text">Addressed to the Wolven students. Acknowledging instinct and the moon. Soft. Welcoming.</div>
+      </div>
+      <div class="shimmer-row">
+        <div class="shimmer-label">Shimmer 2</div>
+        <div class="shimmer-text">Addressed to the Fae students who forgot their magic. Gentle. Forgiving. "That's alright. Magic didn't forget you."</div>
+      </div>
+      <div class="shimmer-row">
+        <div class="shimmer-label">Shimmer 3</div>
+        <div class="shimmer-text">Addressed to the Owlkin. The sky and the riddles. Slightly unsettling because they blink in unison.</div>
+      </div>
+      <div class="shimmer-row">
+        <div class="shimmer-label">Shimmer 4</div>
+        <div class="shimmer-text">Addressed to the dragon eggs. "Haven't quite hatched yet. That's alright. We're patient." One of the eggs hums back.</div>
+      </div>
+      <div class="shimmer-row">
+        <div class="shimmer-label">Final Shimmer</div>
+        <div class="shimmer-text">Full wing flare. Brilliant. Crackling. Breathtaking. The crowd laughs. Then he introduces Thane and steps aside with a flourish.</div>
+      </div>
+    </div>
+
+    <div class="quote-block" style="margin-top:28px;">
+      <p>"Shimmer on, children."</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- RELATIONSHIPS -->
+  <div class="section">
+    <div class="section-label">Relationships</div>
+
+    <div class="relationship">
+      <div>
+        <div class="rel-name">Allura Starling</div>
+        <div class="rel-role">Student — Watched</div>
+      </div>
+      <div class="rel-note">Protective and quietly invested. He knows something about her arc that he is not sharing. He watches her with the specific attention of someone waiting for a moment they have already seen coming. He is patient about it in a way that suggests he has been waiting a very long time.</div>
+    </div>
+
+    <div class="relationship">
+      <div>
+        <div class="rel-name">Harrison Starling</div>
+        <div class="rel-role">Student — Prodigy</div>
+      </div>
+      <div class="rel-note">Treats him like a prodigy he has been waiting for. Harrison's wide-eyed joy at the Nexus genuinely delights him — not as amusement, but as recognition. He called Harrison out in the opening address and meant every word.</div>
+    </div>
+
+    <div class="relationship">
+      <div>
+        <div class="rel-name">Zlade (Reign)</div>
+        <div class="rel-role">Student — Known</div>
+      </div>
+      <div class="rel-note">Respects him and gently pokes at his temper when it serves a purpose. Knows more about Zlade's bond and true identity than Zlade does. Is patient about this in a way that suggests long sight. He is waiting for the right moment. He knows what the right moment is.</div>
+    </div>
+
+    <div class="relationship">
+      <div>
+        <div class="rel-name">Vaelor Thornfang</div>
+        <div class="rel-role">Faculty — Aligned</div>
+      </div>
+      <div class="rel-note">A specific and layered dynamic. They share understanding of things the students do not yet know. Whether this is coordination or simply convergence is unclear. Both are possible. Both are probably true.</div>
+    </div>
+
+    <div class="relationship">
+      <div>
+        <div class="rel-name">Faculty — General</div>
+        <div class="rel-role">Colleagues</div>
+      </div>
+      <div class="rel-note">Half adore him, half fear him, all ultimately trust his judgment even when they cannot follow his reasoning. He finds this entirely fair and has never once tried to make it easier for them.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ROLE IN STORY -->
+  <div class="section">
+    <div class="section-label">Role in the Story</div>
+    <ul class="bullet-list">
+      <li>Introduces the Selenari Nexus at the Opening Convergence Ceremony — sets the entire emotional register of the world</li>
+      <li>Serves as guide, mentor, and cosmic wildcard throughout the arc</li>
+      <li>Knows about Allura and Zlade's bond before they do</li>
+      <li>Appears at key emotional turning points — his presence is a signal that something real is happening</li>
+      <li>Introduces Thane Morrow to the first-year cohort ("Be kind to him. He needs it.")</li>
+      <li>In a 10-book world, his long sight and patience suggest his role deepens significantly across later arcs</li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ART PROMPT -->
+  <div class="section">
+    <div class="section-label">Art Prompt</div>
+    <p class="body-text" style="font-style:italic; color: var(--muted);">A tall, loose-limbed headmaster with warm sun-touched skin and iridescent wings that trail light like a living aurora. Wind-tousled hair — it looks this way indoors too. Eyes that shift between starlight and quiet amusement. Clothing that is somehow slightly askew and somehow perfect. Constellation-stitched coat. He looks like someone who has never once rushed, and has never needed to. He is not performing ease — he simply lives there.</p>
+    <p class="body-text" style="font-style:italic; color: var(--muted);">Not Matthew McConaughey — original face, golden-toned and ageless, the kind of features that don't track to any specific number of years. He could be forty. He could be four hundred. The eyes are the tell: they have seen more than they admit, and they find it interesting.</p>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="page-footer">
+    <span>Of Stormsalt &amp; Smoke</span>
+    <span class="footer-diamond">◆</span>
+    <span>Faeblood Chronicles Book 1</span>
+    <span class="footer-diamond">◆</span>
+    <span>Banister Whitis</span>
+    <span class="footer-diamond">◆</span>
+    <span>Character Canon</span>
+    <span class="footer-diamond">◆</span>
+    <span>© 2026 Zoey Alexis Caine</span>
+  </div>
+
+</div>
+</body>
+</html>

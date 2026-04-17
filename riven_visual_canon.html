@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Riven — Visual Canon</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold-warm: #D4A832;
+    --gold-bright: #F0C040;
+    --gold-pale: #F7E8A0;
+    --platinum: #E8DEB8;
+    --electric-blue: #3AACF0;
+    --electric-dim: #1E7AB0;
+    --midnight: #0A0C14;
+    --deep: #12140E;
+    --bark: #1E1A10;
+    --stone: #2A2416;
+    --cream: #F4EDD8;
+    --warm-mid: #C4A070;
+    --text-body: #CCC0A0;
+    --text-dim: #6A6040;
+    --chaos-red: #C04828;
+    --chaos-dim: #8B3018;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--midnight);
+    color: var(--text-body);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* Warm sunburst background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(700px 500px at 60% 10%, rgba(212,168,50,0.08) 0%, transparent 70%),
+      radial-gradient(400px 400px at 10% 60%, rgba(58,172,240,0.05) 0%, transparent 70%),
+      radial-gradient(300px 300px at 90% 80%, rgba(192,72,40,0.04) 0%, transparent 70%),
+      radial-gradient(1px 1px at 8% 12%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 38%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 38% 8%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 72% 22%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 45%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 45% 30%, rgba(212,168,50,0.7) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 30% 65%, rgba(58,172,240,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 75% 70%, rgba(212,168,50,0.4) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 60px 40px 100px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 70px;
+    animation: fadeDown 1s ease both;
+  }
+
+  .series-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold-warm);
+    opacity: 0.7;
+    margin-bottom: 20px;
+  }
+
+  .character-name {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(52px, 8vw, 88px);
+    font-weight: 400;
+    color: var(--gold-pale);
+    letter-spacing: 0.12em;
+    line-height: 1;
+    margin-bottom: 12px;
+    text-shadow: 0 0 80px rgba(212,168,50,0.5), 0 2px 4px rgba(0,0,0,0.9);
+  }
+
+  .character-epithet {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 19px;
+    color: var(--electric-blue);
+    letter-spacing: 0.04em;
+    margin-bottom: 30px;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: center;
+    margin: 24px 0;
+  }
+
+  .divider-line {
+    height: 1px;
+    width: 80px;
+    background: linear-gradient(to right, transparent, var(--gold-warm));
+  }
+  .divider-line.reverse {
+    background: linear-gradient(to left, transparent, var(--gold-warm));
+  }
+  .divider-gem {
+    width: 6px;
+    height: 6px;
+    background: var(--gold-bright);
+    transform: rotate(45deg);
+    box-shadow: 0 0 12px var(--gold-bright);
+  }
+
+  /* Sections */
+  .section {
+    margin-bottom: 56px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .section:nth-child(2) { animation-delay: 0.1s; }
+  .section:nth-child(3) { animation-delay: 0.2s; }
+  .section:nth-child(4) { animation-delay: 0.3s; }
+  .section:nth-child(5) { animation-delay: 0.4s; }
+  .section:nth-child(6) { animation-delay: 0.5s; }
+  .section:nth-child(7) { animation-delay: 0.6s; }
+
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold-warm);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, rgba(212,168,50,0.4), transparent);
+  }
+
+  /* Physical Grid */
+  .physical-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .stat-block {
+    background: rgba(30, 26, 16, 0.7);
+    border: 1px solid rgba(212,168,50,0.15);
+    padding: 20px 18px;
+    transition: border-color 0.3s;
+  }
+  .stat-block:hover { border-color: rgba(212,168,50,0.4); }
+
+  .stat-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+
+  .stat-value {
+    font-size: 16px;
+    color: var(--cream);
+    font-weight: 300;
+    line-height: 1.4;
+  }
+
+  .stat-note {
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+
+  .eye-color {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .eye-swatch {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #90D8FF, #3AACF0, #1060A0);
+    box-shadow: 0 0 10px rgba(58,172,240,0.8);
+    flex-shrink: 0;
+  }
+
+  /* Ear canon callout */
+  .ear-callout {
+    background: rgba(212,168,50,0.07);
+    border: 1px solid rgba(212,168,50,0.2);
+    padding: 18px 22px;
+    margin-top: 2px;
+    font-size: 15px;
+    color: var(--text-body);
+    line-height: 1.7;
+  }
+
+  .ear-callout strong {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 8px;
+    color: var(--gold-warm);
+  }
+
+  /* Lycari terms box */
+  .lycari-term {
+    background: rgba(10,12,20,0.8);
+    border: 1px solid rgba(212,168,50,0.25);
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 8px 20px;
+    align-items: start;
+  }
+
+  .term-word {
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    color: var(--gold-bright);
+    letter-spacing: 0.08em;
+    text-shadow: 0 0 20px rgba(240,192,64,0.4);
+  }
+
+  .term-def {
+    font-size: 15px;
+    color: var(--text-body);
+    line-height: 1.6;
+  }
+
+  .term-note {
+    grid-column: 2;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-top: -4px;
+  }
+
+  /* Wolf form */
+  .wolf-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-bottom: 16px;
+  }
+
+  .wolf-half {
+    padding: 22px 20px;
+  }
+
+  .wolf-half.gold-light {
+    background: rgba(212,168,50,0.1);
+    border: 1px solid rgba(212,168,50,0.2);
+  }
+
+  .wolf-half.gold-dark {
+    background: rgba(140,100,20,0.12);
+    border: 1px solid rgba(140,100,20,0.2);
+  }
+
+  .wolf-half-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    color: rgba(212,168,50,0.5);
+  }
+
+  .wolf-detail {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-body);
+  }
+
+  /* Prose blocks */
+  .prose-block {
+    background: rgba(10,12,20,0.7);
+    border-left: 2px solid var(--gold-warm);
+    padding: 22px 26px;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--text-body);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .prose-block.electric {
+    border-left-color: var(--electric-blue);
+  }
+
+  .prose-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-warm);
+    font-style: normal;
+    display: block;
+    margin-bottom: 10px;
+    opacity: 0.8;
+  }
+
+  .prose-label.electric { color: var(--electric-blue); }
+
+  /* Outfit cards */
+  .outfit-card {
+    background: rgba(30,26,16,0.5);
+    border: 1px solid rgba(212,168,50,0.15);
+    padding: 28px 30px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .outfit-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--gold-warm), var(--gold-bright), transparent);
+  }
+
+  .outfit-card.ball::before {
+    background: linear-gradient(to right, var(--gold-warm), var(--electric-blue), var(--gold-warm), transparent);
+  }
+
+  .outfit-name {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    letter-spacing: 0.15em;
+    color: var(--gold-pale);
+    margin-bottom: 16px;
+  }
+
+  .outfit-details {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 10px 16px;
+    font-size: 15px;
+  }
+
+  .detail-key {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding-top: 2px;
+  }
+
+  .detail-val { color: var(--text-body); line-height: 1.6; }
+
+  /* Palette swatches */
+  .palette-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+
+  .swatch {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  .swatch-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Canon badge */
+  .canon-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--electric-blue);
+    border: 1px solid rgba(58,172,240,0.3);
+    padding: 4px 10px;
+    margin-left: 12px;
+    vertical-align: middle;
+  }
+  .canon-badge::before { content: '◆'; font-size: 7px; }
+
+  .refine-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--chaos-red);
+    border: 1px solid rgba(192,72,40,0.3);
+    padding: 4px 10px;
+    margin-left: 12px;
+    vertical-align: middle;
+  }
+  .refine-badge::before { content: '◇'; font-size: 7px; }
+
+  /* Writer note */
+  .writer-note {
+    background: rgba(212,168,50,0.06);
+    border: 1px dashed rgba(212,168,50,0.2);
+    padding: 18px 22px;
+    font-size: 14px;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-top: 12px;
+    line-height: 1.7;
+  }
+
+  .writer-note::before {
+    content: '✦ Writer\'s note: ';
+    color: var(--gold-warm);
+    font-style: normal;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .refine-note {
+    background: rgba(192,72,40,0.06);
+    border: 1px dashed rgba(192,72,40,0.2);
+    padding: 18px 22px;
+    font-size: 14px;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-top: 12px;
+    line-height: 1.7;
+  }
+
+  .refine-note::before {
+    content: '◇ Refine with image: ';
+    color: var(--chaos-red);
+    font-style: normal;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  /* Pack comparison strip */
+  .pack-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 16px;
+  }
+
+  .pack-member {
+    background: rgba(20,18,10,0.8);
+    border: 1px solid rgba(212,168,50,0.1);
+    padding: 16px;
+    text-align: center;
+  }
+
+  .pack-member.active {
+    border-color: rgba(212,168,50,0.35);
+    background: rgba(212,168,50,0.07);
+  }
+
+  .pack-name {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--gold-warm);
+    margin-bottom: 8px;
+  }
+
+  .pack-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    margin-top: 80px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(212,168,50,0.1);
+  }
+
+  .footer-text {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 600px) {
+    .page { padding: 40px 20px 80px; }
+    .physical-grid { grid-template-columns: 1fr 1fr; }
+    .wolf-split { grid-template-columns: 1fr; }
+    .outfit-details { grid-template-columns: 1fr; }
+    .lycari-term { grid-template-columns: 1fr; }
+    .term-note { grid-column: 1; }
+    .pack-strip { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="series-label">Of Stormsalt &amp; Smoke — Faeblood Chronicles</div>
+    <div class="character-name">Riven</div>
+    <div class="character-epithet">"The storm that arrived already laughing."</div>
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-gem"></div>
+      <div class="divider-line reverse"></div>
+    </div>
+    <div class="series-label" style="opacity:0.5; font-size:9px;">Visual Canon — Book 1 · Stormveil Pack</div>
+  </div>
+
+  <!-- Lycari Form Terms — Canon First -->
+  <div class="section">
+    <div class="section-title">Lycari Form Terminology <span class="canon-badge">Species Canon</span></div>
+
+    <div class="lycari-term">
+      <div class="term-word">Faecoat</div>
+      <div class="term-def">The two-legged form. Fae in appearance — but with wolf ears always present, always visible. The coat they wear in the world of courts and universities and other people's expectations.</div>
+      <div class="term-note">Riven coined it. Or at least he says he did. Kaelith says he heard it somewhere and forgot.</div>
+    </div>
+
+    <div class="lycari-term">
+      <div class="term-word">Furcoat</div>
+      <div class="term-def">Full wolf form. Four legs, full shift, true nature. What they are when nothing is watching and the forest has room for them. Also what Riven calls it when he wants to make Kaelith's eye twitch.</div>
+      <div class="term-note">The more formal Lycari term may exist — but among the Stormveil pack, it's furcoat. Has been for years.</div>
+    </div>
+
+    <div class="ear-callout">
+      <strong>The Ears — Lycari Canon</strong>
+      In faecoat form, wolf ears are always present. Always. They are not glamoured, not hidden, not suppressed. They are part of what the Lycari are — the one thing that doesn't change between forms. They move with emotion: flat against the skull in anger or grief, perked forward in attention or delight, angled back in warning. For Riven specifically, his ears are expressive in ways his face sometimes isn't. Pay attention to them. They tell the truth even when he doesn't.
+    </div>
+
+    <div class="ear-callout" style="margin-top:2px; background: rgba(58,172,240,0.05); border-color: rgba(58,172,240,0.2);">
+      <strong style="color: var(--electric-blue);">Shifting Progression — Year 1 (Book 1)</strong>
+      The Stormveil pack are in Year 1 at SNU. Currently: faecoat or furcoat only — no in-between. The bipedal wolf form, partial shifts, claw-holds, face features — all of that comes with training across Years 2 and 3. Right now they are either fully themselves or fully the wolf. There is no middle ground yet. That limitation matters narratively.
+    </div>
+  </div>
+
+  <!-- Physical Canon -->
+  <div class="section">
+    <div class="section-title">Physical Canon <span class="refine-badge">Refine with Image</span></div>
+    <div class="physical-grid">
+      <div class="stat-block">
+        <div class="stat-label">Height</div>
+        <div class="stat-value">6'0"–6'1"</div>
+        <div class="stat-note">Slightly shorter than Reign. You feel it when they stand together.</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Build</div>
+        <div class="stat-value">Large, reckless energy</div>
+        <div class="stat-note">Built for chaos not control. Wide shoulders, moves too fast for his size.</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Skin</div>
+        <div class="stat-value">Medium-deep, warm</div>
+        <div class="stat-note">Rich contrast against platinum hair. Sun-deepened, not delicate.</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Hair</div>
+        <div class="stat-value">Warm platinum</div>
+        <div class="stat-note">Golden undertone — starlight blonde that leans warm. Always chaotic.</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Eyes</div>
+        <div class="stat-value">
+          <span class="eye-color">
+            <span class="eye-swatch"></span>
+            Electric blue
+          </span>
+        </div>
+        <div class="stat-note">Almost too bright. Sparkling with delight more often than not.</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Wolf Ears</div>
+        <div class="stat-value">Warm gold, always visible</div>
+        <div class="stat-note">Match his fur. Expressive. Betray him constantly.</div>
+      </div>
+    </div>
+
+    <div class="refine-note">
+      Face structure, exact ear size and placement, and precise skin depth to be locked in computer session with Midjourney reference. Coloring is canon — face is pending.
+    </div>
+  </div>
+
+  <!-- Wolf Form -->
+  <div class="section">
+    <div class="section-title">Furcoat Form Canon</div>
+    <div class="wolf-split">
+      <div class="wolf-half gold-light">
+        <div class="wolf-half-label">Primary Coloring</div>
+        <div class="wolf-detail">
+          Warm gold — the color of late afternoon sun through amber glass. Matches his faecoat hair precisely. Like the wolf and the fae were designed to be the same thing, just wearing different shapes.
+        </div>
+      </div>
+      <div class="wolf-half gold-dark">
+        <div class="wolf-half-label">Secondary / Shadow</div>
+        <div class="wolf-detail">
+          Cream undermarkings — chest, legs, face panels. Soft contrast, nothing harsh. The overall read is golden warmth, not dramatic contrast. He looks like sunshine given teeth.
+        </div>
+      </div>
+    </div>
+
+    <div class="outfit-card" style="margin-bottom:0;">
+      <div class="outfit-name" style="font-size:12px; opacity:0.8;">Wolf Form Notes</div>
+      <div class="outfit-details">
+        <div class="detail-key">Size</div>
+        <div class="detail-val">Large — visibly pack-size, bigger than ordinary wolves. Slightly smaller than Reign in furcoat. Still enormous by any normal standard.</div>
+        <div class="detail-key">Movement</div>
+        <div class="detail-val">Where Reign moves quiet, Riven moves fast. He covers ground with reckless joy. Running with him feels like being chased by good news.</div>
+        <div class="detail-key">Manuscript note</div>
+        <div class="detail-val">Allura spots him as the "golden" wolf in the treeline — warm summer day coloring. She clocks him before she sees Reign. He's impossible to miss.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Everyday Style -->
+  <div class="section">
+    <div class="section-title">Everyday Style — Faecoat</div>
+
+    <div class="prose-block electric">
+      <span class="prose-label electric">The Vibe</span>
+      Loud. Maximalist. He dresses like he's the main event everywhere he goes — and somehow he's usually right. Where Reign's warmth is accidental, Riven's is a weapon he wields with full awareness and zero shame. He layers things that shouldn't work together and they work. Kaelith has stopped asking how.
+    </div>
+
+    <div class="outfit-card">
+      <div class="outfit-name">Campus / General Wear</div>
+      <div class="outfit-details">
+        <div class="detail-key">Palette</div>
+        <div class="detail-val">
+          <div class="palette-row">
+            <span class="swatch"><span class="swatch-dot" style="background:#C4880A;"></span>Deep amber</span>
+            <span class="swatch"><span class="swatch-dot" style="background:#8B4513;"></span>Burnt sienna</span>
+            <span class="swatch"><span class="swatch-dot" style="background:#F4C842;"></span>Gold</span>
+            <span class="swatch"><span class="swatch-dot" style="background:#F0EDD8;"></span>Cream</span>
+            <span class="swatch"><span class="swatch-dot" style="background:#3AACF0;"></span>Electric blue accent</span>
+          </div>
+        </div>
+
+        <div class="detail-key">Silhouette</div>
+        <div class="detail-val">Layers on layers. An open over-piece, usually something with texture or embellishment, over something fitted underneath. He fills space physically and visually. That's intentional.</div>
+
+        <div class="detail-key">Jewelry</div>
+        <div class="detail-val">Multiple necklaces — as in the reference image. Layered chains, small pendants, things collected rather than curated. Each piece has a story he'll tell you whether you asked or not.</div>
+
+        <div class="detail-key">Signature</div>
+        <div class="detail-val">Something unexpected every time — a fur-trimmed edge, an embroidered detail, a color that shouldn't be in the outfit but anchors it. He has one piece that always raises an eyebrow. He considers this a success.</div>
+
+        <div class="detail-key">The necklaces</div>
+        <div class="detail-val">Locked from the reference image — layered chains of varying lengths, mixed metals, small pendants. Not precious. Personal. The difference matters to him even if he'd joke about it.</div>
+
+        <div class="detail-key">What he avoids</div>
+        <div class="detail-val">Nothing. Riven avoids nothing. This is the problem. This is also the point.</div>
+      </div>
+    </div>
+
+    <div class="writer-note">
+      The contrast that defines Riven's style vs Reign's: Reign's warmth is background radiation — you absorb it slowly. Riven's warmth hits you like opening a furnace door. Same palette family. Completely different volume. When they're in a room together, Riven draws the eye first. Reign is the one you can't stop coming back to.
+    </div>
+  </div>
+
+  <!-- Ball Look -->
+  <div class="section">
+    <div class="section-title">Formal / Ball Look</div>
+
+    <div class="outfit-card ball">
+      <div class="outfit-name">The Lazuline Ball — Canon</div>
+      <div class="outfit-details">
+        <div class="detail-key">Energy</div>
+        <div class="detail-val">He dressed up. He fully committed. He spent more time than Reign did and will absolutely deny it. He looks like a prince and he knows it and he said so out loud.</div>
+
+        <div class="detail-key">Base</div>
+        <div class="detail-val">Deep gold or warm amber — something that catches the ballroom light and gives it back doubled. He is not wearing dark tones to a party. That is Reign's territory.</div>
+
+        <div class="detail-key">Details</div>
+        <div class="detail-val">More ornamentation than Reign, less than the most elaborate fae in the room. He hits the sweet spot between effort and excess with the precision of someone who has practiced this exactly.</div>
+
+        <div class="detail-key">The mooncrown</div>
+        <div class="detail-val">Reign's blood-forged crescent moon piece — shards radiating outward like a star map, faint inner glow. Riven wears it like he was born in it. He was. Reign knew he would be. That's why he made it that way.</div>
+
+        <div class="detail-key">Hair at ball</div>
+        <div class="detail-val">Still chaotic, but intentionally chaotic. The platinum catches the lanternlight. He adjusted it approximately forty times. He'd tell you he didn't touch it.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pack Comparison -->
+  <div class="section">
+    <div class="section-title">Stormveil Pack — Visual Contrast</div>
+    <div class="prose-block">
+      <span class="prose-label">The three of them together</span>
+      Reign is shadow and warmth — dark clothes, golden-brown, quiet menace. Riven is light and noise — platinum, gold, already laughing. Kaelith is the precise middle — dark hair, wolfish angles, watching both of them with an expression that says she loves them and they exhaust her. Together they read as a unit instantly. Three wolves who grew up in the same storm.
+    </div>
+
+    <div class="pack-strip">
+      <div class="pack-member">
+        <div class="pack-name">Reign</div>
+        <div class="pack-desc">Shadow and warmth. Moves quiet. The storm before it breaks.</div>
+      </div>
+      <div class="pack-member active">
+        <div class="pack-name">Riven ← You are here</div>
+        <div class="pack-desc">Gold and noise. Moves fast. The storm already laughing.</div>
+      </div>
+      <div class="pack-member">
+        <div class="pack-name">Kaelith</div>
+        <div class="pack-desc">Dark and precise. Watches everything. The eye of the storm.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="divider" style="margin-bottom:20px;">
+      <div class="divider-line" style="width:40px;"></div>
+      <div class="divider-gem"></div>
+      <div class="divider-line reverse" style="width:40px;"></div>
+    </div>
+    <div class="footer-text">Of Stormsalt &amp; Smoke · Faeblood Chronicles Book 1 · Riven Visual Canon · © 2026 Zoey Alexis Caine</div>
+  </div>
+
+</div>
+</body>
+</html>

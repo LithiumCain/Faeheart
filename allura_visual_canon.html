@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Allura — Visual Canon</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=EB+Garamond:ital@1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8D08A;
+    --gold-pale: #F5EAC8;
+    --midnight: #0D0F1A;
+    --deep-navy: #111827;
+    --navy-mid: #1C2640;
+    --lavender: #C4B5D4;
+    --lavender-dark: #8B7AA0;
+    --starfire: #7FFFA8;
+    --starfire-dim: #4DB87A;
+    --cream: #F8F2E6;
+    --text-body: #D4C9B0;
+    --text-dim: #7A7060;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--midnight);
+    color: var(--text-body);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Starfield background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 8%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 60%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 25%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 50%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 75%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 80%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 33% 90%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 85%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 48% 33%, rgba(201,168,76,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 78% 65%, rgba(201,168,76,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 20% 55%, rgba(196,181,212,0.4) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 60px 40px 100px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 70px;
+    animation: fadeDown 1s ease both;
+  }
+
+  .series-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.7;
+    margin-bottom: 20px;
+  }
+
+  .character-name {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(52px, 8vw, 88px);
+    font-weight: 400;
+    color: var(--gold-light);
+    letter-spacing: 0.08em;
+    line-height: 1;
+    margin-bottom: 12px;
+    text-shadow: 0 0 60px rgba(201,168,76,0.3), 0 2px 4px rgba(0,0,0,0.8);
+  }
+
+  .character-epithet {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: var(--lavender);
+    letter-spacing: 0.05em;
+    margin-bottom: 30px;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: center;
+    margin: 24px 0;
+  }
+
+  .divider-line {
+    height: 1px;
+    width: 80px;
+    background: linear-gradient(to right, transparent, var(--gold));
+  }
+
+  .divider-line.reverse {
+    background: linear-gradient(to left, transparent, var(--gold));
+  }
+
+  .divider-gem {
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    box-shadow: 0 0 8px var(--gold);
+  }
+
+  /* Sections */
+  .section {
+    margin-bottom: 56px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .section:nth-child(2) { animation-delay: 0.1s; }
+  .section:nth-child(3) { animation-delay: 0.2s; }
+  .section:nth-child(4) { animation-delay: 0.3s; }
+  .section:nth-child(5) { animation-delay: 0.4s; }
+  .section:nth-child(6) { animation-delay: 0.5s; }
+
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, rgba(201,168,76,0.4), transparent);
+  }
+
+  /* Physical Canon Grid */
+  .physical-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .stat-block {
+    background: rgba(28, 38, 64, 0.5);
+    border: 1px solid rgba(201,168,76,0.12);
+    padding: 20px 18px;
+    position: relative;
+    transition: border-color 0.3s;
+  }
+
+  .stat-block:hover {
+    border-color: rgba(201,168,76,0.3);
+  }
+
+  .stat-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+
+  .stat-value {
+    font-size: 16px;
+    color: var(--cream);
+    font-weight: 300;
+    line-height: 1.4;
+  }
+
+  .stat-note {
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+
+  /* Color swatch */
+  .eye-color {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .eye-swatch {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #AAFFCC, #3DB870, #1A7A4A);
+    box-shadow: 0 0 8px rgba(127,255,168,0.6);
+    flex-shrink: 0;
+  }
+
+  /* Prose description blocks */
+  .prose-block {
+    background: rgba(13, 15, 26, 0.6);
+    border-left: 2px solid var(--gold);
+    padding: 22px 26px;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--text-body);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .prose-block.lavender {
+    border-left-color: var(--lavender-dark);
+  }
+
+  .prose-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-style: normal;
+    display: block;
+    margin-bottom: 10px;
+    opacity: 0.8;
+  }
+
+  .prose-label.lavender { color: var(--lavender); }
+
+  /* Outfit cards */
+  .outfit-card {
+    background: rgba(28, 38, 64, 0.4);
+    border: 1px solid rgba(201,168,76,0.15);
+    padding: 28px 30px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .outfit-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--gold), transparent);
+  }
+
+  .outfit-card.gown::before {
+    background: linear-gradient(to right, var(--midnight), var(--lavender-dark), var(--gold), var(--lavender-dark), transparent);
+  }
+
+  .outfit-name {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    letter-spacing: 0.15em;
+    color: var(--gold-light);
+    margin-bottom: 16px;
+  }
+
+  .outfit-details {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 10px 16px;
+    font-size: 15px;
+  }
+
+  .detail-key {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding-top: 2px;
+  }
+
+  .detail-val {
+    color: var(--text-body);
+    line-height: 1.6;
+  }
+
+  /* Palette swatches */
+  .palette-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+  }
+
+  .swatch {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  .swatch-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Rune note */
+  .rune-callout {
+    background: rgba(139,122,160,0.12);
+    border: 1px solid rgba(196,181,212,0.25);
+    padding: 18px 22px;
+    margin-top: 16px;
+    font-size: 15px;
+    color: var(--lavender);
+    line-height: 1.7;
+  }
+
+  .rune-callout strong {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 8px;
+    color: var(--lavender-dark);
+  }
+
+  /* Writer's note */
+  .writer-note {
+    background: rgba(201,168,76,0.06);
+    border: 1px dashed rgba(201,168,76,0.2);
+    padding: 18px 22px;
+    font-size: 14px;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-top: 12px;
+    line-height: 1.7;
+  }
+
+  .writer-note::before {
+    content: '✦ Writer's note: ';
+    color: var(--gold);
+    font-style: normal;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  /* Canon lock badge */
+  .canon-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--starfire-dim);
+    border: 1px solid rgba(77,184,122,0.3);
+    padding: 4px 10px;
+    margin-left: 12px;
+    vertical-align: middle;
+  }
+
+  .canon-badge::before {
+    content: '◆';
+    font-size: 7px;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    margin-top: 80px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(201,168,76,0.1);
+  }
+
+  .footer-text {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  /* Animations */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 600px) {
+    .page { padding: 40px 20px 80px; }
+    .physical-grid { grid-template-columns: 1fr 1fr; }
+    .outfit-details { grid-template-columns: 1fr; }
+    .detail-key { padding-bottom: 0; margin-bottom: -4px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="series-label">Of Stormsalt &amp; Smoke — Faeblood Chronicles</div>
+    <div class="character-name">Allura</div>
+    <div class="character-epithet">"A star breaking open in the dark. A supernova."</div>
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-gem"></div>
+      <div class="divider-line reverse"></div>
+    </div>
+    <div class="series-label" style="opacity:0.5; font-size:9px;">Visual Canon — Book 1</div>
+  </div>
+
+  <!-- Physical Canon -->
+  <div class="section">
+    <div class="section-title">Physical Canon <span class="canon-badge">Locked</span></div>
+    <div class="physical-grid">
+      <div class="stat-block">
+        <div class="stat-label">Height</div>
+        <div class="stat-value">5'5"–5'6"</div>
+        <div class="stat-note">Long torso, strong presence</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Build</div>
+        <div class="stat-value">Soft curves, strong frame</div>
+        <div class="stat-note">Moves like she owns the room</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Skin</div>
+        <div class="stat-value">Warm, honeyed, sun-kissed</div>
+        <div class="stat-note">Golden undertone</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Hair</div>
+        <div class="stat-value">Golden blonde, long, layered</div>
+        <div class="stat-note">Ends moon-pale, windtossed</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Eyes</div>
+        <div class="stat-value">
+          <span class="eye-color">
+            <span class="eye-swatch"></span>
+            Starfire green
+          </span>
+        </div>
+        <div class="stat-note">Bright, vivid, almost luminous — "dazzle like stars"</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Face</div>
+        <div class="stat-value">Soft cheekbones, warm angles</div>
+        <div class="stat-note">Approachable face, commanding presence</div>
+      </div>
+    </div>
+
+    <div class="rune-callout" style="margin-top:2px;">
+      <strong>Canon Note — The Runes</strong>
+      Intricate, ancient patterns along her arms and collarbone. They do <em>not</em> glow by her own power — light reacts to her. Soft gold flare, shy and fleeting. She does not yet understand them. In strong magic environments or moments of high emotion, they respond without her permission.
+    </div>
+  </div>
+
+  <!-- Physical Description — Prose Ready -->
+  <div class="section">
+    <div class="section-title">Prose-Ready Description</div>
+    <div class="prose-block">
+      <span class="prose-label">First impression (Reign's POV)</span>
+      Golden, windtossed hair that catches lanternlight like something lit from within — long and layered, the ends pale as the moon. Warm, honey-kissed skin. Eyes the color of starfire: vivid, luminous green that dazzles like she's carrying light she doesn't know she has. Soft cheekbones, a long torso, strong presence in a frame that doesn't announce itself — it simply arrives.
+    </div>
+    <div class="prose-block lavender">
+      <span class="prose-label lavender">Neutral / third person shorthand</span>
+      She had the kind of warmth that read as sunlight — golden hair, golden skin, eyes too green and too bright for someone who claimed not to believe in magic.
+    </div>
+    <div class="writer-note">
+      When you're stuck mid-scene, "golden" is your anchor word for Allura. Hair, skin, the way light finds her — gold keeps coming back because it's who she is before she knows it.
+    </div>
+  </div>
+
+  <!-- Everyday Style -->
+  <div class="section">
+    <div class="section-title">Everyday Style</div>
+
+    <div class="outfit-card">
+      <div class="outfit-name">Campus / General Wear</div>
+      <div class="outfit-details">
+        <div class="detail-key">Silhouette</div>
+        <div class="detail-val">Fitted but never fussy. Things that move with her body — nothing that fights her. She doesn't perform getting dressed.</div>
+
+        <div class="detail-key">Palette</div>
+        <div class="detail-val">
+          <div class="palette-row">
+            <span class="swatch"><span class="swatch-dot" style="background:#B8962E;"></span>Deep gold</span>
+            <span class="swatch"><span class="swatch-dot" style="background:#1a2340;"></span>Deep navy</span>
+            <span class="swatch"><span class="swatch-dot" style="background:#0d0f1a;"></span>Midnight</span>
+            <span class="swatch"><span class="swatch-dot" style="background:#F5F0E8;"></span>Soft white</span>
+          </div>
+        </div>
+
+        <div class="detail-key">Fabrics</div>
+        <div class="detail-val">Nothing stiff. Soft wovens, draped things, the kind of fabric that hints at shape rather than demanding it.</div>
+
+        <div class="detail-key">Signature pieces</div>
+        <div class="detail-val">A well-worn cloak she pulls tighter out of habit, not cold. Boots that have been places. Usually a layer she can shed.</div>
+
+        <div class="detail-key">What she avoids</div>
+        <div class="detail-val">Over-ornamentation. Anything that announces she's trying. She can look stunning in a navy fitted top and dark trousers and she knows it.</div>
+      </div>
+    </div>
+
+    <div class="outfit-card">
+      <div class="outfit-name">Field / Survival Days</div>
+      <div class="outfit-details">
+        <div class="detail-key">Silhouette</div>
+        <div class="detail-val">Same fitted instinct, but more practical. Nothing loose enough to catch. She ties her hair back but pieces always escape.</div>
+
+        <div class="detail-key">Details</div>
+        <div class="detail-val">Cloak still present. Belt or wrap at the waist — she likes something anchoring her center. Dark trousers, fitted boots. Gold or ivory on top.</div>
+
+        <div class="detail-key">Energy</div>
+        <div class="detail-val">She looks like she dressed for class and ended up in the forest. It still works.</div>
+      </div>
+    </div>
+
+    <div class="writer-note">
+      Her everyday style secret: the colors do the heavy lifting. Deep navy + gold reads as effortlessly celestial. She doesn't need embellishment — the palette is the statement.
+    </div>
+  </div>
+
+  <!-- Ball Gown — Detailed -->
+  <div class="section">
+    <div class="section-title">Formal / Ball Look</div>
+
+    <div class="outfit-card gown">
+      <div class="outfit-name">The Lazuline Ball Gown — Scene Canon</div>
+      <div class="outfit-details">
+        <div class="detail-key">Silhouette</div>
+        <div class="detail-val">Floor-length. Full skirt, fitted bodice. The kind of gown that doesn't need a train to be dramatic — it moves with her instead of behind her.</div>
+
+        <div class="detail-key">Color story</div>
+        <div class="detail-val">Deepest midnight black at the center of the bodice, melting outward through rich deep navy into soft lavender at the skirt edges. Every hem burns with bright gold. The transition is seamless — like watching a night sky catch sunrise.</div>
+
+        <div class="detail-key">Fabric</div>
+        <div class="detail-val">Goldflecked tulle over the skirt — suspended stardust effect. The bodice has weight and structure but the skirt breathes. Each movement sends the gold flecks shimmering.</div>
+
+        <div class="detail-key">Embellishment</div>
+        <div class="detail-val">Gold droplets suspended from the fabric like frozen stardust caught mid-fall. Not clustered — scattered, deliberate, like a constellation someone mapped by hand.</div>
+
+        <div class="detail-key">Neckline</div>
+        <div class="detail-val">High enough to be formal, low enough to show the collarbone where her runes sit. The runes are part of the look whether she wants them to be or not.</div>
+
+        <div class="detail-key">Arms</div>
+        <div class="detail-val">Exposed, or lightly draped — the rune patterns on her arms need to be visible for the lantern-flare moment. This is not optional. The gown was made for that reveal even if she didn't know it.</div>
+      </div>
+    </div>
+
+    <div class="outfit-card">
+      <div class="outfit-name">Ball — Hair</div>
+      <div class="outfit-details">
+        <div class="detail-key">Style</div>
+        <div class="detail-val">Mostly down — her hair is too distinctive to hide. Soft movement, some pieces swept back or pinned loosely. The length and layers do the work.</div>
+
+        <div class="detail-key">Crown / adornment</div>
+        <div class="detail-val">A crown of yellow and pink flowers — as written and locked. Warm, soft, almost wildflower-casual against the formality of the gown. That contrast is intentional. She's not performing royalty. She just arrived.</div>
+
+        <div class="detail-key">Texture</div>
+        <div class="detail-val">Lanternlight turns her hair into soft fire. This is a recurring image — use it. Gold hair + gold light = she looks lit from inside.</div>
+      </div>
+    </div>
+
+    <div class="outfit-card">
+      <div class="outfit-name">Ball — Accessories</div>
+      <div class="outfit-details">
+        <div class="detail-key">Jewelry</div>
+        <div class="detail-val">Minimal and deliberate. The gown is already a statement. Small gold earrings — drops or studs, nothing that competes with the flower crown. No necklace — the collarbone and runes are the necklace.</div>
+
+        <div class="detail-key">Hands</div>
+        <div class="detail-val">Bare. When Reign takes her hand on the dance floor, there's nothing between his palm and hers. That contact is sacred — don't interrupt it with rings or gloves.</div>
+
+        <div class="detail-key">Shoes</div>
+        <div class="detail-val">Gold or ivory — something that disappears under the skirt and only appears in motion. She doesn't draw attention to her feet. She draws attention to the way she moves.</div>
+      </div>
+    </div>
+
+    <div class="rune-callout">
+      <strong>The Rune Moment — Ball Scene</strong>
+      When the lantern glow sweeps across her skin, the runes along her arms and collarbone flare in soft gold — intricate, ancient, not cast by her. Light reacting to her. The glow fades shy and fleeting. This is the first time anyone in the ballroom sees them light. Reign's stomach drops. This is the moment he knows something is more than he thought. The gown's bare arms are not a style choice — they're a narrative necessity.
+    </div>
+
+    <div class="writer-note">
+      When writing the ball scene from any POV: the gown reads differently in motion than standing still. Standing — she's striking. Moving — she becomes something else entirely. The gold-flecked tulle only reveals itself when she walks. Let the scene earn the fabric.
+    </div>
+  </div>
+
+  <!-- Style Identity Summary -->
+  <div class="section">
+    <div class="section-title">Style Identity — The Through Line</div>
+    <div class="prose-block">
+      <span class="prose-label">Who Allura dresses like</span>
+      She dresses like someone who never needed to try — and is slowly realizing that the things she reaches for instinctively (gold, midnight, things that move with her) are not coincidences. Her style is celestial without being performative. It suits a girl who grew up not knowing what she was, reaching for colors and silhouettes that echo a magic she hasn't named yet.
+    </div>
+    <div class="prose-block lavender">
+      <span class="prose-label lavender">The contrast that defines her</span>
+      Flower crown over a stargown. Worn cloak over something beautiful. Soft face, strong presence. She carries contradiction without resolving it — and that's exactly right for who she is in Book 1. She hasn't resolved herself yet either.
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="divider" style="margin-bottom:20px;">
+      <div class="divider-line" style="width:40px;"></div>
+      <div class="divider-gem"></div>
+      <div class="divider-line reverse" style="width:40px;"></div>
+    </div>
+    <div class="footer-text">Of Stormsalt &amp; Smoke · Faeblood Chronicles Book 1 · Allura Visual Canon · © 2026 Zoey Alexis Caine</div>
+  </div>
+
+</div>
+</body>
+</html>

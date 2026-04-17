@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reign — Visual Canon</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blood: #8B1A1A;
+    --blood-bright: #C0392B;
+    --garnet: #6B0F1A;
+    --garnet-glow: #A93226;
+    --ocean: #1A3A5C;
+    --ocean-bright: #2E6DA4;
+    --ocean-pale: #5B9BD5;
+    --midnight: #0A0C14;
+    --deep: #111520;
+    --charcoal: #1C1F2E;
+    --stone: #2A2D3E;
+    --cream: #F0EAD6;
+    --warm-tan: #C4A882;
+    --text-body: #C8BFA8;
+    --text-dim: #6A6458;
+    --gold: #C9A84C;
+    --wolf-black: #1A1A1A;
+    --wolf-cream: #E8DFC8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--midnight);
+    color: var(--text-body);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(600px 600px at 80% 20%, rgba(139,26,26,0.06) 0%, transparent 70%),
+      radial-gradient(400px 400px at 20% 70%, rgba(26,58,92,0.08) 0%, transparent 70%),
+      radial-gradient(1px 1px at 12% 18%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 28% 45%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 45% 12%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 62% 68%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 75% 30%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 55%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 18% 80%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 52% 38%, rgba(139,26,26,0.6) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 35% 72%, rgba(46,109,164,0.5) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 60px 40px 100px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 70px;
+    animation: fadeDown 1s ease both;
+  }
+
+  .series-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--blood-bright);
+    opacity: 0.7;
+    margin-bottom: 20px;
+  }
+
+  .character-name {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(52px, 8vw, 88px);
+    font-weight: 400;
+    color: var(--cream);
+    letter-spacing: 0.12em;
+    line-height: 1;
+    margin-bottom: 12px;
+    text-shadow: 0 0 80px rgba(139,26,26,0.4), 0 2px 4px rgba(0,0,0,0.9);
+  }
+
+  .character-epithet {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 19px;
+    color: var(--ocean-pale);
+    letter-spacing: 0.04em;
+    margin-bottom: 30px;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: center;
+    margin: 24px 0;
+  }
+
+  .divider-line {
+    height: 1px;
+    width: 80px;
+    background: linear-gradient(to right, transparent, var(--blood));
+  }
+  .divider-line.reverse {
+    background: linear-gradient(to left, transparent, var(--blood));
+  }
+
+  .divider-gem {
+    width: 6px;
+    height: 6px;
+    background: var(--blood-bright);
+    transform: rotate(45deg);
+    box-shadow: 0 0 10px var(--blood-bright);
+  }
+
+  /* Sections */
+  .section {
+    margin-bottom: 56px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .section:nth-child(2) { animation-delay: 0.1s; }
+  .section:nth-child(3) { animation-delay: 0.2s; }
+  .section:nth-child(4) { animation-delay: 0.3s; }
+  .section:nth-child(5) { animation-delay: 0.4s; }
+  .section:nth-child(6) { animation-delay: 0.5s; }
+  .section:nth-child(7) { animation-delay: 0.6s; }
+
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--blood-bright);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, rgba(139,26,26,0.4), transparent);
+  }
+
+  /* Physical Grid */
+  .physical-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .stat-block {
+    background: rgba(28, 31, 46, 0.6);
+    border: 1px solid rgba(139,26,26,0.15);
+    padding: 20px 18px;
+    transition: border-color 0.3s;
+  }
+
+  .stat-block:hover { border-color: rgba(139,26,26,0.35); }
+
+  .stat-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+
+  .stat-value {
+    font-size: 16px;
+    color: var(--cream);
+    font-weight: 300;
+    line-height: 1.4;
+  }
+
+  .stat-note {
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+
+  .eye-color {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .eye-swatch {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #7BBFEA, #1E6FA8, #0D3D6B);
+    box-shadow: 0 0 8px rgba(46,109,164,0.7);
+    flex-shrink: 0;
+  }
+
+  /* Wolf form split */
+  .wolf-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-bottom: 16px;
+  }
+
+  .wolf-half {
+    padding: 22px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .wolf-half.dark {
+    background: rgba(20,20,20,0.8);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .wolf-half.light {
+    background: rgba(232,223,200,0.08);
+    border: 1px solid rgba(232,223,200,0.12);
+  }
+
+  .wolf-half-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .wolf-half.dark .wolf-half-label { color: rgba(255,255,255,0.3); }
+  .wolf-half.light .wolf-half-label { color: rgba(232,223,200,0.5); }
+
+  .wolf-detail {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .wolf-half.dark .wolf-detail { color: rgba(255,255,255,0.6); }
+  .wolf-half.light .wolf-detail { color: rgba(232,223,200,0.7); }
+
+  /* Prose blocks */
+  .prose-block {
+    background: rgba(10, 12, 20, 0.7);
+    border-left: 2px solid var(--blood);
+    padding: 22px 26px;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--text-body);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .prose-block.ocean {
+    border-left-color: var(--ocean-bright);
+  }
+
+  .prose-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--blood-bright);
+    font-style: normal;
+    display: block;
+    margin-bottom: 10px;
+    opacity: 0.8;
+  }
+
+  .prose-label.ocean { color: var(--ocean-pale); }
+
+  /* Outfit cards */
+  .outfit-card {
+    background: rgba(28, 31, 46, 0.5);
+    border: 1px solid rgba(139,26,26,0.15);
+    padding: 28px 30px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .outfit-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--blood), transparent);
+  }
+
+  .outfit-card.ball::before {
+    background: linear-gradient(to right, var(--charcoal), var(--blood-bright), var(--charcoal), transparent);
+  }
+
+  .outfit-name {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    letter-spacing: 0.15em;
+    color: var(--cream);
+    margin-bottom: 16px;
+  }
+
+  .outfit-details {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 10px 16px;
+    font-size: 15px;
+  }
+
+  .detail-key {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding-top: 2px;
+  }
+
+  .detail-val { color: var(--text-body); line-height: 1.6; }
+
+  /* Palette swatches */
+  .palette-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+
+  .swatch {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  .swatch-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Blood jewelry section */
+  .jewelry-piece {
+    background: rgba(107,15,26,0.15);
+    border: 1px solid rgba(139,26,26,0.25);
+    padding: 24px 26px;
+    margin-bottom: 12px;
+    position: relative;
+  }
+
+  .jewelry-piece::before {
+    content: '◆';
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    color: var(--blood-bright);
+    font-size: 10px;
+    opacity: 0.5;
+  }
+
+  .jewelry-name {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--blood-bright);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  .jewelry-desc {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--text-body);
+    margin-bottom: 10px;
+  }
+
+  .jewelry-craft {
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text-dim);
+    border-top: 1px solid rgba(139,26,26,0.15);
+    padding-top: 10px;
+    margin-top: 10px;
+  }
+
+  /* Special callouts */
+  .wolf-callout {
+    background: rgba(26,26,26,0.6);
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 18px 22px;
+    margin-top: 16px;
+    font-size: 15px;
+    color: rgba(200,191,168,0.7);
+    line-height: 1.7;
+  }
+
+  .wolf-callout strong {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 8px;
+    color: rgba(255,255,255,0.25);
+  }
+
+  .writer-note {
+    background: rgba(139,26,26,0.07);
+    border: 1px dashed rgba(139,26,26,0.25);
+    padding: 18px 22px;
+    font-size: 14px;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-top: 12px;
+    line-height: 1.7;
+  }
+
+  .writer-note::before {
+    content: '✦ Writer\'s note: ';
+    color: var(--blood-bright);
+    font-style: normal;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .canon-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ocean-pale);
+    border: 1px solid rgba(46,109,164,0.3);
+    padding: 4px 10px;
+    margin-left: 12px;
+    vertical-align: middle;
+  }
+
+  .canon-badge::before {
+    content: '◆';
+    font-size: 7px;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    margin-top: 80px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(139,26,26,0.12);
+  }
+
+  .footer-text {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 600px) {
+    .page { padding: 40px 20px 80px; }
+    .physical-grid { grid-template-columns: 1fr 1fr; }
+    .wolf-split { grid-template-columns: 1fr; }
+    .outfit-details { grid-template-columns: 1fr; }
+    .detail-key { margin-bottom: -4px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="series-label">Of Stormsalt &amp; Smoke — Faeblood Chronicles</div>
+    <div class="character-name">Reign</div>
+    <div class="character-epithet">"You don't clock the size until it's too late."</div>
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-gem"></div>
+      <div class="divider-line reverse"></div>
+    </div>
+    <div class="series-label" style="opacity:0.5; font-size:9px;">Visual Canon — Book 1 · Stormveil Pack</div>
+  </div>
+
+  <!-- Lycari Form Terms -->
+  <div class="section">
+    <div class="section-title">Lycari Form Terminology <span class="canon-badge">Species Canon</span></div>
+
+    <div style="background:rgba(26,26,26,0.6);border:1px solid rgba(255,255,255,0.06);padding:20px 24px;margin-bottom:2px;display:grid;grid-template-columns:120px 1fr;gap:8px 20px;align-items:start;">
+      <div style="font-family:'Cinzel',serif;font-size:18px;color:var(--ocean-pale);letter-spacing:0.08em;text-shadow:0 0 20px rgba(91,155,213,0.4);">Faecoat</div>
+      <div style="font-size:15px;color:var(--text-body);line-height:1.6;">The two-legged form. Fae in appearance — but wolf ears always present, always visible. The coat worn in the world of courts, universities, and other people's expectations.</div>
+      <div></div>
+      <div style="font-style:italic;font-size:13px;color:var(--text-dim);margin-top:-4px;">What Reign is in most scenes. Never mistake it for his whole self.</div>
+    </div>
+
+    <div style="background:rgba(26,26,26,0.6);border:1px solid rgba(255,255,255,0.06);padding:20px 24px;margin-bottom:16px;display:grid;grid-template-columns:120px 1fr;gap:8px 20px;align-items:start;">
+      <div style="font-family:'Cinzel',serif;font-size:18px;color:var(--ocean-pale);letter-spacing:0.08em;text-shadow:0 0 20px rgba(91,155,213,0.4);">Furcoat</div>
+      <div style="font-size:15px;color:var(--text-body);line-height:1.6;">Full wolf form. Four legs, full shift, true nature. What he is when the forest has room for him and nothing is watching. Also the word Riven uses when he wants to make Kaelith's eye twitch.</div>
+      <div></div>
+      <div style="font-style:italic;font-size:13px;color:var(--text-dim);margin-top:-4px;">Year 1 at SNU: faecoat or furcoat only. No partial shifts yet. The in-between comes with training.</div>
+    </div>
+
+    <div class="wolf-callout">
+      <strong>The Ears — Lycari Canon</strong>
+      In faecoat form, wolf ears are always present. Always. They are not glamoured, not hidden, not suppressed. They are part of what the Lycari are — the one constant between forms. For Reign, his ears are controlled with the same iron discipline he applies to everything else. Flat in anger or grief. Perked forward in alertness. The tell he can't quite silence: they angle toward Allura before he's consciously aware she's near. She hasn't noticed yet.
+    </div>
+  </div>
+
+  <!-- Physical Canon -->
+  <div class="section">
+    <div class="section-title">Physical Canon <span class="canon-badge">Locked</span></div>
+    <div class="physical-grid">
+      <div class="stat-block">
+        <div class="stat-label">Height</div>
+        <div class="stat-value">6'1"–6'2"</div>
+        <div class="stat-note">She looks up. Not by much. Enough.</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Build</div>
+        <div class="stat-value">Big, moves quiet</div>
+        <div class="stat-note">Apex predator energy. You feel him before you see him.</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Skin</div>
+        <div class="stat-value">Warm tan, dewy</div>
+        <div class="stat-note">Post-shift: almost luminous. The wolf is close to the surface.</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Hair</div>
+        <div class="stat-value">Golden-brown, tapered</div>
+        <div class="stat-note">Clean cut, soft wavy curls on top. Looks intentional without trying.</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Eyes</div>
+        <div class="stat-value">
+          <span class="eye-color">
+            <span class="eye-swatch"></span>
+            Deep ocean blue
+          </span>
+        </div>
+        <div class="stat-note">Closed when overwhelmed by her scent. Flash gold when the wolf surges.</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Hands</div>
+        <div class="stat-value">Large, calloused, warm</div>
+        <div class="stat-note">The first thing Allura feels. Nails sharpen involuntarily under emotion.</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Wolf Ears</div>
+        <div class="stat-value">Black, always visible</div>
+        <div class="stat-note">Match his furcoat. Controlled — but they angle toward Allura before he does.</div>
+      </div>
+    </div>
+
+    <div class="wolf-callout" style="margin-top:2px;">
+      <strong>Eye Canon — The Two States</strong>
+      Default: deep ocean blue, steady, observant — the man is present. Shifted or surging: molten gold flash, involuntary, always a tell. When Allura affects him enough to make the gold bleed in, he notices. She will eventually too.
+    </div>
+  </div>
+
+  <!-- Wolf Form -->
+  <div class="section">
+    <div class="section-title">Furcoat Form Canon</div>
+    <div class="wolf-split">
+      <div class="wolf-half dark">
+        <div class="wolf-half-label">Dark Markings</div>
+        <div class="wolf-detail">
+          Inky black across the back, shoulders, flanks, face, and ears. Full black muzzle. Black ears. The darkness is total — not grey, not dark brown. Black like deep water at night.
+        </div>
+      </div>
+      <div class="wolf-half light">
+        <div class="wolf-half-label">Cream Markings</div>
+        <div class="wolf-detail">
+          Cream and beige on all four legs, face panels, and shoulders — like he's wearing something ancient and ceremonial. A diamond marking on the forehead. White teeth, moon-bright.
+        </div>
+      </div>
+    </div>
+
+    <div class="outfit-card" style="margin-bottom:0;">
+      <div class="outfit-name" style="font-size:12px; opacity:0.8;">Distinguishing Marks</div>
+      <div class="outfit-details">
+        <div class="detail-key">Forehead</div>
+        <div class="detail-val">Diamond marking — pale against dark fur. Visible at distance. Unmistakable up close.</div>
+        <div class="detail-key">Size</div>
+        <div class="detail-val">Larger than other wolves. Noticeably. Allura clocks him across a treeline by size alone before she sees his markings.</div>
+        <div class="detail-key">Movement</div>
+        <div class="detail-val">Quiet for something that large. Nails click on cobblestones — that sound is a tell. In the forest: near-silent.</div>
+        <div class="detail-key">Glamoured form</div>
+        <div class="detail-val">Same coloring, same markings, but softer — "more approachable, harmless looking enough to be ignored by most fae." Still unmistakably large. Still him.</div>
+      </div>
+    </div>
+
+    <div class="writer-note">
+      When Allura watches the pack run, she clocks three large wolves and identifies him last — the cream-and-dark one who looks right at her and flashes gold. That eye flash is the confirmation. Use it as a recurring tell whenever the wolf is close to the surface in faecoat too.
+    </div>
+  </div>
+
+  <!-- Everyday Style -->
+  <div class="section">
+    <div class="section-title">Everyday Style</div>
+
+    <div class="prose-block ocean">
+      <span class="prose-label ocean">The Reference</span>
+      Jensen Ackles energy — the guy who looks effortlessly good because he's genuinely comfortable, not performing. Earthy tones, warm neutrals, the occasional splash of color that surprises you. A little nerdy warmth woven in. Not Harvey Specter. Not a suit-and-tie man. Someone who could walk into a forest or a casual dinner and look exactly right for both.
+    </div>
+
+    <div class="outfit-card">
+      <div class="outfit-name">Campus / General Wear</div>
+      <div class="outfit-details">
+        <div class="detail-key">Palette</div>
+        <div class="detail-val">
+          <div class="palette-row">
+            <span class="swatch"><span class="swatch-dot" style="background:#3B2F2F;"></span>Deep warm brown</span>
+            <span class="swatch"><span class="swatch-dot" style="background:#2C3320;"></span>Forest green</span>
+            <span class="swatch"><span class="swatch-dot" style="background:#5C4A3A;"></span>Warm tan</span>
+            <span class="swatch"><span class="swatch-dot" style="background:#1C1C1C;"></span>Near-black</span>
+            <span class="swatch"><span class="swatch-dot" style="background:#8B6F5E;"></span>Rust/clay</span>
+          </div>
+        </div>
+
+        <div class="detail-key">Silhouette</div>
+        <div class="detail-val">Nothing loose enough to catch in a shift. Fitted through the shoulders and chest — his build does the talking. Simple cuts, nothing fussy. He didn't think about it. It still works.</div>
+
+        <div class="detail-key">Layers</div>
+        <div class="detail-val">Usually. A henley or simple top underneath, something over it — a jacket, an open shirt, a worn layer he can move in. The layering is functional, not styled. It ends up looking styled anyway.</div>
+
+        <div class="detail-key">Signature</div>
+        <div class="detail-val">Boots, always. Dark trousers that fit well. The occasional piece with unexpected detail — a subtle texture, a small embellishment — that you only notice when you're standing close. Which most people don't get to do.</div>
+
+        <div class="detail-key">The nerd thread</div>
+        <div class="detail-val">Small, specific details that read as curated if you're paying attention. A pin, a particular book tucked under his arm, something that doesn't quite fit the apex predator image — and is therefore exactly him.</div>
+
+        <div class="detail-key">What he avoids</div>
+        <div class="detail-val">Anything that announces effort. Anything stiff. Anything that would slow a shift. He will never be caught in something he can't move in.</div>
+      </div>
+    </div>
+
+    <div class="writer-note">
+      His style secret: the warmth. Earth tones on warm tan skin with golden-brown hair creates a cohesive naturalness that reads as effortless. He looks like he grew out of the forest and just happens to be wearing clothes. That's right. That's canon.
+    </div>
+  </div>
+
+  <!-- Ball Look -->
+  <div class="section">
+    <div class="section-title">Formal / Ball Look</div>
+
+    <div class="outfit-card ball">
+      <div class="outfit-name">The Lazuline Ball — Suit Canon</div>
+      <div class="outfit-details">
+        <div class="detail-key">Base color</div>
+        <div class="detail-val">Deep charcoal — not quite black, not grey. The color of storm clouds before they break. It reads as black across a ballroom. Up close, it has depth.</div>
+
+        <div class="detail-key">Silhouette</div>
+        <div class="detail-val">Perfectly tailored through the shoulders — his build is the statement. Not boxy, not slim-cut vanity. Structured enough to look intentional, relaxed enough that he can still move. Kaelith probably had a hand in this.</div>
+
+        <div class="detail-key">The one detail</div>
+        <div class="detail-val">Subtle wolf-pack symbolism worked into the lapel or collar — a small engraved clasp, a fine embroidered line, something you'd only see if you were close and looking. Understated. He doesn't announce what he is. The detail is for those who already know.</div>
+
+        <div class="detail-key">Underneath</div>
+        <div class="detail-val">Deep charcoal or near-black underneath — no contrast break. The whole look reads as one continuous dark form. He disappears into the room until he doesn't.</div>
+
+        <div class="detail-key">Hair</div>
+        <div class="detail-val">The curls are present but settled — slightly more composed than everyday, still him. Kaelith adjusted it. He let her. He'd deny caring about this.</div>
+
+        <div class="detail-key">At the dance</div>
+        <div class="detail-val">He moves better in this suit than he should. He's been taught. His wolf knows how to move a body. The combination is devastating.</div>
+      </div>
+    </div>
+
+    <div class="writer-note">
+      The contrast that matters at the ball: Allura is light — gold, lavender, stardust. Reign is dark — charcoal, shadow, quiet menace in a suit. When they stand together on the dance floor, the visual is already telling the story. Don't over-describe it. Let the colors do it.
+    </div>
+  </div>
+
+  <!-- Blood Jewelry -->
+  <div class="section">
+    <div class="section-title">Blood Jewelry — The Craft</div>
+
+    <div class="prose-block">
+      <span class="prose-label">How it works</span>
+      A single claw drawn across his palm. Blood rises in floating droplets — not falling, suspended, shimmering garnet-red in the air. He shapes them with slow, practiced hand movements, the rhythm something between ritual and muscle memory. When he pulls the tether tight, they harden into glasslike jewels — cool to the touch, catching light from inside as if the blood remembers being warm.
+    </div>
+
+    <div class="jewelry-piece">
+      <div class="jewelry-name">His Own — Ear Cuff &amp; Neck Piece</div>
+      <div class="jewelry-desc">
+        Deliberately understated. He made himself something elegant but small — an ear cuff that follows the curve of cartilage, thin as a whisper, with a single garnet drop. The neck piece is a fine dark chain with one shaped jewel at the hollow of his throat, barely visible above his collar. Nothing that announces itself.
+      </div>
+      <div class="jewelry-craft">
+        He made these last and smallest. "Who was he to wear a crown, even to a formal event?" The restraint in what he crafted for himself says everything about who he thinks he is in Book 1. The blood remembers the wound even when he won't.
+      </div>
+    </div>
+
+    <div class="jewelry-piece">
+      <div class="jewelry-name">Kaelith's — Ruby Circlet</div>
+      <div class="jewelry-desc">
+        A delicate arcing circlet of fused ruby droplets, each one shaped individually before being set. A single teardrop gem suspended at the center, meant to rest just between her brows. Smaller droplets form a constellation trail across her cheekbones — they follow the sharp, wolfish angles of her face like they were mapped to her specifically. Because they were.
+      </div>
+      <div class="jewelry-craft">
+        He knows her face better than she knows it. The placement is exact. He didn't measure. He's been looking at her his whole life.
+      </div>
+    </div>
+
+    <div class="jewelry-piece">
+      <div class="jewelry-name">Riven's — Crescent Moon Piece</div>
+      <div class="jewelry-desc">
+        A forehead piece shaped as a crescent moon, radiating outward in tiny star-shaped shards — each one a frozen tear of his blood. The whole piece glows faintly, as if it caught invisible moonlight and kept it. It should look ridiculous. On Riven, it looks like it was always supposed to exist.
+      </div>
+      <div class="jewelry-craft">
+        Riven will wear it like he was born in it. Reign knew he would. That's why he made it this way.
+      </div>
+    </div>
+
+    <div class="wolf-callout">
+      <strong>Canon Note — The Blood Magic</strong>
+      The jewels harden into glass but they don't go cold immediately — there's a warmth in them that fades slowly, like they're mourning being blood. When Allura eventually learns what these pieces are made of, that detail matters. He gave pieces of himself to the people he loves. Literally. And then made himself something small.
+    </div>
+  </div>
+
+  <!-- Style Identity -->
+  <div class="section">
+    <div class="section-title">Style Identity — The Through Line</div>
+    <div class="prose-block ocean">
+      <span class="prose-label ocean">Who Reign dresses like</span>
+      Someone who grew up in the wilds and learned to exist in civilization without being shaped by it. His clothes are warm and natural because he is. He doesn't perform belonging anywhere — not in Nulune, not at the University, not at a formal ball. He simply arrives and the space adjusts. That is, in itself, a kind of power most fae spend their whole lives trying to manufacture.
+    </div>
+    <div class="prose-block">
+      <span class="prose-label">The contrast that defines him</span>
+      Big but quiet. Dark clothing, warm coloring. Apex predator who gives wounded wolves blood-forged gifts and then makes himself something small. He is the storm that walks softly. His style, like everything about him, is a contradiction that resolves into something true.
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="divider" style="margin-bottom:20px;">
+      <div class="divider-line" style="width:40px;"></div>
+      <div class="divider-gem"></div>
+      <div class="divider-line reverse" style="width:40px;"></div>
+    </div>
+    <div class="footer-text">Of Stormsalt &amp; Smoke · Faeblood Chronicles Book 1 · Reign Visual Canon · © 2026 Zoey Alexis Caine</div>
+  </div>
+
+</div>
+</body>
+</html>

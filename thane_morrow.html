@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thane Morrow — Of Stormsalt & Smoke</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cormorant+SC:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --cream:        #FAF7F2;
+    --cream-mid:    #F3EDE3;
+    --cream-deep:   #EDE4D6;
+    --ink:          #1C1915;
+    --ink-soft:     #3D3730;
+    --muted:        #8C7F72;
+    --border:       #DDD5C4;
+    --border-light: #EDE7DA;
+
+    /* Dragon-bond ember accent — warm charcoal + blue flame */
+    --accent:       #B06A2A;
+    --accent-light: #D4925A;
+    --accent-pale:  #F2E0CC;
+    --ember:        #C8602A;
+    --blue-flame:   #3A5A7C;
+    --soot:         #2E2E38;
+
+    --font-display: 'Cormorant SC', serif;
+    --font-body:    'Cormorant Garamond', serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: var(--cream);
+    color: var(--ink-soft);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 80px 60px 120px;
+  }
+
+  /* ── SERIES HEADER ── */
+  .series-header {
+    text-align: center;
+    letter-spacing: 0.25em;
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 300;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 52px;
+  }
+
+  /* ── HERO ── */
+  .hero { text-align: center; margin-bottom: 48px; }
+
+  .hero-name {
+    font-family: var(--font-display);
+    font-size: clamp(56px, 10vw, 88px);
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 24px;
+  }
+
+  .hero-tagline {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+    margin-bottom: 28px;
+  }
+
+  .hero-diamond {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 24px;
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+  }
+
+  .hero-diamond::before,
+  .hero-diamond::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .diamond-symbol { color: var(--accent); font-size: 14px; }
+
+  .hero-meta {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* ── DIVIDERS ── */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    margin: 48px 0;
+  }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.28em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-light);
+  }
+
+  /* ── LOCKED BADGE ── */
+  .locked-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-display);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 4px 12px;
+    text-transform: uppercase;
+    margin-left: 12px;
+  }
+
+  .locked-badge .dot {
+    width: 5px; height: 5px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* ── TRAIT GRID ── */
+  .trait-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid var(--border);
+    margin-bottom: 12px;
+  }
+
+  .trait-grid-2 { grid-template-columns: repeat(2, 1fr); }
+
+  .trait-cell {
+    padding: 22px 24px 26px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .trait-cell:nth-child(3n) { border-right: none; }
+  .trait-grid-2 .trait-cell:nth-child(2n) { border-right: none; }
+  .trait-cell:nth-last-child(-n+3) { border-bottom: none; }
+  .trait-grid-2 .trait-cell:nth-last-child(-n+2) { border-bottom: none; }
+
+  .trait-label {
+    font-family: var(--font-display);
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .trait-value {
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+
+  .trait-note {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  /* ── BODY TEXT ── */
+  .body-text {
+    font-family: var(--font-body);
+    font-size: 17px;
+    color: var(--ink-soft);
+    line-height: 1.85;
+    margin-bottom: 20px;
+  }
+
+  /* ── HERO QUOTE ── */
+  .hero-quote {
+    text-align: center;
+    padding: 36px 60px;
+    background: var(--cream-mid);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin: 40px 0;
+  }
+
+  .hero-quote p {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 21px;
+    font-weight: 300;
+    color: var(--blue-flame);
+    line-height: 1.65;
+    letter-spacing: 0.01em;
+  }
+
+  .hero-quote .attribution {
+    margin-top: 14px;
+    font-family: var(--font-display);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* ── QUOTE BLOCK ── */
+  .quote-block {
+    border-left: 2px solid var(--accent);
+    padding: 16px 28px;
+    margin: 28px 0;
+    background: var(--cream-mid);
+  }
+
+  .quote-block p {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--blue-flame);
+    line-height: 1.8;
+  }
+
+  /* ── BULLET LIST ── */
+  .bullet-list {
+    list-style: none;
+    margin: 0 0 24px 0;
+    padding: 0;
+  }
+
+  .bullet-list li {
+    display: flex;
+    gap: 16px;
+    padding: 8px 0;
+    font-family: var(--font-body);
+    font-size: 17px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .bullet-list li:last-child { border-bottom: none; }
+
+  .bullet-list li::before {
+    content: '◆';
+    color: var(--accent);
+    font-size: 8px;
+    margin-top: 8px;
+    flex-shrink: 0;
+  }
+
+  /* ── KV TABLE ── */
+  .kv-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 24px;
+  }
+
+  .kv-table tr { border-bottom: 1px solid var(--border-light); }
+
+  .kv-table td {
+    padding: 12px 0;
+    font-family: var(--font-body);
+    font-size: 17px;
+    vertical-align: top;
+  }
+
+  .kv-table td:first-child {
+    font-family: var(--font-display);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    width: 180px;
+    padding-right: 24px;
+    padding-top: 14px;
+  }
+
+  .kv-table td:last-child { color: var(--ink-soft); line-height: 1.7; }
+
+  /* ── CALLOUT ── */
+  .callout {
+    background: var(--cream-deep);
+    border: 1px solid var(--border);
+    padding: 24px 30px;
+    margin: 28px 0;
+  }
+
+  .callout-label {
+    font-family: var(--font-display);
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .callout p {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--ink-soft);
+    line-height: 1.8;
+  }
+
+  /* ── RELATIONSHIP ── */
+  .relationship {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border-light);
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 24px;
+  }
+
+  .relationship:last-child { border-bottom: none; }
+
+  .rel-name {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+
+  .rel-role {
+    font-family: var(--font-display);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 3px;
+  }
+
+  .rel-note {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  /* ── NOTE BLOCK ── */
+  .note-block {
+    border: 1px dashed var(--border);
+    padding: 20px 28px;
+    margin: 28px 0;
+  }
+
+  .note-block p {
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .note-block strong { color: var(--ink); font-weight: 500; font-style: normal; }
+
+  /* ── SOOT SECTION — special treatment ── */
+  .soot-box {
+    border: 1px solid var(--border);
+    background: var(--cream-mid);
+    padding: 0;
+    margin: 28px 0;
+    overflow: hidden;
+  }
+
+  .soot-header {
+    background: var(--soot);
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .soot-header-text {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+  }
+
+  .soot-header-name {
+    font-family: var(--font-display);
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    color: #A8C8E8;
+    text-transform: uppercase;
+    margin-left: auto;
+  }
+
+  .soot-body { padding: 24px 28px; }
+
+  .soot-body p {
+    font-family: var(--font-body);
+    font-size: 17px;
+    color: var(--ink-soft);
+    line-height: 1.85;
+    margin-bottom: 16px;
+  }
+
+  .soot-body p:last-child { margin-bottom: 0; }
+
+  /* ── DIALOGUE LINES ── */
+  .dialogue-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin: 24px 0;
+  }
+
+  .dialogue-cell {
+    background: var(--cream);
+    padding: 16px 20px;
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--blue-flame);
+    line-height: 1.6;
+  }
+
+  /* ── RULES BLOCK ── */
+  .rules-block {
+    border: 1px solid var(--border);
+    padding: 0;
+    margin: 24px 0;
+    overflow: hidden;
+  }
+
+  .rules-header {
+    background: var(--cream-deep);
+    padding: 12px 24px;
+    font-family: var(--font-display);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .rule-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .rule-row:last-child { border-bottom: none; }
+
+  .rule-num {
+    font-family: var(--font-display);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    text-transform: uppercase;
+    width: 60px;
+    flex-shrink: 0;
+    padding-top: 3px;
+  }
+
+  .rule-text {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+
+  /* ── SECTION ── */
+  .section { margin-bottom: 52px; }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    margin-top: 100px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .page-footer span {
+    font-family: var(--font-display);
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .footer-diamond { color: var(--accent); font-size: 8px; }
+
+  @media print {
+    body { background: #FAF7F2; }
+    .page { padding: 40px; }
+  }
+
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="series-header">
+    Of Stormsalt &amp; Smoke &nbsp;—&nbsp; Faeblood Chronicles
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1 class="hero-name">Thane Morrow</h1>
+    <div class="hero-tagline">"Retired war hero who accidentally adopted a dragon and now teaches teenagers."</div>
+    <div class="hero-diamond">
+      <span class="diamond-symbol">◆</span>
+      <span>Character Canon &nbsp;·&nbsp; Faculty &nbsp;·&nbsp; Cohort Advisor</span>
+    </div>
+    <div class="hero-meta">Visual Canon &nbsp;·&nbsp; Book 1 &nbsp;·&nbsp; Selenari Nexus</div>
+  </div>
+
+  <!-- SIGNATURE QUOTE -->
+  <div class="hero-quote">
+    <p>"If you die, I get paperwork. Don't make me do paperwork."</p>
+    <div class="attribution">Don't Die 101 &nbsp;·&nbsp; First Day of Class &nbsp;·&nbsp; Canon</div>
+  </div>
+
+  <!-- BASIC INFO -->
+  <div class="section">
+    <div class="section-label">
+      Basic Info
+      <span class="locked-badge"><span class="dot"></span> Locked</span>
+    </div>
+    <table class="kv-table">
+      <tr><td>Full Name</td><td>Professor Thane Marrow</td></tr>
+      <tr><td>Species</td><td>Fae — Dragon-Bonded (Imprint Bond, not Ascension)</td></tr>
+      <tr><td>Bond</td><td>Soot Oryo — juvenile wyrm, charcoal-scaled, blue-flame iridescence</td></tr>
+      <tr><td>Age</td><td>Appears ~40. Dragon-bonding slowed his aging. The math on his battlefield record doesn't add up and he knows it.</td></tr>
+      <tr><td>Role</td><td>Cohort Advisor (all three years) · Instructor, Don't Die 101 · Battle Tactics Arc II</td></tr>
+      <tr><td>Alignment</td><td>Chaotic Good</td></tr>
+      <tr><td>Vibe</td><td>Battlefield-dad energy. Exhausted. Secretly soft. Would die for his students without hesitation and complain about it the entire way down.</td></tr>
+      <tr><td>Author Casting</td><td>Nathan Fillion — original face, weathered, perpetually amused</td></tr>
+    </table>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PHYSICAL CANON -->
+  <div class="section">
+    <div class="section-label">
+      Physical Canon
+      <span class="locked-badge"><span class="dot"></span> Locked</span>
+    </div>
+
+    <div class="trait-grid">
+      <div class="trait-cell">
+        <div class="trait-label">Build</div>
+        <div class="trait-value">Tall, rangy, slightly feral</div>
+        <div class="trait-note">Broad-shouldered. The kind of build that reads as comfortable until you realize it's also a threat assessment.</div>
+      </div>
+      <div class="trait-cell">
+        <div class="trait-label">Hair</div>
+        <div class="trait-value">Tousled. Always.</div>
+        <div class="trait-note">Looks like he fought a windstorm and lost. He did. The windstorm was Soot. This is a daily occurrence.</div>
+      </div>
+      <div class="trait-cell">
+        <div class="trait-label">Eyes</div>
+        <div class="trait-value">Sharp, tired, done</div>
+        <div class="trait-note">Flash gold when irritated. Occasionally lit gold when channeling magic. He pretends this doesn't happen. It does.</div>
+      </div>
+      <div class="trait-cell">
+        <div class="trait-label">Coat</div>
+        <div class="trait-value">Long, black, singed</div>
+        <div class="trait-note">Silver threads catch the light. Perpetually snagging on hooks. He has lost this battle every single day for years. He keeps showing up anyway.</div>
+      </div>
+      <div class="trait-cell">
+        <div class="trait-label">Scars</div>
+        <div class="trait-value">Present. Unaddressed.</div>
+        <div class="trait-note">He has them. He doesn't discuss them. Students have stopped asking. The silence says enough.</div>
+      </div>
+      <div class="trait-cell">
+        <div class="trait-label">Boots</div>
+        <div class="trait-value">Worn from battles</div>
+        <div class="trait-note">The good kind of worn. The kind that means he survived everything they walked him into. He has never replaced them.</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">Dragon-Echo Features — Canon Locked</div>
+      <p>Subtle scale-sheen at the temples and jawline — only visible in certain light. Eyes flash gold when irritated or channeling. Voice occasionally drops into a low resonant echo, the kind that makes creatures go still. No wings — his bond is imprint-based, not ascension. He did not ask for any of this and has made his peace with it.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PERSONALITY -->
+  <div class="section">
+    <div class="section-label">Personality</div>
+
+    <p class="body-text">Thane Morrow strode in like a storm wearing a coat — and his coat immediately snagged on a hook by the door. He stopped mid-stride. <em>"Every damn time,"</em> he muttered, untangling himself with the resigned skill of a man who had been losing this battle for years. He turned to the class with a bright, charismatic smile like nothing had happened.</p>
+
+    <p class="body-text">That is Thane in one scene. Deeply competent. Perpetually exasperated. Charismatic without effort. Funny without trying. He is sarcastic but never cruel, exhausted but never absent, and so quietly protective of his students that most of them only realize it long after the moment has passed.</p>
+
+    <p class="body-text">He chose teaching after a catastrophic battlefield event — the details are intentionally vague, the weight of it is not. He came here to prevent young fae from dying the way his cohort did. Every joke is load-bearing. Every rule is earned in blood he watched spill. The class doesn't know that. He prefers it that way.</p>
+
+    <div class="note-block">
+      <p><strong>Writer's note:</strong> He is <em>emotionally allergic</em> and <em>secretly soft</em> in equal measure. The sarcasm is the shell. The shell is not the point. When Thane is genuinely kind to a student, it lands harder than anything else in the room precisely because he doesn't do it often. That's the craft.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- MAGIC & ABILITIES -->
+  <div class="section">
+    <div class="section-label">Magic &amp; Abilities</div>
+
+    <div class="trait-grid trait-grid-2" style="margin-bottom:24px;">
+      <div class="trait-cell">
+        <div class="trait-label">Fae Magic</div>
+        <div class="trait-value">Sensory, light, wards</div>
+        <div class="trait-note">Enhanced reflexes. Strong survival instincts. Protective ward magic — the kind built for keeping others alive, not himself.</div>
+      </div>
+      <div class="trait-cell">
+        <div class="trait-label">Bond Echoes</div>
+        <div class="trait-value">Heat. Strength. Sense.</div>
+        <div class="trait-note">Heightened heat tolerance. Slightly enhanced strength. Can sense magical creatures. The bond changed him and he has never fully inventoried how much.</div>
+      </div>
+    </div>
+
+    <ul class="bullet-list">
+      <li>Eyes glow gold when channeling — involuntary, he's stopped trying to hide it</li>
+      <li>Voice can instinctively "command" creatures — a resonance that makes things go still</li>
+      <li>Former battlefield operative — combat experience that goes well beyond the academic</li>
+      <li>Can extinguish magical fire with a snap of his fingers (frequently necessary)</li>
+      <li>Soot Oryo's blue flame does not harm him — another side effect he didn't ask for</li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SOOT ORYO -->
+  <div class="section">
+    <div class="section-label">Soot Oryo &nbsp;— The Bond</div>
+
+    <div class="soot-box">
+      <div class="soot-header">
+        <div class="soot-header-text">Imprint Bond &nbsp;·&nbsp; Juvenile Wyrm &nbsp;·&nbsp; Emotional Core</div>
+        <div class="soot-header-name">Soot Oryo</div>
+      </div>
+      <div class="soot-body">
+        <p>Charcoal-scaled. Faint blue iridescence. Curls behind the platform like an oversized cat with murder potential. His tail flicks. His nostrils smoke. He chews the podium when bored. He is here for <em>educational purposes</em> — mostly to demonstrate what not to do. He is very good at this.</p>
+        <p>Soot thinks Thane is his entire world. Thane pretends to be annoyed. Thane is absolutely not annoyed. They are inseparable. Soot causes ninety percent of Thane's daily stress and one hundred percent of his soft moments. This is not a coincidence. This is a dragon who understands exactly what he is doing.</p>
+        <p>The bond is imprint-based — magical parenthood thrust upon him, not chosen. He chose to stay. That distinction matters and he has never said it out loud.</p>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:0;">
+      <div class="callout-label">Daily Dialogue — Canon</div>
+      <p>"Soot Oryo, spit that out." &nbsp;·&nbsp; "Soot Oryo, don't eat the students." &nbsp;·&nbsp; "Soot Oryo, that is NOT a snack." &nbsp;·&nbsp; "Soot Oryo, get off the ceiling." &nbsp;·&nbsp; "SOOT ORYO, DROP THAT."</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- DON'T DIE 101 -->
+  <div class="section">
+    <div class="section-label">Don't Die 101 &nbsp;— The Class</div>
+
+    <p class="body-text">Officially: <em>Intro to Living Magic &amp; Dangerous Creatures.</em> Unofficially and universally: Don't Die 101. Thane teaches it like a man who has watched people die from not knowing things he could have told them. Every rule is a memorial he doesn't name.</p>
+
+    <div class="rules-block">
+      <div class="rules-header">The Rules &nbsp;·&nbsp; Opening Address &nbsp;·&nbsp; Canon</div>
+      <div class="rule-row">
+        <div class="rule-num">Rule 01</div>
+        <div class="rule-text">If something glows, don't touch it.</div>
+      </div>
+      <div class="rule-row">
+        <div class="rule-num">Rule 02</div>
+        <div class="rule-text">If something whispers, <em>definitely</em> don't touch it.</div>
+      </div>
+      <div class="rule-row">
+        <div class="rule-num">Rule 03</div>
+        <div class="rule-text">If something starts chanting, run.</div>
+      </div>
+      <div class="rule-row">
+        <div class="rule-num">Rule 04</div>
+        <div class="rule-text">If something starts chanting <em>backwards</em>, run faster.</div>
+      </div>
+      <div class="rule-row">
+        <div class="rule-num">Rule 05</div>
+        <div class="rule-text">Do not duel in the hallways. The hallways always win.</div>
+      </div>
+      <div class="rule-row">
+        <div class="rule-num">Rule 06</div>
+        <div class="rule-text">Do not summon anything you can't banish. If you don't know whether you can banish it, assume you can't.</div>
+      </div>
+      <div class="rule-row">
+        <div class="rule-num">Rule 07</div>
+        <div class="rule-text">Do not flirt with your professor. I know I'm charming. I know I have a certain rugged mystique. I promise you, it's mostly exhaustion.</div>
+      </div>
+      <div class="rule-row">
+        <div class="rule-num">Rule 08</div>
+        <div class="rule-text">No one — and I mean NO ONE — here is a snack. Not you. Not you. Definitely not you. <em>Especially</em> not Soot.</div>
+      </div>
+    </div>
+
+    <div class="quote-block">
+      <p>"Welcome to Selenari Nexus. Try not to die."</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- COHORT ADVISOR -->
+  <div class="section">
+    <div class="section-label">Cohort Advisor &nbsp;— All Three Years</div>
+
+    <p class="body-text">Thane is the anchor adult for Allura's entire class. He is with them for all three years — approving electives, supervising field assignments, handling conflicts, attending evaluations, serving as their emergency contact. He will watch them go from terrified first-years to something that can actually handle a crisis.</p>
+
+    <p class="body-text">He is the teacher-parent of the cohort. He did not apply for this distinction. He has accepted it with the same energy he accepts everything: by complaining about it loudly and then showing up without fail.</p>
+
+    <div class="callout">
+      <div class="callout-label">What He Knows That They Don't</div>
+      <p>He notices Allura's emotional shifts before she names them. He knows she's hiding something during the Thalen arc. He clocks the bond forming between her and Zlade before either of them has language for it. He says nothing. He is waiting for them to catch up. He is very patient about this and pretends he is not.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- RELATIONSHIPS -->
+  <div class="section">
+    <div class="section-label">Relationships</div>
+
+    <div class="relationship">
+      <div>
+        <div class="rel-name">Allura Starling</div>
+        <div class="rel-role">Student — Watched</div>
+      </div>
+      <div class="rel-note">Sees her potential immediately. Monitors her emotional state with the quiet attention of someone who has learned what it looks like when a person is about to break before they know it themselves. Quietly protective. Does not make it obvious. It is obvious.</div>
+    </div>
+
+    <div class="relationship">
+      <div>
+        <div class="rel-name">Zlade (Reign)</div>
+        <div class="rel-role">Student — Respected</div>
+      </div>
+      <div class="rel-note">Mutual respect with mild antagonism as the texture. Understands wolf instincts better than he admits. He recognized the bond forming before they did and filed it away without comment. He has a lot of filed-away observations about that particular situation.</div>
+    </div>
+
+    <div class="relationship">
+      <div>
+        <div class="rel-name">Harrison Starling</div>
+        <div class="rel-role">Student — Prodigy</div>
+      </div>
+      <div class="rel-note">Treats him like a prodigy he's been handed without warning. Gives him perhaps too much freedom. Is secretly, genuinely proud in a way he has not said out loud and probably won't for at least two books.</div>
+    </div>
+
+    <div class="relationship">
+      <div>
+        <div class="rel-name">Riven Stormveil</div>
+        <div class="rel-role">Student — Trusted</div>
+      </div>
+      <div class="rel-note">"The quiet one I trust." Riven's perceptiveness registers. Thane is one of the few adults who has clocked that Riven is sharper than he looks and has chosen not to make it a thing.</div>
+    </div>
+
+    <div class="relationship">
+      <div>
+        <div class="rel-name">Kaelith Stormveil</div>
+        <div class="rel-role">Student — Known</div>
+      </div>
+      <div class="rel-note">"The seer who knows too much." There is a specific kind of professional respect between two people who both see things before they happen. They have an unspoken understanding that neither has named.</div>
+    </div>
+
+    <div class="relationship">
+      <div>
+        <div class="rel-name">Zor</div>
+        <div class="rel-role">Student — Liability</div>
+      </div>
+      <div class="rel-note">"Walking liability." Said with affection. Mostly.</div>
+    </div>
+
+    <div class="relationship">
+      <div>
+        <div class="rel-name">Banister Whitis</div>
+        <div class="rel-role">Headmaster — Boss</div>
+      </div>
+      <div class="rel-note">Introduced to the first-year cohort with: <em>"Be kind to him. He needs it."</em> Thane has opinions about this introduction. He has kept them to himself. Banister finds this delightful.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ARC ROLE -->
+  <div class="section">
+    <div class="section-label">Role in the Story</div>
+    <ul class="bullet-list">
+      <li>Sets the tone of the Nexus from the first night — humor, danger, and the suggestion that surviving here requires something real</li>
+      <li>Provides grounding and dry humor across the arc without deflating genuine tension</li>
+      <li>Long-term mentor and emotional anchor — present across all three years and likely multiple books</li>
+      <li>Knows more about the Allura/Zlade bond than he admits and has chosen to wait</li>
+      <li>His past — the catastrophic event, the cohort that didn't survive — is a slow-release canon thread</li>
+      <li>Soot Oryo becomes a symbol across the series: chaos, unexpected family, the thing you didn't ask for that turns out to be exactly what you needed</li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ART PROMPT -->
+  <div class="section">
+    <div class="section-label">Art Prompt</div>
+    <p class="body-text" style="font-style:italic; color:var(--muted);">A tall, broad-shouldered dragon-bonded professor with warm brown eyes and tousled hair that has never once cooperated. Long black coat with silver thread detail — singed at the hem, perpetually catching on things. Faint scale-sheen at the temples and jaw in certain light. The look of a man who has fought a dragon before breakfast and is vaguely fine about it. Behind him: Soot Oryo — teenage charcoal dragon, blue iridescence, smoke wisping from his nostrils, sitting on something he absolutely should not be sitting on.</p>
+    <p class="body-text" style="font-style:italic; color:var(--muted);">Not Nathan Fillion — original face, weathered but handsome, perpetually amused in the specific way of someone who has decided that laughter is the only reasonable response to the situation they are currently in.</p>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="page-footer">
+    <span>Of Stormsalt &amp; Smoke</span>
+    <span class="footer-diamond">◆</span>
+    <span>Faeblood Chronicles Book 1</span>
+    <span class="footer-diamond">◆</span>
+    <span>Thane Morrow</span>
+    <span class="footer-diamond">◆</span>
+    <span>Character Canon</span>
+    <span class="footer-diamond">◆</span>
+    <span>© 2026 Zoey Alexis Caine</span>
+  </div>
+
+</div>
+</body>
+</html>
