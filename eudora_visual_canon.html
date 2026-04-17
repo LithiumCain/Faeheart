@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eudora — Visual Canon</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=EB+Garamond:ital@1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #9AB090;
+    --accent-light: #C4D4B8;
+    --accent-pale: #DCE6D0;
+    --midnight: #0C120E;
+    --deep-navy: #141C16;
+    --navy-mid: #1F2A22;
+    --secondary: #B0C0A8;
+    --secondary-dark: #708068;
+    --highlight: #D4D0B8;
+    --highlight-dim: #A09C85;
+    --cream: #F0F4EC;
+    --text-body: #C0C8B8;
+    --text-dim: #707868;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--midnight);
+    color: var(--text-body);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Starfield background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 8%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 60%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 25%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 50%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 75%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 80%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 33% 90%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 85%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 48% 33%, rgba(154,176,144,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 78% 65%, rgba(212,208,184,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 20% 55%, rgba(176,192,168,0.4) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 60px 40px 100px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 70px;
+    animation: fadeDown 1s ease both;
+  }
+
+  .series-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    opacity: 0.7;
+    margin-bottom: 20px;
+  }
+
+  .character-name {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(52px, 8vw, 88px);
+    font-weight: 400;
+    color: var(--accent-light);
+    letter-spacing: 0.08em;
+    line-height: 1;
+    margin-bottom: 12px;
+    text-shadow: 0 0 60px rgba(212,208,184,0.3), 0 2px 4px rgba(0,0,0,0.8);
+  }
+
+  .character-epithet {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: var(--secondary);
+    letter-spacing: 0.05em;
+    margin-bottom: 30px;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: center;
+    margin: 24px 0;
+  }
+
+  .divider-line {
+    height: 1px;
+    width: 80px;
+    background: linear-gradient(to right, transparent, var(--accent));
+  }
+
+  .divider-line.reverse {
+    background: linear-gradient(to left, transparent, var(--accent));
+  }
+
+  .divider-gem {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    transform: rotate(45deg);
+    box-shadow: 0 0 8px var(--accent);
+  }
+
+  .section {
+    margin-bottom: 56px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .section:nth-child(2) { animation-delay: 0.1s; }
+  .section:nth-child(3) { animation-delay: 0.2s; }
+  .section:nth-child(4) { animation-delay: 0.3s; }
+  .section:nth-child(5) { animation-delay: 0.4s; }
+  .section:nth-child(6) { animation-delay: 0.5s; }
+
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, rgba(154,176,144,0.4), transparent);
+  }
+
+  .physical-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .stat-block {
+    background: rgba(31, 42, 34, 0.55);
+    border: 1px solid rgba(154,176,144,0.15);
+    padding: 20px 18px;
+    position: relative;
+    transition: border-color 0.3s;
+  }
+
+  .stat-block:hover {
+    border-color: rgba(154,176,144,0.35);
+  }
+
+  .stat-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+
+  .stat-value {
+    font-size: 16px;
+    color: var(--cream);
+    font-weight: 300;
+    line-height: 1.4;
+  }
+
+  .stat-note {
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+
+  .eye-color {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .eye-swatch {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .prose-block {
+    background: rgba(13, 15, 26, 0.6);
+    border-left: 2px solid var(--accent);
+    padding: 22px 26px;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--text-body);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .prose-block.lavender {
+    border-left-color: var(--secondary-dark);
+  }
+
+  .prose-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-style: normal;
+    display: block;
+    margin-bottom: 10px;
+    opacity: 0.8;
+  }
+
+  .prose-label.lavender { color: var(--secondary); }
+
+  .outfit-card {
+    background: rgba(31, 42, 34, 0.45);
+    border: 1px solid rgba(154,176,144,0.18);
+    padding: 28px 30px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .outfit-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--accent), transparent);
+  }
+
+  .outfit-card.gown::before {
+    background: linear-gradient(to right, var(--midnight), var(--secondary-dark), var(--accent), var(--secondary-dark), transparent);
+  }
+
+  .outfit-name {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    letter-spacing: 0.15em;
+    color: var(--accent-light);
+    margin-bottom: 16px;
+  }
+
+  .outfit-details {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 10px 16px;
+    font-size: 15px;
+  }
+
+  .detail-key {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding-top: 2px;
+  }
+
+  .detail-val {
+    color: var(--text-body);
+    line-height: 1.6;
+  }
+
+  .palette-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+  }
+
+  .swatch {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  .swatch-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .rune-callout {
+    background: rgba(176,192,168,0.1);
+    border: 1px solid rgba(176,192,168,0.28);
+    padding: 18px 22px;
+    margin-top: 16px;
+    font-size: 15px;
+    color: var(--secondary);
+    line-height: 1.7;
+  }
+
+  .rune-callout strong {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 8px;
+    color: var(--secondary-dark);
+  }
+
+  .writer-note {
+    background: rgba(154,176,144,0.06);
+    border: 1px dashed rgba(154,176,144,0.22);
+    padding: 18px 22px;
+    font-size: 14px;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-top: 12px;
+    line-height: 1.7;
+  }
+
+  .writer-note::before {
+    content: '✦ Writer\'s note: ';
+    color: var(--accent);
+    font-style: normal;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .canon-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--highlight-dim);
+    border: 1px solid rgba(160,156,133,0.3);
+    padding: 4px 10px;
+    margin-left: 12px;
+    vertical-align: middle;
+  }
+
+  .canon-badge::before {
+    content: '◆';
+    font-size: 7px;
+  }
+
+  .footer {
+    text-align: center;
+    margin-top: 80px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(154,176,144,0.12);
+  }
+
+  .footer-text {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 600px) {
+    .page { padding: 40px 20px 80px; }
+    .physical-grid { grid-template-columns: 1fr 1fr; }
+    .outfit-details { grid-template-columns: 1fr; }
+    .detail-key { padding-bottom: 0; margin-bottom: -4px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="series-label">Of Stormsalt &amp; Smoke — Faeblood Chronicles</div>
+    <div class="character-name">Eudora</div>
+    <div class="character-epithet">"The forest never forgets. And neither does she."</div>
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-gem"></div>
+      <div class="divider-line reverse"></div>
+    </div>
+    <div class="series-label" style="opacity:0.5; font-size:9px;">Visual Canon — Book 1 · Keeper of Forgotten Lore · Raised the Stormveils</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Physical Canon <span class="canon-badge">Locked</span></div>
+    <div class="physical-grid">
+      <div class="stat-block">
+        <div class="stat-label">Height</div>
+        <div class="stat-value">Medium, straight-backed</div>
+        <div class="stat-note">Stands like a tree that has weathered centuries</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Build</div>
+        <div class="stat-value">Wiry, strong, ageless</div>
+        <div class="stat-note">Bare feet on forest floor. Always.</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Skin</div>
+        <div class="stat-value">Weathered warm brown</div>
+        <div class="stat-note">Lines at the eyes from laughter, and from grief</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Hair</div>
+        <div class="stat-value">Long silver braid</div>
+        <div class="stat-note">Trails like smoke. Never cut, never unbound in public.</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Eyes</div>
+        <div class="stat-value"><span class="eye-color">
+            <span class="eye-swatch" style="background: radial-gradient(circle at 35% 35%, #D4D0B8, #8A8880, #4A4A42); box-shadow: 0 0 8px rgba(212,208,184,0.6);"></span>
+            Storm-washed stone grey
+          </span></div>
+        <div class="stat-note">The color of water-smoothed granite. They miss nothing.</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Age</div>
+        <div class="stat-value">Unknowable</div>
+        <div class="stat-note">Older than the Stormveil name. Older than the cabin.</div>
+      </div>
+    </div>
+    <div class="rune-callout" style="margin-top:2px;">
+      <strong>Canon Note — The Cabin</strong>
+      Her home is woven from willow vines and moonlit branches. White flowers glow along the path. The door opens <em>before</em> visitors knock. The cabin is not haunted. It is <em>alive</em>, and it answers to her. The forest brings her what it wants her to find — abandoned pups, wounded fae, old griefs looking for a place to settle. She has never once turned any of them away.
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Prose-Ready Description</div>
+    <div class="prose-block">
+      <span class="prose-label">First impression (Prologue POV — Nisara & Rey)</span>
+      The door opens before they knock. She stands barefoot on the threshold, silver braid trailing like smoke. Her shawl is stitched with bark and bone. The air around her pulses with quiet, ancient magic. Storm-washed stone for eyes. A voice soft enough to hush a forest — and heavy enough to name three pups <em>Stormveil</em> and have the world agree.
+    </div>
+    <div class="prose-block lavender">
+      <span class="prose-label lavender">Neutral / third person shorthand</span>
+      She was the kind of old that made weather apologize for arriving. Barefoot, silver-braided, stone-eyed, and utterly unsurprised by anything.
+    </div>
+    <div class="writer-note">
+      Eudora's voice is <em>sparse and final</em>. She never wastes syllables. When she speaks, the forest listens. Don't give her monologues — give her sentences that land like stones dropped into water. Her best lines are the ones characters remember years later.
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Daily Presence</div>
+    <div class="outfit-card">
+      <div class="outfit-name">Daily Wear / The Cabin</div>
+      <div class="outfit-details">
+        <div class="detail-key">Silhouette</div>
+        <div class="detail-val">Layered shawls, long loose tunics, wrapped belts. Everything earned, nothing new. She wears what the forest has given her.</div>
+        <div class="detail-key">Palette</div>
+        <div class="detail-val"><div class="palette-row"><span class="swatch"><span class="swatch-dot" style="background:#9AB090;"></span>Moss green</span><span class="swatch"><span class="swatch-dot" style="background:#8A8880;"></span>Stone grey</span><span class="swatch"><span class="swatch-dot" style="background:#C0C0B8;"></span>Silver ash</span><span class="swatch"><span class="swatch-dot" style="background:#6A5A4A;"></span>Earth umber</span></div></div>
+        <div class="detail-key">Fabrics</div>
+        <div class="detail-val">Hand-spun wool. Linen woven with bark thread. A shawl stitched with bark and actual bird-bone. Nothing synthetic. Nothing loud.</div>
+        <div class="detail-key">Signature pieces</div>
+        <div class="detail-val">The silver braid. A small carved antler charm at the throat. A belt of woven vine she has never replaced. The bark-and-bone shawl, always.</div>
+        <div class="detail-key">Feet</div>
+        <div class="detail-val">Bare. Indoors, outdoors, in snow. Always bare. The forest knows her footprints.</div>
+      </div>
+    </div>
+    <div class="outfit-card">
+      <div class="outfit-name">When She Leaves The Woods</div>
+      <div class="outfit-details">
+        <div class="detail-key">Silhouette</div>
+        <div class="detail-val">A long grey cloak, hood up. The silver braid tucked inside. The stone-grey eyes become the only visible thing.</div>
+        <div class="detail-key">Details</div>
+        <div class="detail-val">She carries a staff carved from a tree she knew by name. No jewelry beyond the antler charm. No ornament that announces her.</div>
+        <div class="detail-key">Energy</div>
+        <div class="detail-val">She looks like weather. She is treated like weather. People who should know better make way for her without realizing they've moved.</div>
+      </div>
+    </div>
+    <div class="writer-note">
+      Eudora never changes her clothes for the scene. The scene <em>adjusts</em> to her. When she walks into a throne room barefoot in her bark shawl, that room is now a bark-shawl room.
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">The Prologue Moment</div>
+    <div class="outfit-card">
+      <div class="outfit-name">The Naming Moment — Prologue Canon</div>
+      <div class="outfit-details">
+        <div class="detail-key">Setting</div>
+        <div class="detail-val">Blood moon. Fog-banked forest. A willow-vine cabin lit by glowing white flowers.</div>
+        <div class="detail-key">Action</div>
+        <div class="detail-val">She cradles three wolf pups against her chest, humming under her breath. The middle pup's eyes flash gold as lightning cracks the sky. A rare flower unfurls in the archway out of season.</div>
+        <div class="detail-key">Line</div>
+        <div class="detail-val"><em>Stormborn.</em> Spoken once. And the world rearranges to accommodate it.</div>
+        <div class="detail-key">The Name</div>
+        <div class="detail-val"><em>"I will give them a name to keep them hidden. Stormveil. The storm that brought them here will shield what they are until they choose their own names."</em></div>
+        <div class="detail-key">Aftermath</div>
+        <div class="detail-val">The door closes. The forest exhales. Somewhere, a howl fractures into silence. Nothing is ever the same again. Eudora does not look back.</div>
+      </div>
+    </div>
+    <div class="rune-callout">
+      <strong>What She Knows (And Does Not Say)</strong>
+      Eudora knows exactly what Reign is. She has known since the blood moon. She knows what Allura is, too — or will be — and she has known since the first time the Stormveils mentioned her scent. She has never once told them. She is waiting for them to <em>choose their own names</em>. That's the only way it works. That's the only way it ever worked.
+    </div>
+    <div class="writer-note">
+      The prologue sets her tone forever. Every Eudora scene going forward should echo that first one: magic that responds to her without announcement, words that land like law, bare feet on whatever surface should not support her. She is the <em>anchor</em> of the series mythology. Write her that way.
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Style Identity — The Through Line</div>
+    <div class="prose-block">
+      <span class="prose-label">Who Eudora dresses like</span>
+      She dresses like someone who <em>belongs</em> to the forest and has never tried to dress like anything else. The wardrobe is not rustic — it is <em>rooted</em>. There is a difference, and that difference is three centuries of being the only person the woods would open their door for.
+    </div>
+    <div class="prose-block lavender">
+      <span class="prose-label lavender">The contrast that defines her</span>
+      Ancient and tender. Terrifyingly wise and genuinely warm. She raised three wolf pups into a pack with her own hands and taught them to love each other before she taught them what they were. She is fierce and protective and the Stormveils call her home.
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="divider" style="margin-bottom:20px;">
+      <div class="divider-line" style="width:40px;"></div>
+      <div class="divider-gem"></div>
+      <div class="divider-line reverse" style="width:40px;"></div>
+    </div>
+    <div class="footer-text">Of Stormsalt &amp; Smoke · Faeblood Chronicles Book 1 · Eudora Visual Canon · © 2026 Zoey Alexis Caine</div>
+  </div>
+
+</div>
+</body>
+</html>

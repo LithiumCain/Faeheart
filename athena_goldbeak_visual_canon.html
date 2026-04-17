@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Athena Goldbeak — Visual Canon</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=EB+Garamond:ital@1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #D4A84A;
+    --accent-light: #E8C578;
+    --accent-pale: #F0D9A4;
+    --midnight: #0C0A08;
+    --deep-navy: #141110;
+    --navy-mid: #221D18;
+    --secondary: #E0C890;
+    --secondary-dark: #988055;
+    --highlight: #C89030;
+    --highlight-dim: #906820;
+    --cream: #FAF2E0;
+    --text-body: #D4C4A0;
+    --text-dim: #7A6C52;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--midnight);
+    color: var(--text-body);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Starfield background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 8%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 60%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 25%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 50%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 75%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 80%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 33% 90%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 85%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 48% 33%, rgba(212,168,74,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 78% 65%, rgba(200,144,48,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 20% 55%, rgba(224,200,144,0.4) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 60px 40px 100px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 70px;
+    animation: fadeDown 1s ease both;
+  }
+
+  .series-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    opacity: 0.7;
+    margin-bottom: 20px;
+  }
+
+  .character-name {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(52px, 8vw, 88px);
+    font-weight: 400;
+    color: var(--accent-light);
+    letter-spacing: 0.08em;
+    line-height: 1;
+    margin-bottom: 12px;
+    text-shadow: 0 0 60px rgba(212,168,74,0.35), 0 2px 4px rgba(0,0,0,0.8);
+  }
+
+  .character-epithet {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: var(--secondary);
+    letter-spacing: 0.05em;
+    margin-bottom: 30px;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: center;
+    margin: 24px 0;
+  }
+
+  .divider-line {
+    height: 1px;
+    width: 80px;
+    background: linear-gradient(to right, transparent, var(--accent));
+  }
+
+  .divider-line.reverse {
+    background: linear-gradient(to left, transparent, var(--accent));
+  }
+
+  .divider-gem {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    transform: rotate(45deg);
+    box-shadow: 0 0 8px var(--accent);
+  }
+
+  .section {
+    margin-bottom: 56px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .section:nth-child(2) { animation-delay: 0.1s; }
+  .section:nth-child(3) { animation-delay: 0.2s; }
+  .section:nth-child(4) { animation-delay: 0.3s; }
+  .section:nth-child(5) { animation-delay: 0.4s; }
+  .section:nth-child(6) { animation-delay: 0.5s; }
+
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, rgba(212,168,74,0.4), transparent);
+  }
+
+  .physical-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .stat-block {
+    background: rgba(34, 29, 24, 0.55);
+    border: 1px solid rgba(212,168,74,0.14);
+    padding: 20px 18px;
+    position: relative;
+    transition: border-color 0.3s;
+  }
+
+  .stat-block:hover {
+    border-color: rgba(212,168,74,0.34);
+  }
+
+  .stat-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+
+  .stat-value {
+    font-size: 16px;
+    color: var(--cream);
+    font-weight: 300;
+    line-height: 1.4;
+  }
+
+  .stat-note {
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+
+  .eye-color {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .eye-swatch {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .prose-block {
+    background: rgba(13, 15, 26, 0.6);
+    border-left: 2px solid var(--accent);
+    padding: 22px 26px;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--text-body);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .prose-block.lavender {
+    border-left-color: var(--secondary-dark);
+  }
+
+  .prose-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-style: normal;
+    display: block;
+    margin-bottom: 10px;
+    opacity: 0.8;
+  }
+
+  .prose-label.lavender { color: var(--secondary); }
+
+  .outfit-card {
+    background: rgba(34, 29, 24, 0.45);
+    border: 1px solid rgba(212,168,74,0.17);
+    padding: 28px 30px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .outfit-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--accent), transparent);
+  }
+
+  .outfit-card.gown::before {
+    background: linear-gradient(to right, var(--midnight), var(--secondary-dark), var(--accent), var(--secondary-dark), transparent);
+  }
+
+  .outfit-name {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    letter-spacing: 0.15em;
+    color: var(--accent-light);
+    margin-bottom: 16px;
+  }
+
+  .outfit-details {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 10px 16px;
+    font-size: 15px;
+  }
+
+  .detail-key {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding-top: 2px;
+  }
+
+  .detail-val {
+    color: var(--text-body);
+    line-height: 1.6;
+  }
+
+  .palette-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+  }
+
+  .swatch {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  .swatch-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .rune-callout {
+    background: rgba(224,200,144,0.1);
+    border: 1px solid rgba(224,200,144,0.28);
+    padding: 18px 22px;
+    margin-top: 16px;
+    font-size: 15px;
+    color: var(--secondary);
+    line-height: 1.7;
+  }
+
+  .rune-callout strong {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 8px;
+    color: var(--secondary-dark);
+  }
+
+  .writer-note {
+    background: rgba(212,168,74,0.06);
+    border: 1px dashed rgba(212,168,74,0.22);
+    padding: 18px 22px;
+    font-size: 14px;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-top: 12px;
+    line-height: 1.7;
+  }
+
+  .writer-note::before {
+    content: '✦ Writer\'s note: ';
+    color: var(--accent);
+    font-style: normal;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .canon-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--highlight-dim);
+    border: 1px solid rgba(144,104,32,0.3);
+    padding: 4px 10px;
+    margin-left: 12px;
+    vertical-align: middle;
+  }
+
+  .canon-badge::before {
+    content: '◆';
+    font-size: 7px;
+  }
+
+  .footer {
+    text-align: center;
+    margin-top: 80px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(212,168,74,0.12);
+  }
+
+  .footer-text {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 600px) {
+    .page { padding: 40px 20px 80px; }
+    .physical-grid { grid-template-columns: 1fr 1fr; }
+    .outfit-details { grid-template-columns: 1fr; }
+    .detail-key { padding-bottom: 0; margin-bottom: -4px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="series-label">Of Stormsalt &amp; Smoke — Faeblood Chronicles</div>
+    <div class="character-name">Prof. Goldbeak</div>
+    <div class="character-epithet">"Wisdom is not inherited. It is earned, sharpened, and tested."</div>
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-gem"></div>
+      <div class="divider-line reverse"></div>
+    </div>
+    <div class="series-label" style="opacity:0.5; font-size:9px;">Visual Canon — Book 1 · Faculty · Stryxian · Celestial Mapping · Xiphos Lore</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Physical Canon <span class="canon-badge">Locked</span></div>
+    <div class="physical-grid">
+      <div class="stat-block">
+        <div class="stat-label">Height</div>
+        <div class="stat-value">Tall, poised</div>
+        <div class="stat-note">Posture as discipline, not performance</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Build</div>
+        <div class="stat-value">Regal, upright</div>
+        <div class="stat-note">Shoulders back, always. Forever.</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Skin</div>
+        <div class="stat-value">Deep warm brown</div>
+        <div class="stat-note">Catches lantern-light like polished mahogany</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Hair</div>
+        <div class="stat-value">Silver-streaked dark coils</div>
+        <div class="stat-note">Pinned with gold scholar's clasps</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Eyes</div>
+        <div class="stat-value"><span class="eye-color">
+            <span class="eye-swatch" style="background: radial-gradient(circle at 35% 35%, #F5E0A0, #D4A84A, #6A4A18); box-shadow: 0 0 8px rgba(212,168,74,0.7);"></span>
+            Gold-flecked dark brown
+          </span></div>
+        <div class="stat-note">Can see lies the way others see colors</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Owl Form</div>
+        <div class="stat-value">Regal, gold-flecked</div>
+        <div class="stat-note">Precise wingbeats. Never hurried.</div>
+      </div>
+    </div>
+    <div class="rune-callout" style="margin-top:2px;">
+      <strong>Canon Note — The Maps</strong>
+      Her office holds a small collection of antique celestial maps, each annotated in her own hand. The annotations are in three languages she never confirms she speaks. Students who earn her respect are allowed to study them. Students who are <em>worthy</em> are given their own copies. Nobody has ever been given a copy. Yet.
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Prose-Ready Description</div>
+    <div class="prose-block">
+      <span class="prose-label">First impression (student POV)</span>
+      She radiates authority the way others radiate warmth. Tall. Poised. Deep warm brown skin catching golden lantern-light like polished mahogany. Silver-streaked dark coils pinned with scholar's clasps. Gold-flecked eyes that can see lies the way other people see colors. She drinks jasmine tea. She speaks with a clarity that makes students straighten their spines without meaning to. Her dry humor takes a beat to register — then hits like a spell.
+    </div>
+    <div class="prose-block lavender">
+      <span class="prose-label lavender">Neutral / third person shorthand</span>
+      She was the kind of professor whose approval felt like weather — rare, cherished, and occasionally terrifying.
+    </div>
+    <div class="writer-note">
+      Goldbeak's authority is <em>never raised</em>. She commands attention by lowering her voice, not raising it. She believes mistakes are the <em>tuition of mastery</em> — let her quote that line verbatim when students fail honorably. She never punishes honest failure. She never forgives laziness.
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Teaching Presence</div>
+    <div class="outfit-card">
+      <div class="outfit-name">Scholar's Robes</div>
+      <div class="outfit-details">
+        <div class="detail-key">Silhouette</div>
+        <div class="detail-val">Structured scholarly robes, always. Long sleeves with feather-soft cuff detailing. Tall collar. Fitted at the shoulder, flowing at the hem.</div>
+        <div class="detail-key">Palette</div>
+        <div class="detail-val"><div class="palette-row"><span class="swatch"><span class="swatch-dot" style="background:#D4A84A;"></span>Old gold</span><span class="swatch"><span class="swatch-dot" style="background:#221D18;"></span>Midnight walnut</span><span class="swatch"><span class="swatch-dot" style="background:#E0C890;"></span>Parchment cream</span><span class="swatch"><span class="swatch-dot" style="background:#988055;"></span>Aged brass</span></div></div>
+        <div class="detail-key">Fabrics</div>
+        <div class="detail-val">Heavy embroidered silks, wool-blend academic robes, feathered accent collars. Every piece tailored to her. Every piece decades old.</div>
+        <div class="detail-key">Signature pieces</div>
+        <div class="detail-val">A gold brooch in the shape of an owl's open eye. Scholar's clasps in her hair. A single antique gold ring passed down for centuries.</div>
+        <div class="detail-key">What she avoids</div>
+        <div class="detail-val">Chaos. Brightness. Anything that would undermine the <em>stillness</em> she cultivates.</div>
+      </div>
+    </div>
+    <div class="writer-note">
+      Her office smells like jasmine tea and very old paper. Her enchanted lanterns are set to soft golden light. When she enters a room, lecterns straighten without being touched. She does not notice. The lecterns would like her to notice.
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Formal / Signature Look</div>
+    <div class="outfit-card">
+      <div class="outfit-name">Ceremonial / Gala Robes</div>
+      <div class="outfit-details">
+        <div class="detail-key">Silhouette</div>
+        <div class="detail-val">Full scholarly robes with gold-thread constellation embroidery across the back and shoulders. A star map made of her own scholarship.</div>
+        <div class="detail-key">Color story</div>
+        <div class="detail-val">Deep walnut-black with aged-gold embroidery. The constellations glow faintly — they respond to celestial alignments visible only to her.</div>
+        <div class="detail-key">Adornment</div>
+        <div class="detail-val">A crown-circlet of thin gold with a single owl-eye gem at the brow. A deeper feathered collar than her daily robes.</div>
+        <div class="detail-key">Energy</div>
+        <div class="detail-val">She looks like a scholar-queen. No one questions this. No one ever has.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Style Identity — The Through Line</div>
+    <div class="prose-block">
+      <span class="prose-label">Who Goldbeak dresses like</span>
+      She dresses like a scholar-queen who never had to demand a throne. Old gold, midnight walnut, parchment cream. Every piece spelled with restraint. Her wardrobe is a <em>thesis on discipline</em>, and it has never once failed to defend itself.
+    </div>
+    <div class="prose-block lavender">
+      <span class="prose-label lavender">The teacher she is</span>
+      Exacting but never cruel. Demanding but never capricious. She expects excellence but never demands perfection — she knows the difference, and she teaches her students to know it too. Students either rise to her standard or leave. Those who rise never forget her.
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="divider" style="margin-bottom:20px;">
+      <div class="divider-line" style="width:40px;"></div>
+      <div class="divider-gem"></div>
+      <div class="divider-line reverse" style="width:40px;"></div>
+    </div>
+    <div class="footer-text">Of Stormsalt &amp; Smoke · Faeblood Chronicles Book 1 · Athena Goldbeak Visual Canon · © 2026 Zoey Alexis Caine</div>
+  </div>
+
+</div>
+</body>
+</html>

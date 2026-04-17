@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anastasia Shadowfang — Visual Canon</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=EB+Garamond:ital@1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #C8C4BC;
+    --accent-light: #E0DCD4;
+    --accent-pale: #EDEAE3;
+    --midnight: #0B0D10;
+    --deep-navy: #13161A;
+    --navy-mid: #1F2328;
+    --secondary: #B8B4AC;
+    --secondary-dark: #78756D;
+    --highlight: #A89878;
+    --highlight-dim: #7A6C50;
+    --cream: #F4F2EC;
+    --text-body: #BEBAB0;
+    --text-dim: #6E6B63;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--midnight);
+    color: var(--text-body);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Starfield background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 8%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 60%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 25%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 50%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 75%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 80%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 33% 90%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 85%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 48% 33%, rgba(200,196,188,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 78% 65%, rgba(184,180,172,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 20% 55%, rgba(168,152,120,0.4) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 60px 40px 100px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 70px;
+    animation: fadeDown 1s ease both;
+  }
+
+  .series-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    opacity: 0.7;
+    margin-bottom: 20px;
+  }
+
+  .character-name {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(52px, 8vw, 88px);
+    font-weight: 400;
+    color: var(--accent-light);
+    letter-spacing: 0.08em;
+    line-height: 1;
+    margin-bottom: 12px;
+    text-shadow: 0 0 60px rgba(224,220,212,0.3), 0 2px 4px rgba(0,0,0,0.8);
+  }
+
+  .character-epithet {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: var(--secondary);
+    letter-spacing: 0.05em;
+    margin-bottom: 30px;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: center;
+    margin: 24px 0;
+  }
+
+  .divider-line {
+    height: 1px;
+    width: 80px;
+    background: linear-gradient(to right, transparent, var(--accent));
+  }
+
+  .divider-line.reverse {
+    background: linear-gradient(to left, transparent, var(--accent));
+  }
+
+  .divider-gem {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    transform: rotate(45deg);
+    box-shadow: 0 0 8px var(--accent);
+  }
+
+  .section {
+    margin-bottom: 56px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .section:nth-child(2) { animation-delay: 0.1s; }
+  .section:nth-child(3) { animation-delay: 0.2s; }
+  .section:nth-child(4) { animation-delay: 0.3s; }
+  .section:nth-child(5) { animation-delay: 0.4s; }
+  .section:nth-child(6) { animation-delay: 0.5s; }
+
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, rgba(200,196,188,0.4), transparent);
+  }
+
+  .physical-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .stat-block {
+    background: rgba(31, 35, 40, 0.55);
+    border: 1px solid rgba(200,196,188,0.12);
+    padding: 20px 18px;
+    position: relative;
+    transition: border-color 0.3s;
+  }
+
+  .stat-block:hover {
+    border-color: rgba(200,196,188,0.32);
+  }
+
+  .stat-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+
+  .stat-value {
+    font-size: 16px;
+    color: var(--cream);
+    font-weight: 300;
+    line-height: 1.4;
+  }
+
+  .stat-note {
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+
+  .eye-color {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .eye-swatch {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .prose-block {
+    background: rgba(13, 15, 26, 0.6);
+    border-left: 2px solid var(--accent);
+    padding: 22px 26px;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--text-body);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .prose-block.lavender {
+    border-left-color: var(--secondary-dark);
+  }
+
+  .prose-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-style: normal;
+    display: block;
+    margin-bottom: 10px;
+    opacity: 0.8;
+  }
+
+  .prose-label.lavender { color: var(--secondary); }
+
+  .outfit-card {
+    background: rgba(31, 35, 40, 0.45);
+    border: 1px solid rgba(200,196,188,0.15);
+    padding: 28px 30px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .outfit-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--accent), transparent);
+  }
+
+  .outfit-card.gown::before {
+    background: linear-gradient(to right, var(--midnight), var(--secondary-dark), var(--accent), var(--secondary-dark), transparent);
+  }
+
+  .outfit-name {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    letter-spacing: 0.15em;
+    color: var(--accent-light);
+    margin-bottom: 16px;
+  }
+
+  .outfit-details {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 10px 16px;
+    font-size: 15px;
+  }
+
+  .detail-key {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding-top: 2px;
+  }
+
+  .detail-val {
+    color: var(--text-body);
+    line-height: 1.6;
+  }
+
+  .palette-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+  }
+
+  .swatch {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  .swatch-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .rune-callout {
+    background: rgba(184,180,172,0.1);
+    border: 1px solid rgba(184,180,172,0.26);
+    padding: 18px 22px;
+    margin-top: 16px;
+    font-size: 15px;
+    color: var(--secondary);
+    line-height: 1.7;
+  }
+
+  .rune-callout strong {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 8px;
+    color: var(--secondary-dark);
+  }
+
+  .writer-note {
+    background: rgba(200,196,188,0.05);
+    border: 1px dashed rgba(200,196,188,0.2);
+    padding: 18px 22px;
+    font-size: 14px;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-top: 12px;
+    line-height: 1.7;
+  }
+
+  .writer-note::before {
+    content: '✦ Writer\'s note: ';
+    color: var(--accent);
+    font-style: normal;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .canon-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--highlight-dim);
+    border: 1px solid rgba(122,108,80,0.3);
+    padding: 4px 10px;
+    margin-left: 12px;
+    vertical-align: middle;
+  }
+
+  .canon-badge::before {
+    content: '◆';
+    font-size: 7px;
+  }
+
+  .footer {
+    text-align: center;
+    margin-top: 80px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(200,196,188,0.1);
+  }
+
+  .footer-text {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 600px) {
+    .page { padding: 40px 20px 80px; }
+    .physical-grid { grid-template-columns: 1fr 1fr; }
+    .outfit-details { grid-template-columns: 1fr; }
+    .detail-key { padding-bottom: 0; margin-bottom: -4px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="series-label">Of Stormsalt &amp; Smoke — Faeblood Chronicles</div>
+    <div class="character-name">Prof. Shadowfang</div>
+    <div class="character-epithet">"A blade is only as sharp as the mind holding it."</div>
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-gem"></div>
+      <div class="divider-line reverse"></div>
+    </div>
+    <div class="series-label" style="opacity:0.5; font-size:9px;">Visual Canon — Book 1 · Faculty · Lycari · Weapons & Combat</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Physical Canon <span class="canon-badge">Locked</span></div>
+    <div class="physical-grid">
+      <div class="stat-block">
+        <div class="stat-label">Height</div>
+        <div class="stat-value">Medium, poised</div>
+        <div class="stat-note">She already knows every exit in the room</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Build</div>
+        <div class="stat-value">Elegant, lethal</div>
+        <div class="stat-note">Grace indistinguishable from threat</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Skin</div>
+        <div class="stat-value">Pale, luminous</div>
+        <div class="stat-note">Faint silver wolf-shimmer at the temples</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Hair</div>
+        <div class="stat-value">Dark, sleek, often pinned</div>
+        <div class="stat-note">Smooth, no decoration</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Eyes</div>
+        <div class="stat-value"><span class="eye-color">
+            <span class="eye-swatch" style="background: radial-gradient(circle at 35% 35%, #EDEAE3, #B0ADA4, #5A584F); box-shadow: 0 0 8px rgba(224,220,212,0.7);"></span>
+            Pale ice grey
+          </span></div>
+        <div class="stat-note">Ghost-hunter eyes. Silent. Patient.</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Wolf Form</div>
+        <div class="stat-value">Pale-eyed, silent</div>
+        <div class="stat-note">Moves like a cold wind through the weapons hall</div>
+      </div>
+    </div>
+    <div class="rune-callout" style="margin-top:2px;">
+      <strong>Canon Note — The Chaotic Drawer</strong>
+      Her office is <em>immaculate</em> — except for a single drawer full of broken weapon parts she swears she'll fix "one day." She has sworn this for years. The drawer has outlived three replacement cabinets. Students who earn her respect are allowed to look inside. Students who try to clean it are never allowed to look again.
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Prose-Ready Description</div>
+    <div class="prose-block">
+      <span class="prose-label">First impression (student POV)</span>
+      She walks in like she already knows every exit and has decided, charitably, not to need any of them. Pale skin. Dark hair smoothed back. Ice-grey eyes that move through a room the way her wolf moves through a field. She wears dark gloves — she says the metal dust from the weapons vault dries out her hands. She drinks iced coffee in winter. She can correct your stance with a gentle touch and put you flat on your back in the same movement, and both feel somehow like kindness.
+    </div>
+    <div class="prose-block lavender">
+      <span class="prose-label lavender">Neutral / third person shorthand</span>
+      She was lethal in the way silk is lethal — beautiful until it closes around your throat, and then entirely beautiful.
+    </div>
+    <div class="writer-note">
+      Shadowfang is <em>patient but not indulgent</em>. She expects effort, not perfection. She is fiercely protective of underdogs and absolutely ruthless with show-offs. When she hums battle hymns under her breath while demonstrating, students learn to recognize the melodies — each one maps to a lesson.
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Teaching Presence</div>
+    <div class="outfit-card">
+      <div class="outfit-name">Teaching Attire</div>
+      <div class="outfit-details">
+        <div class="detail-key">Silhouette</div>
+        <div class="detail-val">Fitted training armor. Subtle fang motifs at the shoulder clasps. A fitted half-cape she sometimes wears, never for warmth.</div>
+        <div class="detail-key">Palette</div>
+        <div class="detail-val"><div class="palette-row"><span class="swatch"><span class="swatch-dot" style="background:#1F2328;"></span>Smoke black</span><span class="swatch"><span class="swatch-dot" style="background:#C8C4BC;"></span>Pale steel</span><span class="swatch"><span class="swatch-dot" style="background:#A89878;"></span>Muted gold</span><span class="swatch"><span class="swatch-dot" style="background:#78756D;"></span>Ash grey</span></div></div>
+        <div class="detail-key">Fabrics</div>
+        <div class="detail-val">Reinforced leather, cold-pressed canvas, dark-dyed wool. Nothing that swishes. Nothing that announces movement before it happens.</div>
+        <div class="detail-key">Signature pieces</div>
+        <div class="detail-val">Dark gloves. Always. A thin silver chain at the throat with a fang pendant. Twin daggers at the hips she has never once drawn in class and never needs to.</div>
+        <div class="detail-key">What she avoids</div>
+        <div class="detail-val">Warm colors. Sound. Anything that would soften her silhouette. She chose this blade edge on purpose.</div>
+      </div>
+    </div>
+    <div class="writer-note">
+      She wears the same silhouette for fifty years and never looks dated. Shadowfang's style is <em>timeless threat</em>. When she hums while demonstrating, the classroom quiets without being asked.
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Style Identity — The Through Line</div>
+    <div class="prose-block">
+      <span class="prose-label">Who Shadowfang dresses like</span>
+      She dresses like a woman who chose her silhouette when she was young and has not needed to update it. Pale steel, smoke black, muted gold. A wardrobe that tells students, wordlessly, that weapons are not the dangerous thing in this room.
+    </div>
+    <div class="prose-block lavender">
+      <span class="prose-label lavender">The teacher she is</span>
+      Elegant. Lethal. Disarmingly calm. She'll flip a student onto the mat without breaking eye contact, help them up, and ask what they think they did wrong. She wants them to <em>see</em> the answer. She will never hand it to them.
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="divider" style="margin-bottom:20px;">
+      <div class="divider-line" style="width:40px;"></div>
+      <div class="divider-gem"></div>
+      <div class="divider-line reverse" style="width:40px;"></div>
+    </div>
+    <div class="footer-text">Of Stormsalt &amp; Smoke · Faeblood Chronicles Book 1 · Anastasia Shadowfang Visual Canon · © 2026 Zoey Alexis Caine</div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Renne Feathermane — Visual Canon</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=EB+Garamond:ital@1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #C9C4D4;
+    --accent-light: #E8E3F0;
+    --accent-pale: #F0EDF6;
+    --midnight: #0A0C18;
+    --deep-navy: #0F1424;
+    --navy-mid: #1A2038;
+    --secondary: #A8B8D4;
+    --secondary-dark: #6E7FA0;
+    --highlight: #E8D08A;
+    --highlight-dim: #B8A560;
+    --cream: #F6F4FA;
+    --text-body: #C5C0D0;
+    --text-dim: #756F80;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--midnight);
+    color: var(--text-body);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Starfield background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 8%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 60%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 25%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 50%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 75%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 80%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 33% 90%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 85%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 48% 33%, rgba(232,227,240,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 78% 65%, rgba(168,184,212,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 20% 55%, rgba(232,208,138,0.4) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 60px 40px 100px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 70px;
+    animation: fadeDown 1s ease both;
+  }
+
+  .series-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    opacity: 0.7;
+    margin-bottom: 20px;
+  }
+
+  .character-name {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(52px, 8vw, 88px);
+    font-weight: 400;
+    color: var(--accent-light);
+    letter-spacing: 0.08em;
+    line-height: 1;
+    margin-bottom: 12px;
+    text-shadow: 0 0 60px rgba(232,227,240,0.25), 0 2px 4px rgba(0,0,0,0.8);
+  }
+
+  .character-epithet {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: var(--secondary);
+    letter-spacing: 0.05em;
+    margin-bottom: 30px;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: center;
+    margin: 24px 0;
+  }
+
+  .divider-line {
+    height: 1px;
+    width: 80px;
+    background: linear-gradient(to right, transparent, var(--accent));
+  }
+
+  .divider-line.reverse {
+    background: linear-gradient(to left, transparent, var(--accent));
+  }
+
+  .divider-gem {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    transform: rotate(45deg);
+    box-shadow: 0 0 8px var(--accent);
+  }
+
+  .section {
+    margin-bottom: 56px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .section:nth-child(2) { animation-delay: 0.1s; }
+  .section:nth-child(3) { animation-delay: 0.2s; }
+  .section:nth-child(4) { animation-delay: 0.3s; }
+  .section:nth-child(5) { animation-delay: 0.4s; }
+  .section:nth-child(6) { animation-delay: 0.5s; }
+
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, rgba(201,196,212,0.4), transparent);
+  }
+
+  .physical-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .stat-block {
+    background: rgba(26, 32, 56, 0.5);
+    border: 1px solid rgba(201,196,212,0.12);
+    padding: 20px 18px;
+    position: relative;
+    transition: border-color 0.3s;
+  }
+
+  .stat-block:hover {
+    border-color: rgba(201,196,212,0.3);
+  }
+
+  .stat-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+
+  .stat-value {
+    font-size: 16px;
+    color: var(--cream);
+    font-weight: 300;
+    line-height: 1.4;
+  }
+
+  .stat-note {
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+
+  .eye-color {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .eye-swatch {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .prose-block {
+    background: rgba(13, 15, 26, 0.6);
+    border-left: 2px solid var(--accent);
+    padding: 22px 26px;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--text-body);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .prose-block.lavender {
+    border-left-color: var(--secondary-dark);
+  }
+
+  .prose-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-style: normal;
+    display: block;
+    margin-bottom: 10px;
+    opacity: 0.8;
+  }
+
+  .prose-label.lavender { color: var(--secondary); }
+
+  .outfit-card {
+    background: rgba(26, 32, 56, 0.4);
+    border: 1px solid rgba(201,196,212,0.15);
+    padding: 28px 30px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .outfit-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--accent), transparent);
+  }
+
+  .outfit-card.gown::before {
+    background: linear-gradient(to right, var(--midnight), var(--secondary-dark), var(--accent), var(--secondary-dark), transparent);
+  }
+
+  .outfit-name {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    letter-spacing: 0.15em;
+    color: var(--accent-light);
+    margin-bottom: 16px;
+  }
+
+  .outfit-details {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 10px 16px;
+    font-size: 15px;
+  }
+
+  .detail-key {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding-top: 2px;
+  }
+
+  .detail-val {
+    color: var(--text-body);
+    line-height: 1.6;
+  }
+
+  .palette-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+  }
+
+  .swatch {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  .swatch-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .rune-callout {
+    background: rgba(168,184,212,0.1);
+    border: 1px solid rgba(168,184,212,0.25);
+    padding: 18px 22px;
+    margin-top: 16px;
+    font-size: 15px;
+    color: var(--secondary);
+    line-height: 1.7;
+  }
+
+  .rune-callout strong {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 8px;
+    color: var(--secondary-dark);
+  }
+
+  .writer-note {
+    background: rgba(201,196,212,0.05);
+    border: 1px dashed rgba(201,196,212,0.2);
+    padding: 18px 22px;
+    font-size: 14px;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-top: 12px;
+    line-height: 1.7;
+  }
+
+  .writer-note::before {
+    content: '✦ Writer\'s note: ';
+    color: var(--accent);
+    font-style: normal;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .canon-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--highlight-dim);
+    border: 1px solid rgba(184,165,96,0.3);
+    padding: 4px 10px;
+    margin-left: 12px;
+    vertical-align: middle;
+  }
+
+  .canon-badge::before {
+    content: '◆';
+    font-size: 7px;
+  }
+
+  .footer {
+    text-align: center;
+    margin-top: 80px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(201,196,212,0.1);
+  }
+
+  .footer-text {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 600px) {
+    .page { padding: 40px 20px 80px; }
+    .physical-grid { grid-template-columns: 1fr 1fr; }
+    .outfit-details { grid-template-columns: 1fr; }
+    .detail-key { padding-bottom: 0; margin-bottom: -4px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="series-label">Of Stormsalt &amp; Smoke — Faeblood Chronicles</div>
+    <div class="character-name">Renne</div>
+    <div class="character-epithet">"Social hurricane. Fashion icon. The owl who sees everything."</div>
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-gem"></div>
+      <div class="divider-line reverse"></div>
+    </div>
+    <div class="series-label" style="opacity:0.5; font-size:9px;">Visual Canon — Book 1 · Owl-Shifter Fae · Strixian Isles</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Physical Canon <span class="canon-badge">Locked</span></div>
+    <div class="physical-grid">
+      <div class="stat-block">
+        <div class="stat-label">Height</div>
+        <div class="stat-value">Tall</div>
+        <div class="stat-note">Dancer-like posture, gliding grace</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Build</div>
+        <div class="stat-value">Elegant, predatory-graceful</div>
+        <div class="stat-note">Moves like she's weightless indoors</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Skin</div>
+        <div class="stat-value">Pale, faint moonlit sheen</div>
+        <div class="stat-note">Subtle feathering along shoulders & collarbone</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Hair</div>
+        <div class="stat-value">Soft waves, dark with white-gold streaks</div>
+        <div class="stat-note">Often decorated with feathers</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Eyes</div>
+        <div class="stat-value"><span class="eye-color">
+            <span class="eye-swatch" style="background: radial-gradient(circle at 35% 35%, #DDEBFF, #8FA8C8, #4A6280); box-shadow: 0 0 8px rgba(168,184,212,0.7);"></span>
+            Silver-blue, reflective, owl-sharp
+          </span></div>
+        <div class="stat-note">Luminous — they catch light like a predator's</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Face</div>
+        <div class="stat-value">Sharp features, warm brown undertone</div>
+        <div class="stat-note">A face that reads rooms instantly</div>
+      </div>
+    </div>
+    <div class="rune-callout" style="margin-top:2px;">
+      <strong>Canon Note — The Talon</strong>
+      One large raptor talon on her right foot that <em>clicks</em> when she walks on stone. Students learn to recognize the sound before they see her. When she's trying to be silent, she isn't — she just chooses not to be heard.
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Prose-Ready Description</div>
+    <div class="prose-block">
+      <span class="prose-label">First impression (Allura's POV)</span>
+      A hurricane arrives in a ballroom and calls it fashion. Soft waves pinned with feathers that catch lanternlight like they were woven by moonlight itself. Silver-blue eyes that flick to you and <em>see</em> you in about half a second. Warm brown skin with a faint moonlit sheen along her collarbone, like her skin remembers the sky. She doesn't walk into a room — she <em>decides</em> the room, and then occupies it.
+    </div>
+    <div class="prose-block lavender">
+      <span class="prose-label lavender">Neutral / third person shorthand</span>
+      She was the kind of beautiful that made other people's posture improve. Feathers in her hair, truth in her eyes, and a grin that promised she already knew your secrets.
+    </div>
+    <div class="writer-note">
+      When writing Renne, lead with <em>presence</em> before appearance. She announces herself — then the description catches up. Feathers and silver-blue are her anchor images. Let the talon click land on stone at least once per scene she walks through.
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Everyday Style</div>
+    <div class="outfit-card">
+      <div class="outfit-name">Campus / General Wear</div>
+      <div class="outfit-details">
+        <div class="detail-key">Silhouette</div>
+        <div class="detail-val">Layered, flowing, unapologetically feminine. Nothing boxy. Pieces that move when she moves.</div>
+        <div class="detail-key">Palette</div>
+        <div class="detail-val"><div class="palette-row"><span class="swatch"><span class="swatch-dot" style="background:#D8D4E0;"></span>Moon silver</span><span class="swatch"><span class="swatch-dot" style="background:#E8D08A;"></span>Warm gold</span><span class="swatch"><span class="swatch-dot" style="background:#1A2038;"></span>Midnight navy</span><span class="swatch"><span class="swatch-dot" style="background:#F0EDF6;"></span>Ivory</span></div></div>
+        <div class="detail-key">Fabrics</div>
+        <div class="detail-val">Silks, sheer layers, lightweight wools. Anything that flutters. She wants fabric that behaves like feathers whether or not she's in shifter form.</div>
+        <div class="detail-key">Signature pieces</div>
+        <div class="detail-val">Feather earrings (real plumage, family-blessed). Gold + moonstone jewelry, always layered. Subtle owl-motif clasps. A layer she shrugs off dramatically at least once a day.</div>
+        <div class="detail-key">What she avoids</div>
+        <div class="detail-val">Anything structured or boring. If it's not in motion, it's not Renne.</div>
+      </div>
+    </div>
+    <div class="outfit-card">
+      <div class="outfit-name">Field / Study Days</div>
+      <div class="outfit-details">
+        <div class="detail-key">Silhouette</div>
+        <div class="detail-val">Fitted under, flowing over. Leggings or fitted trousers, loose layered top, short structured cloak. Feathers become functional.</div>
+        <div class="detail-key">Details</div>
+        <div class="detail-val">Boots she can run in. Braided hair instead of loose waves. Talon visible. Gold glints at the throat and wrists — she doesn't leave them behind.</div>
+        <div class="detail-key">Energy</div>
+        <div class="detail-val">She looks like she came from the ballroom and forgot to change. She didn't. She just doesn't see the difference.</div>
+      </div>
+    </div>
+    <div class="writer-note">
+      Renne's style secret is <em>contrast in motion</em>. A silk layer over leggings. Moonstone at the throat with scuffed boots. She doesn't match — she curates.
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Formal / Ball Look</div>
+    <div class="outfit-card gown">
+      <div class="outfit-name">The Ball Gown — Scene Canon</div>
+      <div class="outfit-details">
+        <div class="detail-key">Silhouette</div>
+        <div class="detail-val">Regal, iridescent, celestial. Plucked feathers woven directly into the fabric — a dress that is also plumage, plumage that is also a dress. Column through the torso, fuller at the hem so it moves like wingbeats.</div>
+        <div class="detail-key">Color story</div>
+        <div class="detail-val">Silver to gold, shifting with every breath. Not a gradient — a <em>response</em>. The fabric changes value depending on how she moves. Indoors it reads silver. Toward lanternlight it flashes gold.</div>
+        <div class="detail-key">Fabric</div>
+        <div class="detail-val">Woven Strixian feathers layered over fine silk. Lightweight. Catches air. Silent, of course — it's owl plumage.</div>
+        <div class="detail-key">Embellishment</div>
+        <div class="detail-val">Feathers alone. No crystals, no beading, nothing competing. The plumage is the statement.</div>
+        <div class="detail-key">Headdress</div>
+        <div class="detail-val">A feathered crest arching from her crown like a celestial diadem. Aweinspiring and unmistakably her. The headdress is the thesis statement of the whole look.</div>
+        <div class="detail-key">Arms / neckline</div>
+        <div class="detail-val">Neckline bares the throat and collarbone. Arms exposed so the subtle feathering along her forearms is visible. The gown is made to show you <em>what she is</em> without telling you.</div>
+      </div>
+    </div>
+    <div class="outfit-card">
+      <div class="outfit-name">Ball — Hair & Accessories</div>
+      <div class="outfit-details">
+        <div class="detail-key">Hair</div>
+        <div class="detail-val">Swept up beneath the headdress. Loose tendrils. Moonstone pins.</div>
+        <div class="detail-key">Jewelry</div>
+        <div class="detail-val">Gold hoops. Layered moonstone chains. Feather-dagger earrings that graze her shoulders when she turns her head.</div>
+        <div class="detail-key">Hands</div>
+        <div class="detail-val">Bare. Rings stacked at two fingers — family rings, not decoration.</div>
+        <div class="detail-key">Shoes</div>
+        <div class="detail-val">Gold, low-heeled, built for dancing and chaos. She has plans for both.</div>
+      </div>
+    </div>
+    <div class="rune-callout">
+      <strong>The Entrance — Ball Scene Canon</strong>
+      Renne's ball entrance in Book 1 is a <em>co-canon moment</em> with Allura's. She hooks Reign's arm without permission, calls him <strong>Fluffy</strong>, and cuts clean through his feral trance with one line. The dress shifts silver-to-gold as she pulls him through the crowd. This is the moment she establishes herself as the character who owns every room she enters — and the only person Reign reliably obeys.
+    </div>
+    <div class="writer-note">
+      When writing Renne in motion at the ball, the dress <em>breathes</em>. Each inhale brightens it toward gold, each exhale cools it toward silver. Let the palette of the room flicker as she passes.
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Style Identity — The Through Line</div>
+    <div class="prose-block">
+      <span class="prose-label">Who Renne dresses like</span>
+      She dresses like someone who's been paying attention to every ballroom for ten years and decided to <em>win</em>. Feathers as fashion statement, not gimmick. Silver and gold not as opposites but as <em>weather</em> she wears. The wardrobe of a woman who knows she's a predator and dresses the part — elegantly.
+    </div>
+    <div class="prose-block lavender">
+      <span class="prose-label lavender">The contrast that defines her</span>
+      Soft waves and a raptor's talon. Silk layers and a predator's eye. Warmth in her voice and a stare that could pin a liar to the wall. Renne is the friend who hypes you up, calls you out, and saves your life — sometimes in that order.
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="divider" style="margin-bottom:20px;">
+      <div class="divider-line" style="width:40px;"></div>
+      <div class="divider-gem"></div>
+      <div class="divider-line reverse" style="width:40px;"></div>
+    </div>
+    <div class="footer-text">Of Stormsalt &amp; Smoke · Faeblood Chronicles Book 1 · Renne Feathermane Visual Canon · © 2026 Zoey Alexis Caine</div>
+  </div>
+
+</div>
+</body>
+</html>
