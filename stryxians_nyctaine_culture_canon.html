@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stryxians & Nyctaine — Culture Canon</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=EB+Garamond:ital@1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --silver:       #C9C4D4;
+    --silver-light: #E8E3F0;
+    --silver-pale:  #F0EDF6;
+    --midnight:     #06080F;
+    --deep-twilight:#0E1220;
+    --twilight-mid: #181F30;
+    --moonglass:    #A8B8D4;
+    --moonglass-dim:#6E7FA0;
+    --gold-warm:    #C8A85A;
+    --gold-bright:  #E8D08A;
+    --feather:      #B8AC90;
+    --bone:         #F0EAD8;
+    --plum:         #6E5878;
+    --cream:        #F4F0E8;
+    --text-body:    #C5C0D0;
+    --text-dim:     #756F80;
+    --rumor:        #A8A0B0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--midnight);
+    color: var(--text-body);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Twin-moon starfield with silver-blue accent */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 8% 12%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 38%, rgba(168,184,212,0.45) 0%, transparent 100%),
+      radial-gradient(1px 1px at 38% 8%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 52% 60%, rgba(232,227,240,0.35) 0%, transparent 100%),
+      radial-gradient(1px 1px at 68% 25%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 82% 50%, rgba(168,184,212,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 18% 75%, rgba(255,255,255,0.35) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 80%, rgba(168,184,212,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 35% 90%, rgba(232,227,240,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 62% 85%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 48% 33%, rgba(232,208,138,0.45) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 78% 65%, rgba(168,184,212,0.45) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 20% 55%, rgba(232,227,240,0.4) 0%, transparent 100%),
+      radial-gradient(2px 2px at 12% 22%, rgba(232,208,138,0.5) 0%, transparent 100%),
+      radial-gradient(2.5px 2.5px at 88% 18%, rgba(232,227,240,0.55) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page { position: relative; z-index: 1; max-width: 920px; margin: 0 auto; padding: 60px 40px 100px; }
+  .header { text-align: center; margin-bottom: 70px; animation: fadeDown 1s ease both; }
+  .series-label {
+    font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.4em;
+    text-transform: uppercase; color: var(--silver); opacity: 0.8; margin-bottom: 20px;
+  }
+  .culture-name {
+    font-family: 'Cinzel', serif; font-size: clamp(48px, 7vw, 76px); font-weight: 400;
+    color: var(--silver-light); letter-spacing: 0.06em; line-height: 1; margin-bottom: 12px;
+    text-shadow: 0 0 80px rgba(232,227,240,0.4), 0 2px 4px rgba(0,0,0,0.9);
+  }
+  .culture-subtitle {
+    font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--gold-warm); margin-bottom: 18px; opacity: 0.85;
+  }
+  .culture-epithet {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 22px;
+    color: var(--bone); letter-spacing: 0.03em; margin: 0 auto 30px; max-width: 600px; line-height: 1.5;
+  }
+  .culture-epithet em { color: var(--gold-bright); font-style: normal; }
+
+  .divider { display: flex; align-items: center; gap: 16px; justify-content: center; margin: 24px 0; }
+  .divider-line { height: 1px; width: 80px; background: linear-gradient(to right, transparent, var(--silver)); }
+  .divider-line.reverse { background: linear-gradient(to left, transparent, var(--silver)); }
+  .divider-gem {
+    width: 7px; height: 7px; background: var(--silver); transform: rotate(45deg);
+    box-shadow: 0 0 14px var(--silver), 0 0 28px rgba(232,227,240,0.4);
+  }
+
+  .section { margin-bottom: 56px; animation: fadeUp 0.8s ease both; }
+  .section-title {
+    font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.35em;
+    text-transform: uppercase; color: var(--silver); margin-bottom: 22px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, rgba(201,196,212,0.45), transparent); }
+
+  .canon-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--gold-warm);
+    border: 1px solid rgba(200,168,90,0.4); padding: 4px 10px;
+    margin-left: 12px; vertical-align: middle; background: rgba(200,168,90,0.05);
+  }
+  .canon-badge::before { content: '◆'; font-size: 7px; }
+  .canon-badge.locked { color: var(--moonglass); border-color: rgba(168,184,212,0.4); background: rgba(168,184,212,0.05); }
+
+  .prose { font-size: 17px; color: var(--text-body); line-height: 1.8; margin-bottom: 18px; }
+  .prose strong { color: var(--silver-light); font-weight: 600; }
+  .prose em { color: var(--bone); }
+
+  .quote-block {
+    background: rgba(24, 31, 48, 0.55); border-left: 2px solid var(--silver);
+    padding: 22px 28px; font-style: italic; font-size: 17px;
+    color: var(--bone); line-height: 1.8; margin: 16px 0;
+  }
+  .quote-block .attribution {
+    display: block; margin-top: 12px; font-family: 'Cinzel', serif;
+    font-style: normal; font-size: 10px; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--gold-warm); opacity: 0.8;
+  }
+
+  .lore-card {
+    background: rgba(24, 31, 48, 0.45); border: 1px solid rgba(201,196,212,0.18);
+    padding: 26px 30px; margin-bottom: 16px; position: relative; overflow: hidden;
+  }
+  .lore-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(to right, var(--silver), transparent);
+  }
+  .lore-card-name {
+    font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 0.15em;
+    color: var(--gold-bright); margin-bottom: 14px;
+  }
+  .lore-card-body { font-size: 16px; color: var(--text-body); line-height: 1.75; }
+  .lore-card-body strong { color: var(--silver-light); }
+
+  /* Two-form comparison */
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .form-card {
+    background: rgba(14, 18, 32, 0.7); border: 1px solid rgba(201,196,212,0.2);
+    padding: 24px 24px; position: relative;
+  }
+  .form-label {
+    font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--gold-warm); margin-bottom: 8px;
+  }
+  .form-name {
+    font-family: 'Cinzel', serif; font-size: 18px; letter-spacing: 0.1em;
+    color: var(--silver-light); margin-bottom: 14px;
+  }
+  .form-body { font-size: 14px; color: var(--text-body); line-height: 1.7; font-style: italic; margin-bottom: 12px; }
+  .form-detail { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
+  .form-detail strong { color: var(--feather); font-weight: 500; }
+
+  /* Iron rule */
+  .iron-rule {
+    background: linear-gradient(135deg, rgba(168,184,212,0.08), rgba(201,196,212,0.04));
+    border: 1px solid rgba(168,184,212,0.3); padding: 22px 28px; margin: 18px 0; position: relative;
+  }
+  .iron-rule::before {
+    content: '⚠ IRON RULE'; position: absolute; top: -10px; left: 20px;
+    background: var(--midnight); padding: 0 10px;
+    font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.3em; color: var(--moonglass);
+  }
+  .iron-rule-text { font-size: 16px; color: var(--bone); line-height: 1.7; }
+  .iron-rule-text strong { color: var(--moonglass); font-weight: 600; }
+
+  .rumor-section {
+    background: rgba(14, 16, 24, 0.5); border: 1px dashed rgba(168,160,176,0.25);
+    padding: 26px 30px; margin-top: 18px;
+  }
+  .rumor-intro {
+    font-style: italic; font-size: 14px; color: var(--text-dim);
+    margin-bottom: 16px; line-height: 1.6;
+  }
+  .rumor {
+    font-style: italic; font-size: 15px; color: var(--rumor); line-height: 1.65;
+    margin-bottom: 12px; padding-left: 22px; position: relative;
+  }
+  .rumor::before {
+    content: '"'; position: absolute; left: 0; top: -4px;
+    font-family: 'EB Garamond', serif; font-size: 32px; color: var(--silver);
+    opacity: 0.5; line-height: 1;
+  }
+  .rumor-source {
+    display: block; font-style: normal; font-family: 'Cinzel', serif;
+    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--text-dim); margin-top: 4px; opacity: 0.7;
+  }
+
+  .hook-block {
+    background: rgba(201,196,212,0.04); border: 1px dashed rgba(201,196,212,0.25);
+    padding: 18px 22px; font-size: 14px; color: var(--text-dim);
+    font-style: italic; margin-top: 14px; line-height: 1.7;
+  }
+  .hook-block::before {
+    content: '✦ Saga hook: '; color: var(--silver); font-style: normal;
+    font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
+  }
+
+  .footer { text-align: center; margin-top: 80px; padding-top: 30px; border-top: 1px solid rgba(201,196,212,0.15); }
+  .footer-text { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--text-dim); }
+
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 700px) {
+    .page { padding: 40px 22px 80px; }
+    .form-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="series-label">Of Stormsalt &amp; Smoke — Faeheart Chronicles</div>
+    <div class="culture-name">Stryxians</div>
+    <div class="culture-subtitle">Nyctaine &amp; The Strixian Isles</div>
+    <div class="culture-epithet">"Wisdom is not inherited. It is <em>watched for, plucked, and pinned to the wall</em> until it can be read."</div>
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-gem"></div>
+      <div class="divider-line reverse"></div>
+    </div>
+    <div class="series-label" style="opacity:0.55; font-size:9px;">Culture Canon · Book 1 Reference · Faeheart World Bible</div>
+  </div>
+
+  <!-- IDENTITY -->
+  <div class="section">
+    <div class="section-title">Identity <span class="canon-badge locked">Canon-Locked</span></div>
+    <p class="prose">Stryxians are <strong>Valkyrie and Harpy</strong> distilled into a single Faekin lineage — minus the harpy reputation, plus several thousand years of <em>scholarship</em>. They are owl-blooded. They are warrior-blooded. They are the only species in Xiphos that has never had to choose between brain and blade.</p>
+    <p class="prose">They are not shifters in the way the Lycari are shifters. A Stryxian does not <em>become</em> an owl and then return to fae. A Stryxian is <strong>always partially owl</strong>. The plumage, the talons, the wing-bones — they are <em>permanent traits</em>, dialed up or dialed down by context, never fully absent. A Stryxian in courtly fae-form still has feather earrings that aren't ornaments — they're <em>her own</em>. A Stryxian in primal-form is unmistakable: feathered legs, raptor talons, a mane of plumage trailing down the back like a second river of hair.</p>
+
+    <p class="prose">They live <em>above</em>. Cliff villages. Mountain peaks. Memory-Tree groves perched in old-growth canopies. Offshore on the Strixian Isles, where the light hits two moons at once and the sea remembers nothing because the wind keeps redrafting the page. They look down on the lowland fae cities not with contempt but with <em>patience</em>. They have always known what was coming. They have always been waiting for someone to ask.</p>
+
+    <div class="quote-block">
+      An owl does not interrupt. An owl <em>watches</em>. By the time the owl speaks, the listener already wishes they had been listening sooner.
+      <span class="attribution">— Athena Goldbeak, opening lecture, Histories &amp; Mythology I</span>
+    </div>
+  </div>
+
+  <!-- THE TWO HOMELANDS -->
+  <div class="section">
+    <div class="section-title">Nyctaine &amp; The Strixian Isles <span class="canon-badge locked">Canon-Locked</span></div>
+    <p class="prose">There are two Stryxian homelands and they are <em>not</em> in conflict. They are in <strong>conversation</strong>.</p>
+
+    <div class="form-grid">
+      <div class="form-card">
+        <div class="form-label">Mainland</div>
+        <div class="form-name">Nyctaine</div>
+        <div class="form-body">A vast forested mountain region of cliff-villages, watch-towers, and Memory-Tree groves. The scholarly heart of the species.</div>
+        <div class="form-detail"><strong>Vibe:</strong> archives, observation, slow patient law. <strong>Architecture:</strong> stone-and-feather lodges built into cliffsides; wide cantilevered platforms for landings; observatories. <strong>Famous for:</strong> the Perch Council, the Memory Trees, and the longest unbroken oral tradition in Xiphos.</div>
+      </div>
+      <div class="form-card">
+        <div class="form-label">Offshore</div>
+        <div class="form-name">The Strixian Isles</div>
+        <div class="form-body">A chain of windswept island peaks rising from a sea that catches both moons at once. The primal heart of the species.</div>
+        <div class="form-detail"><strong>Vibe:</strong> ritual, plumage, talons unsheathed. <strong>Architecture:</strong> open stone amphitheaters carved into cliffs; ceremonial perches; tide-altars. <strong>Famous for:</strong> the Moonglass forges, the Tide-Watchers, and the kind of Stryxian who doesn't bother with shoes — ever.</div>
+      </div>
+    </div>
+
+    <p class="prose">A Stryxian raised in Nyctaine wears feather <em>jewelry</em>. A Stryxian raised on the Isles wears <em>their own feathering</em>. Both are correct. The cultural code-switch — moving between the two presentations — is taught from childhood, and a Stryxian fluent in both is considered <strong>fully formed</strong>. Renne Feathermane is fully formed. So is Athena Goldbeak. So is Xeomere Rainfeather, though she'd shrug if you said so.</p>
+
+    <div class="hook-block">A Stryxian who can no longer code-switch — who can only present primal, or only present courtly — is a Stryxian whose feathers have started to <em>refuse</em>. Nobody talks about why this happens. Several theories exist. None of them are reassuring.</div>
+  </div>
+
+  <!-- THE TWO PRESENTATIONS -->
+  <div class="section">
+    <div class="section-title">The Two Presentations <span class="canon-badge locked">Canon-Locked</span></div>
+    <p class="prose">Every Stryxian holds <strong>two presentations</strong> at all times. Neither is a glamour. Neither is a shift. They are simultaneously real — the species is fundamentally <em>two-natured</em>, and what you see is whichever face they have chosen to show you in this moment.</p>
+
+    <div class="form-grid">
+      <div class="form-card">
+        <div class="form-label">Form A</div>
+        <div class="form-name">Courtly Presentation</div>
+        <div class="form-body">Fae-appearing. Plumage minimized to elegant accents. Feather earrings. Feathered crown-circlets. Wing-armatures folded close beneath couture. Talons tucked into refined boots.</div>
+        <div class="form-detail"><strong>Used for:</strong> diplomacy, court attendance, scholarship, classroom teaching, blending into lowland fae spaces. <strong>What gives it away:</strong> the ear-feathers always remain. Always.</div>
+      </div>
+      <div class="form-card">
+        <div class="form-label">Form B</div>
+        <div class="form-name">Primal Presentation</div>
+        <div class="form-body">Feathered legs from hip to talon. Bare raptor feet that click on stone. A plumage-mane down the back. Wings unfolded or partially extended. Skin marked with feather-shadow patterns.</div>
+        <div class="form-detail"><strong>Used for:</strong> ritual, combat, flight, mating display, tide-watching. <strong>What gives it away:</strong> the talons. They cannot be hidden. They click on every floor that isn't carpet.</div>
+      </div>
+    </div>
+
+    <div class="iron-rule">
+      <div class="iron-rule-text"><strong>The talons are always there.</strong> A Stryxian in courtly presentation has <em>tucked</em> the talons inside a refined boot — but the talons are not gone. The clicking is muffled, not silenced. If you see a Stryxian remove their boots, you are being shown something significant. Renne Feathermane has been seen barefoot in the SNU corridors exactly once. People still talk about it.</div>
+    </div>
+  </div>
+
+  <!-- ABILITIES & MAGIC -->
+  <div class="section">
+    <div class="section-title">Abilities &amp; Magic <span class="canon-badge">Species Canon</span></div>
+
+    <div class="lore-card">
+      <div class="lore-card-name">🦉 Owl-Sense</div>
+      <div class="lore-card-body">Stryxians see in the dark, hear what others cannot, and read micro-expressions like other species read fonts. They are <em>predator-perceptive</em>. They notice the hesitation before the lie. They notice the pulse-shift before the blush. Lying to a Stryxian is functionally impossible. Most species learn this by their second conversation.</div>
+    </div>
+
+    <div class="lore-card">
+      <div class="lore-card-name">🪶 Feather-Glamour</div>
+      <div class="lore-card-body">Stryxians can weave illusion directly into their plumage. A feather can hold a memory. A feather can hold a song. A feather can hold a face. Feather-glamour is the single most refined illusion-magic in Xiphos, and the Strixian Isles are where it is taught. Renne wove her ball gown <em>from her own discarded plumage</em>. Lyrianna says it was the most beautiful thing she'd ever seen and she has seen a lot.</div>
+    </div>
+
+    <div class="lore-card">
+      <div class="lore-card-name">🌙 Moon-Aligned Sensory Magic</div>
+      <div class="lore-card-body">Stryxian magic is moon-tuned, not sun-tuned. Spells cast under both moons together (the rare double-moon nights) are roughly twice as potent. Spells cast under no moon at all — new-moon, eclipse, or behind storm cloud — are <em>different</em>. Quieter. Harder to control. Sometimes they leave a residue on the caster that takes weeks to fade.</div>
+    </div>
+
+    <div class="lore-card">
+      <div class="lore-card-name">🌬 Stillness Presence</div>
+      <div class="lore-card-body">A trained Stryxian can <strong>still a room</strong> with presence alone — quieting conversation, slowing breath, pulling every eye in the space to themselves. The Perch Council can do this in unison. There are recorded events where a council convocation entered a fae court and the entire chamber simply <em>stopped speaking</em> for nine full seconds. Nobody remembers why.</div>
+    </div>
+
+    <p class="prose">Stryxians can also fly. This sounds obvious. It is, however, the largest and most dramatic flight magic in Xiphos — Stryxian wings unfurl to twice the wingspan of a fae's butterfly wings, and a Stryxian in full flight is something the lowland species rarely see at close range. A Stryxian who lands directly in front of you has chosen to do so as a <em>statement</em>.</p>
+  </div>
+
+  <!-- TRADITIONS -->
+  <div class="section">
+    <div class="section-title">Traditions, Trees &amp; Council <span class="canon-badge">Cultural Canon</span></div>
+
+    <div class="lore-card">
+      <div class="lore-card-name">🌳 Memory Trees</div>
+      <div class="lore-card-body">Towering ancient trees scattered across Nyctaine, each one bound to record — through a process the Stryxians have never fully explained — the most important moments of the species' history. The bark itself is <em>readable</em>, in a script only the eldest scholars can fully decipher. Younger Stryxians learn the basics; the deepest readings are reserved for the Perch Council. <strong>The Whispered Leaves</strong> ritual involves placing a single feather into a Memory Tree to mark an oath, a death, or a moment of profound decision.</div>
+    </div>
+
+    <div class="lore-card">
+      <div class="lore-card-name">🦉 The Perch Council</div>
+      <div class="lore-card-body">The governing body of the Stryxians. Elected historians and stargazers who interpret fate through celestial alignment. The Council sits in nine seats — never fewer, rarely more. Decisions require seven-of-nine consensus. The Council does not rule the way the Stormfang king rules; it <em>guides</em>. Stryxians govern themselves day-to-day; they consult the Perch only on matters of species-wide significance. The current Council has not convened in full for eleven years. This is unusual.</div>
+    </div>
+
+    <div class="lore-card">
+      <div class="lore-card-name">🌑 The Eclipse Festival</div>
+      <div class="lore-card-body">Held under the shadow of every total eclipse — rare, irregular, always significant. Marks the formal passage of wisdom from elder to young scholar. Glowing eclipse-berries are harvested under the cover of shadow and consumed in ritual silence. A Stryxian who has attended seven Eclipse Festivals in their lifetime is considered <em>fully witnessed</em> and may stand for the Perch Council.</div>
+    </div>
+
+    <div class="lore-card">
+      <div class="lore-card-name">🪞 Moonglass</div>
+      <div class="lore-card-body">A volcanic glass quarried only on the Strixian Isles. Polished into orbs, circlets, and ceremonial blades. Moonglass refracts moonlight in ways no other material does — a properly cut moonglass orb can hold a single beam of moonlight inside it for nine days. Stryxian elders carry moonglass charms on their belts. So do Stryxian children, for safety. The forging of moonglass is the most closely guarded craft on the Isles.</div>
+    </div>
+  </div>
+
+  <!-- THE TALONLESS -->
+  <div class="section">
+    <div class="section-title">The Talonless <span class="canon-badge">Historical Canon</span></div>
+    <p class="prose">A faction of exiled Stryxian scholars from the <strong>Eclipse Purge</strong>, centuries past. The Talonless rejected the Cycle of Feathers — the species' core philosophy of patience and intergenerational ripple — and attempted to seize power by <em>defacing</em> Memory Trees, erasing sacred history. The war that followed was brief, brutal, and ended with the Perch Council exiling the insurgents into the depths of <strong>The Hollow Woods</strong>, a region beyond Nyctaine's eastern border that no Stryxian has voluntarily entered since.</p>
+
+    <p class="prose">The Talonless took their name from a fable: <strong>The Owl Without Feathers</strong> — a story of an owl who plucked itself bare, believing knowledge alone would sustain it, and was devoured by the winds. The Stryxians tell this fable to their children as a warning. The Talonless adopted it as a <em>boast</em>.</p>
+
+    <p class="prose">They are still out there. They have been silent for centuries. Lately, they have been <em>quieter than silent</em>, and the elders have begun to wonder what that means.</p>
+
+    <div class="hook-block">A Talonless who returned to Nyctaine — who walked back into the Memory Tree groves after centuries of exile — would not be permitted to leave. The trees would know. The trees would tell. The Council would convene for the first time in over a decade. Something would have to be decided.</div>
+  </div>
+
+  <!-- TWO MOONS -->
+  <div class="section">
+    <div class="section-title">The Two Moons <span class="canon-badge locked">World Canon</span></div>
+    <p class="prose">Xiphos has <strong>two moons</strong>. They are not the same. The larger is called <strong>Selen</strong> — pale, slow, the major-key moon of growth, devotion, and the bond. The smaller is called <strong>Vayl</strong> — sharper, faster, the minor-key moon of fate, memory, and consequence. Most species note the moons in passing. The Stryxians <em>map their entire calendar to them</em>.</p>
+
+    <p class="prose">Selen and Vayl rarely align. When they do — every nine years, give or take — the resulting <em>Twin Moon</em> night is sacred to every culture in Xiphos but felt deepest by the Stryxians and the Lycari. Magic doubles. Bonds stir. Memory Trees glow visibly. The Perch Council always convenes within the lunar cycle following a Twin Moon. Always.</p>
+
+    <p class="prose">The next Twin Moon is — by Stryxian calculation — closer than anyone outside the Council currently realizes.</p>
+  </div>
+
+  <!-- TAVERN RUMORS -->
+  <div class="section">
+    <div class="section-title">Tavern Rumors &amp; Half-Truths</div>
+    <div class="rumor-section">
+      <p class="rumor-intro">What the lowland fae say about the cliff-folk. What the cliff-folk say about themselves when no one's listening. What sailors say about the Isles after a long crossing. Some are accurate. Some are wildly off. Some are the kind of half-true that the Stryxians find amusing enough not to correct.</p>
+
+      <div class="rumor">
+        I heard a Stryxian's feathers can hold a memory for a thousand years. You can pluck one off the floor of the Perch and read your own great-grandmother's last conversation if you know how.
+        <span class="rumor-source">— A Lazuline historian, frustrated with primary sources</span>
+      </div>
+
+      <div class="rumor">
+        On the Twin Moon they all fly at once. Every Stryxian alive. I've seen a sketch of it. The whole sky goes <em>silver</em>. Not from the moons. From the wings.
+        <span class="rumor-source">— A traveling bard who has not actually seen this</span>
+      </div>
+
+      <div class="rumor">
+        Don't lie to one. Just don't. They don't punish you. They just — remember. And then their grandchildren remember. And then theirs. Three generations later you find out your family has been quietly disliked by an entire cliff village and nobody can remember why.
+        <span class="rumor-source">— A Kaios merchant who learned this the hard way</span>
+      </div>
+
+      <div class="rumor">
+        The talons clicking in the corridor at SNU? That's how you know one's right behind you. By the time you stop hearing it, they're already past, and you didn't see them.
+        <span class="rumor-source">— Riven Stormveil, complaining to Reign over breakfast</span>
+      </div>
+
+      <div class="rumor">
+        Memory Trees can <em>cry</em>. Bark sap, slow-running, when something terrible has happened that the tree doesn't want to remember. Three trees wept the year of the Ashfall Betrayal. Two of them still haven't stopped.
+        <span class="rumor-source">— A Nyctaine archivist, slightly drunk at a Lazuline gala</span>
+      </div>
+
+      <div class="rumor">
+        The Perch Council hasn't met in eleven years. Eleven. Years. Not because they don't need to. Because something's wrong with the count, and they can't agree on who the ninth seat should be.
+        <span class="rumor-source">— Lannon, owl-fae upper-year, in confidence</span>
+      </div>
+
+      <div class="rumor">
+        I once saw a Stryxian on the Isles take her boots off. Talons longer than my forearm. She was peeling fruit with them. Just — peeling. Like it was nothing. I haven't been back.
+        <span class="rumor-source">— A Tideborn sailor, six pints in</span>
+      </div>
+
+      <div class="rumor">
+        The Talonless aren't gone. They're nesting. The eldest of the elders has been getting feather-letters with no sender. Bark inside, like it was torn from a Memory Tree. Trees in the Hollow Woods. They're <em>writing back</em>.
+        <span class="rumor-source">— Forbidden topic. You did not hear it here.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- IRON CANON -->
+  <div class="section">
+    <div class="section-title">Iron Canon — What Cannot Change</div>
+    <p class="prose">The rules below shape every Stryxian scene across all ten books. Two-natured, two-presentation, two-moon. Everything about this species is <em>both</em>.</p>
+
+    <div class="lore-card">
+      <div class="lore-card-name">The Six Iron Rules</div>
+      <div class="lore-card-body" style="margin-top:8px;">
+        <p style="margin-bottom:10px;"><strong>1.</strong> Two-natured, not shape-changing. Plumage and talons are always present, dialed up or dialed down by context.</p>
+        <p style="margin-bottom:10px;"><strong>2.</strong> Two presentations: Courtly (fae-appearing, feathered jewelry) and Primal (integrated plumage, bare talons). Both are real. Code-switching is mastery.</p>
+        <p style="margin-bottom:10px;"><strong>3.</strong> Two homelands: Nyctaine (mainland, scholarly) and the Strixian Isles (offshore, primal). In dialogue, not conflict.</p>
+        <p style="margin-bottom:10px;"><strong>4.</strong> The Perch Council governs by guidance, not rule. Nine seats. Seven-of-nine consensus. Has not met in full for eleven years.</p>
+        <p style="margin-bottom:10px;"><strong>5.</strong> Memory Trees record species history. Feather-glamour weaves illusion into plumage. Both are sacred. Both are <em>readable</em> to elders.</p>
+        <p style="margin-bottom:0;"><strong>6.</strong> Two moons: Selen (devotion) and Vayl (consequence). Stryxian calendar, magic, and ritual all map to them. Twin Moon nights are sacred to the species.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="divider" style="margin-bottom:20px;">
+      <div class="divider-line" style="width:40px;"></div>
+      <div class="divider-gem"></div>
+      <div class="divider-line reverse" style="width:40px;"></div>
+    </div>
+    <div class="footer-text">Faeheart Chronicles · Culture Canon · Stryxians, Nyctaine &amp; the Strixian Isles · © 2026 Zoey Alexis Caine</div>
+  </div>
+
+</div>
+</body>
+</html>

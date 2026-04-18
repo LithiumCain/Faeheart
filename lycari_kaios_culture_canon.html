@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lycari & Kaios — Culture Canon</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=EB+Garamond:ital@1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --moon:         #C8C4D4;
+    --moon-light:   #E0DCEA;
+    --moon-pale:    #EFEBF4;
+    --midnight:     #06070C;
+    --deep-pine:    #0C1014;
+    --pine-mid:     #16201E;
+    --silver:       #B8BCC4;
+    --silver-dark:  #6E7280;
+    --gold-warm:    #C8A04A;
+    --gold-bright:  #E8C476;
+    --bone:         #F0EAD8;
+    --frost:        #A8C4D4;
+    --blood:        #8A2828;
+    --cream:        #F4F0E8;
+    --text-body:    #C8C0B0;
+    --text-dim:     #75705A;
+    --rumor:        #A8A498;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--midnight);
+    color: var(--text-body);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 8% 12%, rgba(255,255,255,0.55) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 38%, rgba(200,196,212,0.45) 0%, transparent 100%),
+      radial-gradient(1px 1px at 38% 8%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 52% 60%, rgba(168,196,212,0.35) 0%, transparent 100%),
+      radial-gradient(1px 1px at 68% 25%, rgba(255,255,255,0.55) 0%, transparent 100%),
+      radial-gradient(1px 1px at 82% 50%, rgba(200,196,212,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 18% 75%, rgba(168,196,212,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 80%, rgba(255,255,255,0.45) 0%, transparent 100%),
+      radial-gradient(1px 1px at 35% 90%, rgba(200,196,212,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 62% 85%, rgba(255,255,255,0.35) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 48% 33%, rgba(200,160,74,0.45) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 78% 65%, rgba(232,196,118,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 20% 55%, rgba(168,196,212,0.4) 0%, transparent 100%),
+      radial-gradient(2px 2px at 12% 92%, rgba(232,220,200,0.35) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page { position: relative; z-index: 1; max-width: 920px; margin: 0 auto; padding: 60px 40px 100px; }
+
+  .header { text-align: center; margin-bottom: 70px; animation: fadeDown 1s ease both; }
+  .series-label {
+    font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.4em;
+    text-transform: uppercase; color: var(--moon); opacity: 0.8; margin-bottom: 20px;
+  }
+  .culture-name {
+    font-family: 'Cinzel', serif; font-size: clamp(48px, 7vw, 76px); font-weight: 400;
+    color: var(--moon-light); letter-spacing: 0.06em; line-height: 1; margin-bottom: 12px;
+    text-shadow: 0 0 80px rgba(200,196,212,0.4), 0 2px 4px rgba(0,0,0,0.9);
+  }
+  .culture-subtitle {
+    font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--gold-warm); margin-bottom: 18px; opacity: 0.85;
+  }
+  .culture-epithet {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 22px;
+    color: var(--bone); letter-spacing: 0.03em; margin: 0 auto 30px; max-width: 600px; line-height: 1.5;
+  }
+  .culture-epithet em { color: var(--gold-bright); font-style: normal; }
+
+  .divider { display: flex; align-items: center; gap: 16px; justify-content: center; margin: 24px 0; }
+  .divider-line { height: 1px; width: 80px; background: linear-gradient(to right, transparent, var(--moon)); }
+  .divider-line.reverse { background: linear-gradient(to left, transparent, var(--moon)); }
+  .divider-gem {
+    width: 7px; height: 7px; background: var(--moon); transform: rotate(45deg);
+    box-shadow: 0 0 14px var(--moon), 0 0 28px rgba(200,196,212,0.4);
+  }
+
+  .section { margin-bottom: 56px; animation: fadeUp 0.8s ease both; }
+  .section-title {
+    font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.35em;
+    text-transform: uppercase; color: var(--moon); margin-bottom: 22px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, rgba(200,196,212,0.45), transparent); }
+
+  .canon-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--gold-warm);
+    border: 1px solid rgba(200,160,74,0.4); padding: 4px 10px;
+    margin-left: 12px; vertical-align: middle; background: rgba(200,160,74,0.05);
+  }
+  .canon-badge::before { content: '◆'; font-size: 7px; }
+  .canon-badge.locked { color: var(--frost); border-color: rgba(168,196,212,0.4); background: rgba(168,196,212,0.05); }
+
+  .prose { font-size: 17px; color: var(--text-body); line-height: 1.8; margin-bottom: 18px; }
+  .prose strong { color: var(--moon-light); font-weight: 600; }
+  .prose em { color: var(--bone); }
+
+  .quote-block {
+    background: rgba(22, 32, 30, 0.55); border-left: 2px solid var(--moon);
+    padding: 22px 28px; font-style: italic; font-size: 17px;
+    color: var(--bone); line-height: 1.8; margin: 16px 0;
+  }
+  .quote-block .attribution {
+    display: block; margin-top: 12px; font-family: 'Cinzel', serif;
+    font-style: normal; font-size: 10px; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--gold-warm); opacity: 0.8;
+  }
+
+  .lore-card {
+    background: rgba(22, 32, 30, 0.45); border: 1px solid rgba(200,196,212,0.18);
+    padding: 26px 30px; margin-bottom: 16px; position: relative; overflow: hidden;
+  }
+  .lore-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(to right, var(--moon), transparent);
+  }
+  .lore-card-name {
+    font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 0.15em;
+    color: var(--gold-bright); margin-bottom: 14px;
+  }
+  .lore-card-body { font-size: 16px; color: var(--text-body); line-height: 1.75; }
+  .lore-card-body strong { color: var(--moon-light); }
+
+  /* Caste grid */
+  .caste-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .caste-card {
+    background: rgba(12, 16, 20, 0.7); border: 1px solid rgba(200,196,212,0.2);
+    padding: 22px 20px; text-align: center; position: relative;
+  }
+  .caste-label {
+    font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--gold-warm); margin-bottom: 8px;
+  }
+  .caste-name {
+    font-family: 'Cinzel', serif; font-size: 18px; letter-spacing: 0.1em;
+    color: var(--moon-light); margin-bottom: 14px;
+  }
+  .caste-body { font-size: 14px; color: var(--text-body); line-height: 1.65; font-style: italic; }
+
+  /* Three-finger gesture block */
+  .gesture-block {
+    background: linear-gradient(135deg, rgba(200,196,212,0.06), rgba(168,196,212,0.04));
+    border: 1px solid rgba(200,196,212,0.3); padding: 26px 30px; margin: 18px 0; text-align: center;
+  }
+  .gesture-title {
+    font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--moon); margin-bottom: 14px;
+  }
+  .gesture-form {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 16px;
+    color: var(--bone); margin-bottom: 18px; line-height: 1.6;
+  }
+  .gesture-meaning {
+    font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 0.18em;
+    color: var(--gold-bright); margin-bottom: 8px;
+  }
+  .gesture-translation {
+    font-style: italic; font-size: 14px; color: var(--text-body); margin-bottom: 6px;
+  }
+
+  .iron-rule {
+    background: linear-gradient(135deg, rgba(168,196,212,0.08), rgba(200,196,212,0.04));
+    border: 1px solid rgba(168,196,212,0.3); padding: 22px 28px; margin: 18px 0; position: relative;
+  }
+  .iron-rule::before {
+    content: '⚠ IRON RULE'; position: absolute; top: -10px; left: 20px;
+    background: var(--midnight); padding: 0 10px;
+    font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.3em; color: var(--frost);
+  }
+  .iron-rule-text { font-size: 16px; color: var(--bone); line-height: 1.7; }
+  .iron-rule-text strong { color: var(--frost); font-weight: 600; }
+
+  .rumor-section {
+    background: rgba(14, 16, 18, 0.5); border: 1px dashed rgba(168,164,152,0.25);
+    padding: 26px 30px; margin-top: 18px;
+  }
+  .rumor-intro {
+    font-style: italic; font-size: 14px; color: var(--text-dim);
+    margin-bottom: 16px; line-height: 1.6;
+  }
+  .rumor {
+    font-style: italic; font-size: 15px; color: var(--rumor); line-height: 1.65;
+    margin-bottom: 12px; padding-left: 22px; position: relative;
+  }
+  .rumor::before {
+    content: '"'; position: absolute; left: 0; top: -4px;
+    font-family: 'EB Garamond', serif; font-size: 32px; color: var(--moon);
+    opacity: 0.5; line-height: 1;
+  }
+  .rumor-source {
+    display: block; font-style: normal; font-family: 'Cinzel', serif;
+    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--text-dim); margin-top: 4px; opacity: 0.7;
+  }
+
+  .hook-block {
+    background: rgba(200,196,212,0.04); border: 1px dashed rgba(200,196,212,0.25);
+    padding: 18px 22px; font-size: 14px; color: var(--text-dim);
+    font-style: italic; margin-top: 14px; line-height: 1.7;
+  }
+  .hook-block::before {
+    content: '✦ Saga hook: '; color: var(--moon); font-style: normal;
+    font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
+  }
+
+  .footer { text-align: center; margin-top: 80px; padding-top: 30px; border-top: 1px solid rgba(200,196,212,0.15); }
+  .footer-text { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--text-dim); }
+
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 700px) {
+    .page { padding: 40px 22px 80px; }
+    .caste-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="series-label">Of Stormsalt &amp; Smoke — Faeheart Chronicles</div>
+    <div class="culture-name">Lycari</div>
+    <div class="culture-subtitle">&amp; The Realm of Kaios</div>
+    <div class="culture-epithet">"The Sun, the Moon, the Stars. Yourself, your Mate, your Pack. <em>Touch the ear and remember.</em>"</div>
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-gem"></div>
+      <div class="divider-line reverse"></div>
+    </div>
+    <div class="series-label" style="opacity:0.55; font-size:9px;">Culture Canon · Book 1 Reference · Faeheart World Bible</div>
+  </div>
+
+  <!-- IDENTITY -->
+  <div class="section">
+    <div class="section-title">Identity <span class="canon-badge locked">Canon-Locked</span></div>
+    <p class="prose">The Lycari are wolves who walk in fae-skin. Or fae who walk as wolves. They have stopped trying to clarify which came first because the answer has never mattered to them. What matters is the <strong>pack</strong>. What matters is the <strong>mate</strong>. What matters is the <em>moon</em>, and the line of wolves before you, and the line that will come after.</p>
+    <p class="prose">They are the largest, oldest, and most populous of the four great Faekin lineages — branching off the Fae root long before the Stryxians took to the sky or the dragons chose their first bonded. They are also the most <em>monarchical</em>. Where the fae argue over courts and the dragons refuse all crowns, the Lycari have held a single throne unbroken for thousands of years: the <strong>Stormfang line</strong>. Every pack in Xiphos bows to it. Every alpha alive answers to it.</p>
+    <p class="prose">In Book 1's present day, the throne is occupied by a king who has begun, very quietly, to <em>frighten</em> his own people.</p>
+
+    <div class="quote-block">
+      A wolf without a pack is not free. A wolf without a pack is <em>lost</em>. There is a difference, and the world has forgotten which one it was reaching for.
+      <span class="attribution">— Vaelor Thornfang, Pack Leadership lecture</span>
+    </div>
+  </div>
+
+  <!-- KAIOS — THE HOMELAND -->
+  <div class="section">
+    <div class="section-title">Kaios — The Homeland <span class="canon-badge locked">Canon-Locked</span></div>
+    <p class="prose">Kaios is the ancestral seat of the Lycari and the only fae-built city in Xiphos that grows <em>upward</em> through the trees instead of around them. Towering wooden spires serve as both homes and watchtowers; their foundations entwine with thick old roots that the city refuses to cut. Streets wind around trunks the size of towers. Roof-bridges connect canopy to canopy. The city moves with the wind and is occasionally rebuilt because of it.</p>
+    <p class="prose">The Lycari call Kaios an <em>urban forest</em>, but that undersells it. It is a <strong>vertical kingdom</strong>. Pack-houses occupy entire trees. Hunting grounds stretch unbroken for hundreds of leagues beyond the city limits. The royal court — the <strong>Stormfang Hall</strong> — sits at the heart of the oldest grove, in a tree so ancient nobody is sure how to date it. The current king lives there. He has not appeared in public in some time.</p>
+    <p class="prose">Kaios has never been conquered. Once, during the <strong>Shattered Howl</strong> civil war, half of it burned. The trees grew back. The wolves did, too. The city remembers.</p>
+
+    <div class="hook-block">The king has not appeared in public in some time. The packs have noticed. The packs do not yet say so out loud.</div>
+  </div>
+
+  <!-- THE THREE CASTES -->
+  <div class="section">
+    <div class="section-title">The Three Forms <span class="canon-badge locked">Canon-Locked</span></div>
+    <p class="prose">Every Lycari is born with the capacity to shift, but not every Lycari shifts the same way. Three forms exist. Most wolves only ever inhabit one. A few inhabit two. The rarest inhabit all three at will — and those rare few are the ones the throne watches.</p>
+
+    <div class="caste-grid">
+      <div class="caste-card">
+        <div class="caste-label">Form I</div>
+        <div class="caste-name">The Grounded</div>
+        <div class="caste-body">Live as full wolves. Choose instinct, body, scent, and motion above all. Most of the species lives this way. They are not lesser. They are <em>committed</em>.</div>
+      </div>
+      <div class="caste-card">
+        <div class="caste-label">Form II</div>
+        <div class="caste-name">The Warborn</div>
+        <div class="caste-body">Bipedal wolves — towering, dangerous, balanced between strength and strategy. Most pack alphas, seconds, and thirds reach this form by their early twenties. The first sign is the ears.</div>
+      </div>
+      <div class="caste-card">
+        <div class="caste-label">Form III</div>
+        <div class="caste-name">The Sovereigns</div>
+        <div class="caste-body">Hold all forms at will, including a near-fae form with lingering wolf traits. Rare. Royal-blooded, almost always. Can choose, indefinitely, to live in any one form. The pack votes on which form they hold for official duty.</div>
+      </div>
+    </div>
+
+    <div class="iron-rule">
+      <div class="iron-rule-text"><strong>The Ear Tell.</strong> A Lycari approaching their twentieth year begins to flare wolf-ears in their fae-coat — but only those whose body will progress to <strong>Warborn</strong> or <strong>Sovereign</strong>. The Grounded never flare. The ears are the first announcement that this wolf will rise. They cannot be hidden. They cannot be glamoured down for long. By twenty-two, most flared wolves have settled the trait permanently.</div>
+    </div>
+  </div>
+
+  <!-- THE THREE-FINGER GESTURE -->
+  <div class="section">
+    <div class="section-title">The Three-Finger Gesture <span class="canon-badge locked">Canon-Locked</span></div>
+    <p class="prose">The most universal Lycari ritual. A greeting, a vow, a benediction, a goodbye. Used between mates, between pack-members, between strangers who recognize each other as wolves in a city of fae. Children learn it before they learn to speak.</p>
+
+    <div class="gesture-block">
+      <div class="gesture-title">The Form</div>
+      <div class="gesture-form">Pinky and ring finger extended. Index and middle folded down beneath the thumb. The thumb-pad rubs gently from the base of the wolf-ear up to the tip — slow, deliberate, twice.</div>
+      <div class="gesture-meaning">When given to a Lycari (Pack-form):</div>
+      <div class="gesture-translation">The Sun, the Moon, the Stars. Yourself, your Mate, your Pack.</div>
+      <div class="gesture-meaning" style="margin-top:14px;">When given more broadly (General-form):</div>
+      <div class="gesture-translation">Myself, my Mate, the Family I Chose.</div>
+    </div>
+
+    <p class="prose">A Lycari given the gesture by a fae who knows it correctly will <em>stop walking</em>. There is no higher honor an outsider can offer. To do it wrong — wrong fingers, wrong rub, wrong order — is read as mockery. Wolves do not punish mockery. They simply <em>remember</em> it.</p>
+
+    <div class="hook-block">A wolf who refuses to give the gesture to their own pack — who can no longer bring themselves to perform the second meaning, <em>your mate</em> — is a wolf the pack is about to lose. Sometimes to grief. Sometimes to corruption. The pack does not always know which.</div>
+  </div>
+
+  <!-- PACK STRUCTURE & SUCCESSION -->
+  <div class="section">
+    <div class="section-title">Pack Structure &amp; The Bud-Off <span class="canon-badge locked">Canon-Locked</span></div>
+    <p class="prose">A pack is six to seven wolves. Always. More than that and the pack splits; fewer than that and the pack falters. At the head of every pack stands one <strong>alpha</strong>, who chooses two trusted seconds — known across the species as the <strong>Diplomat</strong> (the right hand) and the <strong>Tactician</strong> (the left). The remaining four to five wolves complete the pack as warriors, hunters, and kin.</p>
+    <p class="prose">Each pack will, in a generation, produce <strong>one or two</strong> new alphas — rarely three. These offspring break off with their own chosen seconds and form a <em>new pack</em>, often near but never identical to the parent pack. This is called the <strong>Bud-Off</strong>, and it is how Lycari society renews itself. New packs rise. Old packs settle. The throne holds the center.</p>
+
+    <p class="prose">The triad of <strong>Alpha · Diplomat · Tactician</strong> is the spine of every Lycari pack. The fireteam, as some at SNU have started calling it. Three minds, one will. When the alpha enters a room, the diplomat enters with them and the tactician enters last. When the alpha is wounded, the diplomat speaks for the pack and the tactician moves it. When the alpha dies, the diplomat and tactician choose between them which one rises.</p>
+
+    <div class="lore-card">
+      <div class="lore-card-name">⚔ At Selenari Nexus</div>
+      <div class="lore-card-body">Every active pack in Xiphos sends its leadership trio to SNU on a stagger. Year One is the alpha. Year Two is the diplomat. Year Three is the tactician. Pack Leadership classes hold seven to ten alphas in a single room — every alpha of this generation knows every other alpha personally. The cohort-ties forged at SNU shape the politics of the kingdom for decades. Rivalries born in Year One sparring become wars in Year Forty.</div>
+    </div>
+
+    <div class="hook-block">A pack whose alpha goes to SNU but whose seconds do not is a pack with a problem. Eudora's three pups arrived at SNU together — alpha, diplomat, tactician, all in Year One — because they had no parent pack to stagger through. Pack Leadership noticed.</div>
+  </div>
+
+  <!-- THE ALPHA NAMES THEMSELVES -->
+  <div class="section">
+    <div class="section-title">Wolves Choose Their Own Names <span class="canon-badge locked">Canon-Locked</span></div>
+    <p class="prose">This is the deepest law in Lycari culture. A wolf is given a birth-name by their mother, and that name is theirs only until they choose to claim a different one. Most do. The chosen name is the name the world will know them by — the name carried into every pack they form, every battle they fight, every verse they take in the Howl of Kings.</p>
+
+    <p class="prose">The <strong>pack-name</strong> works the same way. An alpha founding a new pack chooses the surname every wolf in the pack will share. <em>Stormfang. Thornfang. Moonfang. Shadowfang. Emberclaw.</em> The fang-suffix is tradition for royal-line packs; the claw-suffix for warrior-line; other suffixes are open and have been claimed creatively across the centuries. <strong>Pack-names do not have to share prefixes with the parent pack.</strong> The alpha decides.</p>
+
+    <div class="quote-block">
+      My mother named me Zlade. The forest named me Reign. I am the only one allowed to choose between them, and I have not chosen yet.
+      <span class="attribution">— Reign Stormveil, age 14, to Eudora</span>
+    </div>
+
+    <p class="prose">When Eudora found three storm-night pups and named them <em>Stormveil</em>, she gave them a temporary name — a placeholder — meant to shield what they were. <strong>Veil</strong>, not <strong>Fang</strong>, because she was hiding them from the throne. The day the Stormveil siblings claim their true name will be the day the kingdom learns who has been living quietly in the woods.</p>
+
+    <div class="hook-block">The new packs forming at SNU have started picking names that do not echo their parent packs at all. Moonfang's heir is rumored to be considering <em>Moonclaw</em>. Other heirs whisper of dropping the wolf-suffixes entirely. The old conventions are bending. The throne has not yet noticed. Or has, and is choosing not to react.</p></div>
+  </div>
+
+  <!-- THE STORMFANG MONARCHY -->
+  <div class="section">
+    <div class="section-title">The Stormfang Monarchy <span class="canon-badge">Royal Canon</span></div>
+    <p class="prose">One king. One crown. All packs bow. This has been true for as long as any Lycari can remember. The <strong>Stormfang</strong> line has held the throne unbroken across thousands of years — preserved by a quirk of biology and a gift of fate: the line tends to produce <strong>twin alphas</strong> in royal generations. Twin alphas are exceptionally rare. In the royal line, they appear with disturbing reliability. The current king is a twin alpha. So was his brother — Vaelor — who broke off, founded his own pack, took the surname <strong>Thornfang</strong>, and never returned.</p>
+
+    <p class="prose">When royal twin alphas are born, the elder is heir; the younger is expected to bud off and found a parallel royal-tier pack. Both lines hold full royal status. Both lines are watched. Both lines are dangerous.</p>
+
+    <div class="lore-card">
+      <div class="lore-card-name">👑 The Howl of Kings</div>
+      <div class="lore-card-body">A song of history sung only in times of dire need. It calls upon the spirits of past Stormfang sovereigns for guidance. Most wolves alive will never hear it sung in earnest. Hearing it is a sign that the kingdom is in <em>genuine</em> danger. The last full Howl was sung over six hundred years ago. The current king has begun, on certain nights, to <em>hum</em> it alone.</div>
+    </div>
+
+    <div class="lore-card">
+      <div class="lore-card-name">🐺 The Rite of Fangs</div>
+      <div class="lore-card-body">A formal duel by which wolves challenge each other for status — usually for pack succession, occasionally for royal contest. The Rite is bound by ancient honor: no killing-blows except by mutual prior agreement, no third-party interference, and the loser submits without grievance. Sovereigns are not exempt from the Rite. The throne itself can, in theory, be challenged this way. It has not been challenged in eleven hundred years. The thought is, currently, occurring to people.</div>
+    </div>
+
+    <div class="lore-card">
+      <div class="lore-card-name">🌕 The Moonlit Hunt</div>
+      <div class="lore-card-body">A sacred gathering held on the full moon, when all wolves of a region — regardless of pack or rank — run together. The hunt is the only night of the year on which pack rivalries are formally suspended. Even bitter enemies run side by side. The Hunt reaffirms what the wolves have always known: <strong>before pack, there is species. Before species, there is moon.</strong></div>
+    </div>
+  </div>
+
+  <!-- THE MATE BOND -->
+  <div class="section">
+    <div class="section-title">The Mate Bond <span class="canon-badge locked">Canon-Locked</span></div>
+    <p class="prose">The Lycari mate bond is the most intense bond in Xiphos — and the most ironclad. Most Faekin species do not bond until age twenty-five. The Lycari, by contrast, can bond as young as <em>twenty</em>, and once a wolf has scented their mate, the bond cannot be unscented. It cannot be denied. It cannot be transferred. It can be <strong>refused</strong>, but the refusal does damage neither party recovers from cleanly.</p>
+
+    <p class="prose">A bond is recognized by <strong>scent</strong>. The wolf catches their mate's scent and knows — instantly, irreversibly, without ambiguity — that this is the one. The scent itself is layered: a base note unique to that person, a top note that responds to the wolf's own emotion, and a third note that emerges only after the bond locks. Wolves describe the experience as being hit by weather. They are not exaggerating.</p>
+
+    <div class="iron-rule">
+      <div class="iron-rule-text"><strong>The mate-scent rule has one cruel exception.</strong> A wolf cannot recognize a scent they have known their entire life. If two Lycari grow up together — nest-mates, pack-siblings, raised side by side — they have no <em>baseline</em> against which to perceive the bond-scent as new. Their bodies know. Their hindbrains know. They are wolves. But their conscious minds simply file the scent under <em>home</em> and never think to question it. They may live decades without realizing.</div>
+    </div>
+
+    <p class="prose">A mate bond, once locked, manifests in body and magic both. Bonded wolves can sense each other's pain across distance. They run faster, fight smarter, heal cleaner. Their scent merges over time — by the time a bonded pair has been together a decade, neither one has a fully separate scent any longer. They smell, to other wolves, like <em>one creature distributed across two bodies</em>.</p>
+
+    <p class="prose">The bond can be made, not only born. A non-Lycari mate can be turned through a deliberate bite — but the practice is delicate, dangerous, and tradition-laden. Lycari raised in the old culture are extremely cautious about it. Lycari raised outside the old culture have, on occasion, been <em>too</em> casual. This is going to come up.</p>
+
+    <div class="hook-block">Allura is going to ask Kaelith — not Reign — how to become a wolf. Kaelith is the diplomat. Kaelith answers questions Reign cannot bring himself to answer. The conversation is going to be calm, deliberate, and the most dangerous one Allura has ever had.</div>
+  </div>
+
+  <!-- HISTORY: THE SHATTERED HOWL -->
+  <div class="section">
+    <div class="section-title">The Shattered Howl <span class="canon-badge">Historical Canon</span></div>
+    <p class="prose">Centuries past, the Lycari fractured. A leadership dispute over the Lunar Covenant — the ancient law dictating transformation cycles and dominance hierarchy — splintered the species into rival factions: <strong>The Nightfangs</strong> and <strong>The Silverborn</strong>. They clashed in <strong>The Burning Hunt</strong>, a battle that scorched half of Kaios's outer urban forest before the throne could intervene. The Silverborn won. The Nightfangs were not eradicated, only scattered. They are still out there. They have been quiet. Lately, they have been <em>quieter</em>.</p>
+
+    <p class="prose">The civil war birthed the cautionary myth still told to Lycari pups today: <strong>The Tale of the Split Moon</strong>. Two wolf brothers, Fenrik and Valen, once led the packs in harmony — until ambition and distrust turned them against one another. The moon, witnessing the betrayal, split in sorrow. The myth's core warning is that <em>unity must be fought for, lest the moon fracture again</em>. It is the first story Lycari children memorize. It is the story Vaelor tells his nephews privately, on certain nights, when he thinks they need to remember.</p>
+  </div>
+
+  <!-- TAVERN RUMORS -->
+  <div class="section">
+    <div class="section-title">Tavern Rumors &amp; Half-Truths</div>
+    <div class="rumor-section">
+      <p class="rumor-intro">Spoken in roadside lodges, market squares, the pack-houses of border towns — what the average wolf says when they think no one in the royal line is listening. Some are true. Some are wildly exaggerated. Some have started circulating only in the last year, and that itself is the rumor.</p>
+
+      <div class="rumor">
+        On the lunar blood moon, every wolf in Xiphos can hear every other wolf's heartbeat. Every one. Even the king's. <em>Especially</em> the king's. People have started listening on purpose.
+        <span class="rumor-source">— Innkeeper at the Three Pines, Kaios outer ring</span>
+      </div>
+
+      <div class="rumor">
+        I heard a Sovereign can hold faecoat for a hundred years if they want. Just choose to be fae. Forget they ever ran on four legs. Some of the old kings did it on purpose, to look more like the courts. Made the wolves nervous.
+        <span class="rumor-source">— A Lazuline tailor, fitting a wolf-fae for court robes</span>
+      </div>
+
+      <div class="rumor">
+        The throne hasn't ridden the Moonlit Hunt in nine years. <em>Nine years.</em> My grandfather said when a king skips the Hunt, something old wakes up underneath the trees.
+        <span class="rumor-source">— A pack-bonded mid-tier wolf, three drinks deep</span>
+      </div>
+
+      <div class="rumor">
+        The Nightfangs aren't gone. They're just waiting. My cousin saw a black wolf with no pack-scent crossing the eastern border last winter. Didn't run. Didn't growl. Just <em>watched</em> her ride past.
+        <span class="rumor-source">— Almost certainly a deer. Almost.</span>
+      </div>
+
+      <div class="rumor">
+        You know what they say about the Stormveil pups? Eudora found them on the bloodiest storm in living memory. Three pups. Three colors. Same age. Came from nowhere. Don't tell me that's a coincidence. Don't.
+        <span class="rumor-source">— Forest hermit, refusing to elaborate further</span>
+      </div>
+
+      <div class="rumor">
+        A Warborn's ears flare around twenty. A Sovereign's ears <em>stay</em> flared. If you see a wolf at SNU who can't put their ears down, you're looking at a future king or queen and you should bow before they notice you didn't.
+        <span class="rumor-source">— Pack Leadership tutor's daughter, hearsay from class</span>
+      </div>
+
+      <div class="rumor">
+        The king's been keeping company with no one. Not even his diplomat. They say his diplomat asked to speak with him three months ago and was <em>denied</em>. Have you ever heard of a king denying his own second?
+        <span class="rumor-source">— Court attendant, fired the next day for "indiscretion"</span>
+      </div>
+
+      <div class="rumor">
+        I'll tell you what I think. I think the king's been <em>eating</em>. I don't know what. I don't want to know. I just know he's been satisfied lately and the kingdom hasn't, and that math doesn't work.
+        <span class="rumor-source">— A Kaios butcher who refuses to take royal contracts</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- IRON CANON -->
+  <div class="section">
+    <div class="section-title">Iron Canon — What Cannot Change</div>
+    <p class="prose">The rules below shape every Lycari scene across all ten books. They are the bones of the species. Break them only when the breaking is <em>the point</em>.</p>
+
+    <div class="lore-card">
+      <div class="lore-card-name">The Seven Iron Rules</div>
+      <div class="lore-card-body" style="margin-top:8px;">
+        <p style="margin-bottom:10px;"><strong>1.</strong> One throne, one crown. The Stormfang line holds it. All packs bow.</p>
+        <p style="margin-bottom:10px;"><strong>2.</strong> Three forms: Grounded, Warborn, Sovereign. Sovereigns are royal-blooded almost without exception.</p>
+        <p style="margin-bottom:10px;"><strong>3.</strong> Pack of six to seven. Triad of Alpha · Diplomat · Tactician at the head. Bud-off when an alpha matures.</p>
+        <p style="margin-bottom:10px;"><strong>4.</strong> Wolves choose their own names. Birth-name, chosen-name, pack-name — all elective. Alpha decides the pack-name.</p>
+        <p style="margin-bottom:10px;"><strong>5.</strong> Mate bond by scent. Irreversible. Most fae bond at 25; Lycari can bond as early as 20.</p>
+        <p style="margin-bottom:10px;"><strong>6.</strong> A wolf cannot recognize the bond-scent of someone they have known their entire life. The hindbrain knows. The conscious mind doesn't.</p>
+        <p style="margin-bottom:0;"><strong>7.</strong> Wolves cannot bond dragons. Lycari soul is too earth-rooted, too pack-bound. The Dragon Order has confirmed this for ten thousand years.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="divider" style="margin-bottom:20px;">
+      <div class="divider-line" style="width:40px;"></div>
+      <div class="divider-gem"></div>
+      <div class="divider-line reverse" style="width:40px;"></div>
+    </div>
+    <div class="footer-text">Faeheart Chronicles · Culture Canon · Lycari &amp; Kaios · © 2026 Zoey Alexis Caine</div>
+  </div>
+
+</div>
+</body>
+</html>

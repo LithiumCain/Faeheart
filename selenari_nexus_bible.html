@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selenari Nexus — The Academy Bible</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=EB+Garamond:ital@1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --moonstone:    #B8AEC4;
+    --moonstone-light: #D4C8DC;
+    --moonstone-pale:  #EBE3F2;
+    --midnight:     #06070E;
+    --deep-violet:  #0E0A18;
+    --violet-mid:   #1C1428;
+    --crystal:      #A8C4D4;
+    --crystal-dim:  #7088A0;
+    --gold-warm:    #C8A85A;
+    --gold-bright:  #E8D08A;
+    --starfire:     #7FFFA8;
+    --bone:         #F0EAD8;
+    --rose-pink:    #C87AA8;
+    --text-body:    #C8C0D0;
+    --text-dim:     #756F80;
+    --rumor:        #A8A0B0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--midnight);
+    color: var(--text-body);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Moonstone-and-starlight starfield — SNU at night */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 8% 12%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 38%, rgba(184,174,196,0.45) 0%, transparent 100%),
+      radial-gradient(1px 1px at 38% 8%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 52% 60%, rgba(127,255,168,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 68% 25%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 82% 50%, rgba(168,196,212,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 18% 75%, rgba(255,255,255,0.35) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 80%, rgba(184,174,196,0.45) 0%, transparent 100%),
+      radial-gradient(1px 1px at 35% 90%, rgba(212,200,220,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 62% 85%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 48% 33%, rgba(232,208,138,0.45) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 78% 65%, rgba(168,196,212,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 20% 55%, rgba(184,174,196,0.45) 0%, transparent 100%),
+      radial-gradient(2px 2px at 12% 22%, rgba(127,255,168,0.35) 0%, transparent 100%),
+      radial-gradient(2.5px 2.5px at 88% 18%, rgba(232,208,138,0.5) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page { position: relative; z-index: 1; max-width: 920px; margin: 0 auto; padding: 60px 40px 100px; }
+  .header { text-align: center; margin-bottom: 70px; animation: fadeDown 1s ease both; }
+  .series-label {
+    font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.4em;
+    text-transform: uppercase; color: var(--moonstone); opacity: 0.85; margin-bottom: 20px;
+  }
+  .culture-name {
+    font-family: 'Cinzel', serif; font-size: clamp(48px, 7vw, 76px); font-weight: 400;
+    color: var(--moonstone-light); letter-spacing: 0.06em; line-height: 1; margin-bottom: 12px;
+    text-shadow: 0 0 80px rgba(212,200,220,0.4), 0 2px 4px rgba(0,0,0,0.9);
+  }
+  .culture-subtitle {
+    font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--gold-warm); margin-bottom: 18px; opacity: 0.85;
+  }
+  .culture-epithet {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 22px;
+    color: var(--bone); letter-spacing: 0.03em; margin: 0 auto 30px; max-width: 620px; line-height: 1.5;
+  }
+  .culture-epithet em { color: var(--gold-bright); font-style: normal; }
+
+  .divider { display: flex; align-items: center; gap: 16px; justify-content: center; margin: 24px 0; }
+  .divider-line { height: 1px; width: 80px; background: linear-gradient(to right, transparent, var(--moonstone)); }
+  .divider-line.reverse { background: linear-gradient(to left, transparent, var(--moonstone)); }
+  .divider-gem {
+    width: 7px; height: 7px; background: var(--moonstone); transform: rotate(45deg);
+    box-shadow: 0 0 14px var(--moonstone), 0 0 28px rgba(184,174,196,0.4);
+  }
+
+  .section { margin-bottom: 56px; animation: fadeUp 0.8s ease both; }
+  .section-title {
+    font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.35em;
+    text-transform: uppercase; color: var(--moonstone); margin-bottom: 22px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, rgba(184,174,196,0.45), transparent); }
+
+  .canon-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--gold-warm); border: 1px solid rgba(200,168,90,0.4);
+    padding: 4px 10px; margin-left: 12px; vertical-align: middle; background: rgba(200,168,90,0.05);
+  }
+  .canon-badge::before { content: '◆'; font-size: 7px; }
+  .canon-badge.locked { color: var(--crystal); border-color: rgba(168,196,212,0.4); background: rgba(168,196,212,0.05); }
+
+  .prose { font-size: 17px; color: var(--text-body); line-height: 1.8; margin-bottom: 18px; }
+  .prose strong { color: var(--moonstone-light); font-weight: 600; }
+  .prose em { color: var(--bone); }
+
+  .quote-block {
+    background: rgba(28, 20, 40, 0.55); border-left: 2px solid var(--moonstone);
+    padding: 22px 28px; font-style: italic; font-size: 17px;
+    color: var(--bone); line-height: 1.8; margin: 16px 0;
+  }
+  .quote-block .attribution {
+    display: block; margin-top: 12px; font-family: 'Cinzel', serif;
+    font-style: normal; font-size: 10px; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--gold-warm); opacity: 0.85;
+  }
+
+  .lore-card {
+    background: rgba(28, 20, 40, 0.45); border: 1px solid rgba(184,174,196,0.18);
+    padding: 26px 30px; margin-bottom: 16px; position: relative; overflow: hidden;
+  }
+  .lore-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(to right, var(--moonstone), transparent);
+  }
+  .lore-card-name {
+    font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 0.15em;
+    color: var(--gold-bright); margin-bottom: 14px;
+  }
+  .lore-card-body { font-size: 16px; color: var(--text-body); line-height: 1.75; }
+  .lore-card-body strong { color: var(--moonstone-light); }
+
+  /* Four factions grid */
+  .faction-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .faction-card {
+    background: rgba(14, 10, 24, 0.7); border: 1px solid rgba(184,174,196,0.2);
+    padding: 22px 24px; position: relative;
+  }
+  .faction-card::before {
+    content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 2px;
+    background: linear-gradient(to bottom, var(--moonstone), transparent);
+  }
+  .faction-label {
+    font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--gold-warm); margin-bottom: 8px;
+  }
+  .faction-name {
+    font-family: 'Cinzel', serif; font-size: 17px; letter-spacing: 0.1em;
+    color: var(--moonstone-light); margin-bottom: 10px;
+  }
+  .faction-body { font-size: 14px; color: var(--text-body); line-height: 1.65; font-style: italic; }
+
+  /* Landmarks grid */
+  .landmark-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 10px;
+  }
+  .landmark-tile {
+    background: rgba(28, 20, 40, 0.5); border: 1px solid rgba(184,174,196,0.15);
+    padding: 18px 20px; transition: border-color 0.3s, transform 0.3s;
+  }
+  .landmark-tile:hover {
+    border-color: rgba(184,174,196,0.4); transform: translateY(-2px);
+  }
+  .landmark-icon { font-size: 20px; margin-bottom: 8px; display: block; }
+  .landmark-name {
+    font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 0.18em;
+    color: var(--gold-bright); margin-bottom: 6px;
+  }
+  .landmark-desc { font-size: 13px; color: var(--text-body); line-height: 1.6; font-style: italic; }
+
+  .iron-rule {
+    background: linear-gradient(135deg, rgba(168,196,212,0.08), rgba(184,174,196,0.04));
+    border: 1px solid rgba(168,196,212,0.3); padding: 22px 28px; margin: 18px 0; position: relative;
+  }
+  .iron-rule::before {
+    content: '⚠ IRON RULE'; position: absolute; top: -10px; left: 20px;
+    background: var(--midnight); padding: 0 10px;
+    font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.3em; color: var(--crystal);
+  }
+  .iron-rule-text { font-size: 16px; color: var(--bone); line-height: 1.7; }
+  .iron-rule-text strong { color: var(--crystal); font-weight: 600; }
+
+  /* Faculty section — compact table-ish */
+  .faculty-block {
+    background: rgba(14, 10, 24, 0.4); border: 1px solid rgba(184,174,196,0.12);
+    padding: 22px 26px; margin-bottom: 14px;
+  }
+  .faculty-dept {
+    font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--gold-warm); margin-bottom: 12px;
+    padding-bottom: 10px; border-bottom: 1px solid rgba(184,174,196,0.15);
+  }
+  .faculty-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    padding: 8px 0; align-items: baseline; font-size: 14px;
+  }
+  .faculty-name {
+    font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 0.1em;
+    color: var(--moonstone-light);
+  }
+  .faculty-subj { color: var(--text-dim); font-style: italic; font-size: 13px; }
+
+  .rumor-section {
+    background: rgba(14, 10, 24, 0.5); border: 1px dashed rgba(168,160,176,0.25);
+    padding: 26px 30px; margin-top: 18px;
+  }
+  .rumor-intro {
+    font-style: italic; font-size: 14px; color: var(--text-dim);
+    margin-bottom: 16px; line-height: 1.6;
+  }
+  .rumor {
+    font-style: italic; font-size: 15px; color: var(--rumor); line-height: 1.65;
+    margin-bottom: 12px; padding-left: 22px; position: relative;
+  }
+  .rumor::before {
+    content: '"'; position: absolute; left: 0; top: -4px;
+    font-family: 'EB Garamond', serif; font-size: 32px; color: var(--moonstone);
+    opacity: 0.5; line-height: 1;
+  }
+  .rumor-source {
+    display: block; font-style: normal; font-family: 'Cinzel', serif;
+    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--text-dim); margin-top: 4px; opacity: 0.7;
+  }
+
+  .hook-block {
+    background: rgba(184,174,196,0.04); border: 1px dashed rgba(184,174,196,0.25);
+    padding: 18px 22px; font-size: 14px; color: var(--text-dim);
+    font-style: italic; margin-top: 14px; line-height: 1.7;
+  }
+  .hook-block::before {
+    content: '✦ Saga hook: '; color: var(--moonstone); font-style: normal;
+    font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
+  }
+
+  .footer { text-align: center; margin-top: 80px; padding-top: 30px; border-top: 1px solid rgba(184,174,196,0.15); }
+  .footer-text { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--text-dim); }
+
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 700px) {
+    .page { padding: 40px 22px 80px; }
+    .faction-grid { grid-template-columns: 1fr; }
+    .landmark-grid { grid-template-columns: 1fr; }
+    .faculty-row { grid-template-columns: 1fr; gap: 2px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="series-label">Of Stormsalt &amp; Smoke — Faeheart Chronicles</div>
+    <div class="culture-name">Selenari Nexus</div>
+    <div class="culture-subtitle">The Academy Bible · Book 1 Reference</div>
+    <div class="culture-epithet">"Grown from living trees and moonstone, deep in an ancient forest. The only place in Xiphos where every species <em>has to sit in the same room</em>."</div>
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-gem"></div>
+      <div class="divider-line reverse"></div>
+    </div>
+    <div class="series-label" style="opacity:0.55; font-size:9px;">Culture Canon · Book 1 Reference · Faeheart World Bible</div>
+  </div>
+
+  <!-- IDENTITY -->
+  <div class="section">
+    <div class="section-title">Identity <span class="canon-badge locked">Canon-Locked</span></div>
+    <p class="prose">Selenari Nexus is the premier institution of magical and cultural learning in Xiphos — and it is unlike any other academy in the realm. It was not built; it was <strong>grown</strong>. Its halls are woven from living trees whose trunks the architects trained across centuries into spires. Its walls are moonstone quarried from deep beneath the forest floor. Its walkways are stone paths laced with magic that glow softly underfoot after dusk. Students who wake in the middle of the night to use the bathhouse have described the experience as <em>walking through a constellation</em>.</p>
+    <p class="prose">It is the only school in Xiphos that accepts students from <strong>every</strong> Faekin lineage: fae of the courts, Lycari pack-trios, Stryxian scholar-hatchlings, dragon-bonded recruits, the rare Wild Fae whose enclave has sent them out to be witnessed by the wider world. Each species has a dorm wing, but classes mix freely. Pack Leadership is taught beside Font Mastery. Dragon-Egg Observation is down the corridor from Spellsong. Advanced Tracking meets in a grove that, depending on the week, might host an Ember-Font workshop instead because the grove itself has <em>opinions</em>.</p>
+    <p class="prose">Most students attend for three years. The academy calendar is split into three Arcs per year. Most bond their mates here. Most awaken their Font here. Most, by the time they graduate, have been changed so completely they are no longer the person their family sent.</p>
+
+    <div class="quote-block">
+      The Nexus is not a school, exactly. The Nexus is a <em>crucible</em>. You come in convinced you know who you are. You leave holding whoever has survived the second year.
+      <span class="attribution">— Banister Whitis, Headmaster's welcome speech, every year</span>
+    </div>
+  </div>
+
+  <!-- LOCATION & ARCHITECTURE -->
+  <div class="section">
+    <div class="section-title">The Hidden Campus <span class="canon-badge locked">Canon-Locked</span></div>
+    <p class="prose">Selenari Nexus is hidden in the <strong>Ember Scale Wilds</strong>, a deep primeval forest roughly equidistant from Nulune, Ameliora, and Kaios. The campus cannot be reached by simply walking toward it. The path reveals itself only to those who have been invited — letters arrive the way letters always arrive in Xiphos, by enchanted parchment, and the parchment itself <em>guides</em> the student the final stretch.</p>
+
+    <p class="prose">Seen from above, the Nexus is a <strong>concentric ring city</strong>. Three great circular paths spiral outward from a central grove where a <em>crystalline spire complex</em> rises through the canopy — the magical heart of the campus, visible for leagues at night. The inner ring houses the oldest classrooms and the Great Library. The middle ring holds the dorms, the bathhouse, the dining halls, the practice groves. The outer ring — wide and wooded — is the training perimeter, blending seamlessly into the Ember Scale Wilds beyond.</p>
+
+    <p class="prose">The violet-pink stone paths that link the rings glow with a soft magic-light at dusk. Students joke that the paths <em>decide</em> which direction they want you to go. The faculty do not contradict this.</p>
+
+    <div class="iron-rule">
+      <div class="iron-rule-text"><strong>The campus is alive.</strong> Trees that form classroom walls must be <em>asked</em> before they are pruned. The bathhouse adjusts its water temperature based on who is bathing. The library rearranges its shelves overnight — students have learned to bookmark by <em>scent</em> rather than location. The crystalline spire at the center is said to pulse in time with the Twin Moons when they align. None of this is controlled by the faculty. All of this is tolerated because the alternative is <em>fighting the Nexus</em>, and nobody has won that fight yet.</div>
+    </div>
+  </div>
+
+  <!-- THE FOUR FACTIONS -->
+  <div class="section">
+    <div class="section-title">The Four Factions <span class="canon-badge">Cultural Canon</span></div>
+    <p class="prose">Every student at Selenari Nexus is sorted — not by species, not by Font, not by class, but by <strong>philosophical alignment</strong>. The sorting happens quietly, during the first week. Students do not choose their faction; the faction chooses them. Most Nexus graduates keep their faction affiliation for life and continue to network with fellow members well into their careers.</p>
+
+    <div class="faction-grid">
+      <div class="faction-card">
+        <div class="faction-label">Faction I</div>
+        <div class="faction-name">Grove of Surprises</div>
+        <div class="faction-body">Experimental magic theorists. Break rules on purpose. Publish findings the courts never asked for. The Grove is where the interesting chaos comes from.</div>
+      </div>
+      <div class="faction-card">
+        <div class="faction-label">Faction II</div>
+        <div class="faction-name">Circle of Guardians</div>
+        <div class="faction-body">Magical law enforcers. The Nexus's internal order, and the people who graduate into cross-species diplomatic work. Don't break rules near them.</div>
+      </div>
+      <div class="faction-card">
+        <div class="faction-label">Faction III</div>
+        <div class="faction-name">Order of Promise</div>
+        <div class="faction-body">Scholars of prophecy, oath, and binding. The quietest faction. Most meet privately and keep notes the rest of the campus cannot decipher.</div>
+      </div>
+      <div class="faction-card">
+        <div class="faction-label">Faction IV</div>
+        <div class="faction-name">Grove of Enlightened Stars</div>
+        <div class="faction-body">Astral historians. Celestial readers. Moon-mappers. Most of the Stryxian students end up here. So do most of the dragon-bonded. So does Harrison.</div>
+      </div>
+    </div>
+
+    <p class="prose">The four factions are not rival houses in the Hogwarts sense. They are <em>lenses</em>. A student of the Grove of Surprises might sit beside a Circle of Guardians at dinner and argue cheerfully about the ethics of the Font choice they both just made. The factions matter less than the Scholar's Oath, and the Oath is the only thing at the Nexus that every student swears.</p>
+  </div>
+
+  <!-- THE SCHOLAR'S OATH -->
+  <div class="section">
+    <div class="section-title">The Scholar's Oath <span class="canon-badge locked">Canon-Locked</span></div>
+    <p class="prose">Every student at Selenari Nexus swears the <strong>Scholar's Oath</strong> on the first day of their first Arc. The Oath binds them to their chosen field of study for life. It cannot be revoked. It cannot be transferred. It cannot be faked — the magic of the Oath runs through the moonstone foundation of the campus itself, and a student who swears falsely will find their magic refuse them for the next seven days while the Nexus <em>decides what to do about it</em>.</p>
+
+    <div class="quote-block">
+      I swear to pursue knowledge with care. I swear to wield power with consent. I swear to remember that what I learn here will one day walk beside me, even when I do not know it is there.
+      <span class="attribution">— The Scholar's Oath · spoken at the Great Library</span>
+    </div>
+
+    <p class="prose">Students touch the cover of <strong>The Forgotten Scholars</strong> — the burnt-leather book chronicling the Ashfall Betrayal — upon entering the library for the first time. It is a silent vow. <em>Never again.</em></p>
+  </div>
+
+  <!-- THE ASHFALL BETRAYAL -->
+  <div class="section">
+    <div class="section-title">The Ashfall Betrayal <span class="canon-badge">Historical Canon</span></div>
+    <p class="prose">Decades ago, a cohort of rogue scholars attempted to <strong>rewrite the Convergence Theory</strong> — the academy's foundational magical doctrine holding that magic, fate, and history are inextricably interlinked. Their goal was nothing less than altering magic itself. The attempt succeeded only in destroying whole wings of the campus as students fought over reality-altering texts. Many died. Much was lost. The books they tried to rewrite were burned. The survivors rebuilt the campus from its moonstone bones upward, and instituted the Scholar's Oath to prevent anything like it from ever happening again.</p>
+
+    <p class="prose">The only surviving record is <strong>The Forgotten Scholars</strong>, a book bound in burnt leather kept in the library. Every student touches its cover upon entering the library for the first time. A silent pledge never to repeat history.</p>
+
+    <div class="hook-block">Nobody alive at the Nexus today was present for the Betrayal. Banister Whitis was a student in the decade that followed. He has never spoken about that period. When asked directly, he changes the subject with a particular kind of smile that tells students not to ask again.</div>
+  </div>
+
+  <!-- KEY LANDMARKS -->
+  <div class="section">
+    <div class="section-title">Key Landmarks</div>
+
+    <div class="landmark-grid">
+      <div class="landmark-tile">
+        <span class="landmark-icon">📚</span>
+        <div class="landmark-name">The Great Library</div>
+        <div class="landmark-desc">Gothic-fae archive beneath a glass dome. Cherry trees grow inside. Shelves rearrange overnight — students bookmark by scent.</div>
+      </div>
+      <div class="landmark-tile">
+        <span class="landmark-icon">🛁</span>
+        <div class="landmark-name">The Bathhouse</div>
+        <div class="landmark-desc">Multi-level stone pools lit by hanging lanterns. Water-temperature adjusts to the bather. Firefly-light drifts on the surface.</div>
+      </div>
+      <div class="landmark-tile">
+        <span class="landmark-icon">🏛</span>
+        <div class="landmark-name">The Great Hall</div>
+        <div class="landmark-desc">Candle-lit dining hall opening onto a mountaintop valley view. Ceremonies, feasts, the Ball at year's end.</div>
+      </div>
+      <div class="landmark-tile">
+        <span class="landmark-icon">🌳</span>
+        <div class="landmark-name">The Dormitory Trees</div>
+        <div class="landmark-desc">Five ancient trees carved into living dorms. One per species wing. The Stormveil pack shares a hollow in the Lycari dorm.</div>
+      </div>
+      <div class="landmark-tile">
+        <span class="landmark-icon">🏔</span>
+        <div class="landmark-name">The Aerie</div>
+        <div class="landmark-desc">High-altitude landing platform for Stryxians and dragon-bonded. Flight approaches only. Ground students rarely visit.</div>
+      </div>
+      <div class="landmark-tile">
+        <span class="landmark-icon">⚔</span>
+        <div class="landmark-name">The Training Fields</div>
+        <div class="landmark-desc">Outer-ring clearings for sparring, Combat Fundamentals, and the Open Sparring rotations. Blood magic forbidden here by Oath.</div>
+      </div>
+      <div class="landmark-tile">
+        <span class="landmark-icon">🌲</span>
+        <div class="landmark-name">The Wildlands Perimeter</div>
+        <div class="landmark-desc">Where the campus blurs into Ember Scale Wilds. Field Survival classes begin at the treeline and do not always return on time.</div>
+      </div>
+      <div class="landmark-tile">
+        <span class="landmark-icon">💎</span>
+        <div class="landmark-name">The Crystalline Spire</div>
+        <div class="landmark-desc">The magical heart of campus. Pulses in time with the Twin Moons. Nobody enters casually. Nobody has explained why.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE CONVERGENCE THEORY -->
+  <div class="section">
+    <div class="section-title">The Convergence Theory <span class="canon-badge">Foundational Doctrine</span></div>
+    <p class="prose">The central magical doctrine of Selenari Nexus. Holds that <strong>magic, fate, and history are inextricably interlinked</strong> — that every spell cast echoes forward and backward through time, that every bond formed reshapes the future, that every choice made in magical context ripples across the realm in ways no single caster can trace.</p>
+    <p class="prose">The Convergence Theory is why the Nexus exists in its current form. It is why the Scholar's Oath is absolute. It is why tampering with foundational texts — as the Ashfall rogues did — is the gravest crime a Nexus scholar can commit. The Theory holds that magic is not <em>technology</em>; magic is <em>relationship</em>. To rewrite magic is to rewrite what the world is.</p>
+    <p class="prose">First-year students learn the Theory's basics in <strong>Convergence Theory I</strong>. Upper years take advanced seminars. Only the Order of Promise teaches the deepest layer, and what they teach they do not write down.</p>
+  </div>
+
+  <!-- FACULTY ROSTER -->
+  <div class="section">
+    <div class="section-title">Current Faculty <span class="canon-badge">Book 1 Canon</span></div>
+
+    <div class="faculty-block">
+      <div class="faculty-dept">Administration</div>
+      <div class="faculty-row"><div class="faculty-name">Banister Whitis</div><div class="faculty-subj">Headmaster · Auric Font oversight · Enlightenment I &amp; II</div></div>
+    </div>
+
+    <div class="faculty-block">
+      <div class="faculty-dept">Lycari Track</div>
+      <div class="faculty-row"><div class="faculty-name">Vaelor Thornfang</div><div class="faculty-subj">Pack Leadership · Enlightenment oversight for wolves</div></div>
+      <div class="faculty-row"><div class="faculty-name">Cellean Moonfang</div><div class="faculty-subj">Young-wolf instruction · Pack Dynamics support</div></div>
+      <div class="faculty-row"><div class="faculty-name">Anastasia Shadowfang</div><div class="faculty-subj">Weapons Handling · Combat Fundamentals (Females)</div></div>
+      <div class="faculty-row"><div class="faculty-name">Talisen Emberclaw</div><div class="faculty-subj">Combat Conditioning · Physical advanced tracks</div></div>
+    </div>
+
+    <div class="faculty-block">
+      <div class="faculty-dept">Dragon-Bonded Track</div>
+      <div class="faculty-row"><div class="faculty-name">Niraphael Cypress</div><div class="faculty-subj">Field Survival · Draconic Egg Observation · Egg-Caller</div></div>
+      <div class="faculty-row"><div class="faculty-name">Thane Morrow</div><div class="faculty-subj">Don't Die 101 · Combat Fundamentals · Meteor-dragon Soot</div></div>
+      <div class="faculty-row"><div class="faculty-name">Seraphael Pallas</div><div class="faculty-subj">Dragon-Bonded Combat · Advanced Battle Tactics</div></div>
+    </div>
+
+    <div class="faculty-block">
+      <div class="faculty-dept">Stryxian Track</div>
+      <div class="faculty-row"><div class="faculty-name">Athena Goldbeak</div><div class="faculty-subj">Celestial Mapping · Lost Civilizations of Xiphos</div></div>
+      <div class="faculty-row"><div class="faculty-name">Orrin Wexley</div><div class="faculty-subj">Field Survival (Group Sections)</div></div>
+      <div class="faculty-row"><div class="faculty-name">Xeomere Rainfeather</div><div class="faculty-subj">Wild Terrain Navigation · Magical Ecology</div></div>
+    </div>
+
+    <div class="faculty-block">
+      <div class="faculty-dept">Fae &amp; Font Magic</div>
+      <div class="faculty-row"><div class="faculty-name">Neris Ambrose</div><div class="faculty-subj">Font Mastery · Ethics of Power · Sanguine Font advanced</div></div>
+      <div class="faculty-row"><div class="faculty-name">Sable Ripple</div><div class="faculty-subj">Supervised Spellwork · Illusions · Umbral Font</div></div>
+      <div class="faculty-row"><div class="faculty-name">Calder Thornwill</div><div class="faculty-subj">Rune Literacy I · Sparring Rotation · Storm-tied</div></div>
+    </div>
+
+    <div class="faculty-block">
+      <div class="faculty-dept">Grounds &amp; Support</div>
+      <div class="faculty-row"><div class="faculty-name">Zakori Wildfire</div><div class="faculty-subj">Groundskeeping · Feast cooking · Primal-Font gardens</div></div>
+      <div class="faculty-row"><div class="faculty-name">Illiat Thornwhistle</div><div class="faculty-subj">Groundskeeping · Night-herbs · Wildlands patrol</div></div>
+    </div>
+
+    <div class="hook-block">Seven male faculty. Seven female faculty. One headmaster. The numerology is deliberate. The Nexus <em>notices</em> when a seat goes empty. When a position cannot be filled, the curriculum shifts until the Nexus finds the right person. Several positions have taken decades to fill. One is currently vacant. Students have not been told.</div>
+  </div>
+
+  <!-- TAVERN RUMORS -->
+  <div class="section">
+    <div class="section-title">Tavern Rumors &amp; Half-Truths</div>
+    <div class="rumor-section">
+      <p class="rumor-intro">What students whisper in the dormitory halls. What alumni say about the campus when they've had too much to drink. What the faculty deliberately don't correct. Some are accurate. Some are absurd. Some are exactly the kind of rumor that turns out, years later, to have been the truth all along.</p>
+
+      <div class="rumor">
+        The Library moves. I don't mean shelves. I mean the <em>library</em>. My third-year roommate swore she walked in one morning and the east wing was now the north wing. She checked the maps. The maps had <em>changed</em>.
+        <span class="rumor-source">— Upper-year Grove of Surprises student</span>
+      </div>
+
+      <div class="rumor">
+        Don't swear the Scholar's Oath hungover. I did. I couldn't cast for nine days. <em>Nine days.</em> The Nexus knew.
+        <span class="rumor-source">— Circle of Guardians alumna, three decades later, still grumbling</span>
+      </div>
+
+      <div class="rumor">
+        There's a room in the Great Library that only opens for students the Nexus thinks are in danger. Nobody teaches you where it is. You just find it. You just find it on the night you needed to.
+        <span class="rumor-source">— Order of Promise student, in confidence</span>
+      </div>
+
+      <div class="rumor">
+        The Spire pulses in time with the Twin Moons. Everyone knows that. What they don't tell you is that it's been pulsing <em>off-rhythm</em> for the last two years. Getting faster. Faculty won't talk about it.
+        <span class="rumor-source">— Stryxian first-year, possibly observant</span>
+      </div>
+
+      <div class="rumor">
+        Every seven years someone bonds their mate in the bathhouse. I'm not joking. It's happened reliably since the Nexus was built. The water <em>knows</em>. The bathhouse chooses the pair. Ask any of the groundskeepers.
+        <span class="rumor-source">— Lyrianna, at a very drunk Grove of Surprises party</span>
+      </div>
+
+      <div class="rumor">
+        The Wildlands perimeter has a tree that speaks. One tree. It answers questions. You have to bring it something sweet — a fruit, a memory, a song. And you have to accept its answer. And you have to never, <em>ever</em> tell anyone else what it said.
+        <span class="rumor-source">— Field Survival upper-year, deeply serious</span>
+      </div>
+
+      <div class="rumor">
+        There's a faction nobody talks about. A fifth one. They meet in the Spire on moonless nights. They don't have a name. They don't take new members. If you're meant to be one of them, they find you.
+        <span class="rumor-source">— Almost certainly a joke. Almost.</span>
+      </div>
+
+      <div class="rumor">
+        Headmaster Whitis was at the Nexus during the decade <em>after</em> the Ashfall Betrayal. He won't say what he saw. But he named his cat <em>Ash</em>. Think about that.
+        <span class="rumor-source">— Anonymous student paper, pulled from the bulletin board</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- IRON CANON -->
+  <div class="section">
+    <div class="section-title">Iron Canon — What Cannot Change</div>
+    <p class="prose">The rules below shape every SNU scene across the academy arc (Books 1-3, with setup continuing through Book 6). The Nexus is alive. The Nexus is deliberate. The Nexus is older than the staff, and all of them know it.</p>
+
+    <div class="lore-card">
+      <div class="lore-card-name">The Seven Iron Rules</div>
+      <div class="lore-card-body" style="margin-top:8px;">
+        <p style="margin-bottom:10px;"><strong>1.</strong> Grown from living trees and moonstone. Hidden in the Ember Scale Wilds. Paths reveal themselves only to the invited.</p>
+        <p style="margin-bottom:10px;"><strong>2.</strong> The campus is alive. Trees must be asked. The library rearranges. The Spire pulses with the Twin Moons.</p>
+        <p style="margin-bottom:10px;"><strong>3.</strong> Three-year program, three Arcs per year. Every species studies alongside every other. Classes mix freely.</p>
+        <p style="margin-bottom:10px;"><strong>4.</strong> Every student swears the Scholar's Oath on Day One. It cannot be faked. The Nexus knows.</p>
+        <p style="margin-bottom:10px;"><strong>5.</strong> Four factions: Grove of Surprises, Circle of Guardians, Order of Promise, Grove of Enlightened Stars. Students do not choose — they are chosen.</p>
+        <p style="margin-bottom:10px;"><strong>6.</strong> Seven male faculty, seven female faculty, one headmaster. Numerology is deliberate. Seats noticed when vacant.</p>
+        <p style="margin-bottom:0;"><strong>7.</strong> The Ashfall Betrayal is the academy's foundational trauma. Every student touches <em>The Forgotten Scholars</em> on first library entry. <em>Never again.</em></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="divider" style="margin-bottom:20px;">
+      <div class="divider-line" style="width:40px;"></div>
+      <div class="divider-gem"></div>
+      <div class="divider-line reverse" style="width:40px;"></div>
+    </div>
+    <div class="footer-text">Faeheart Chronicles · Selenari Nexus · Academy Bible · © 2026 Zoey Alexis Caine</div>
+  </div>
+
+</div>
+</body>
+</html>

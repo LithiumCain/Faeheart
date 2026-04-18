@@ -21,6 +21,11 @@
     --text-body:     #D4C9B0;
     --text-dim:      #6A6050;
     --starfire:      #7FFFA8;
+    --ember:         #E0542E;
+    --moon-silver:   #C8C4D4;
+    --tide:          #5A9AC4;
+    --bioluma:       #5DE8B8;
+    --moonstone:     #B8AEC4;
   }
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
   html { scroll-behavior:smooth; }
@@ -64,7 +69,7 @@
     backdrop-filter:blur(6px);
   }
   .nav-logo { font-family:'Cinzel',serif; font-size:10px; letter-spacing:.45em; text-transform:uppercase; color:var(--gold); opacity:.85; text-decoration:none; }
-  .nav-links { display:flex; gap:32px; list-style:none; }
+  .nav-links { display:flex; gap:28px; list-style:none; }
   .nav-links a { font-family:'Cinzel',serif; font-size:8px; letter-spacing:.35em; text-transform:uppercase; color:var(--text-dim); text-decoration:none; transition:color .3s; }
   .nav-links a:hover { color:var(--gold-light); }
 
@@ -133,64 +138,172 @@
   .characters-section { padding:100px 48px; max-width:1300px; margin:0 auto; position:relative; z-index:1; }
   .section-label { font-family:'Cinzel',serif; font-size:9px; letter-spacing:.5em; text-transform:uppercase; color:var(--gold); opacity:.6; margin-bottom:14px; display:flex; align-items:center; gap:16px; }
   .section-label::after { content:''; flex:1; max-width:60px; height:1px; background:var(--gold); opacity:.35; }
-  .section-title { font-family:'Cinzel Decorative',serif; font-size:clamp(26px,3.5vw,44px); font-weight:400; color:var(--gold-pale); line-height:1.1; margin-bottom:44px; }
-  .char-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:2px; margin-top:44px; }
-  .char-card { position:relative; padding:34px 22px; border:1px solid rgba(255,255,255,.05); overflow:hidden; cursor:pointer; text-decoration:none; display:block; transition:all .4s; }
+  .section-title { font-family:'Cinzel Decorative',serif; font-size:clamp(26px,3.5vw,44px); font-weight:400; color:var(--gold-pale); line-height:1.1; margin-bottom:20px; }
+  .section-sub { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:17px; color:var(--text-body); opacity:.72; max-width:720px; line-height:1.65; margin-bottom:48px; }
+  .section-sub em { color:var(--gold-light); font-style:normal; }
+
+  /* CHARACTER VIEW TOGGLE (two "dropdown boxes") */
+  .char-view-toggle { display:flex; gap:2px; margin-bottom:40px; border:1px solid rgba(201,168,76,.15); max-width:540px; }
+  .char-view-toggle button {
+    flex:1; background:transparent; border:none; cursor:pointer;
+    font-family:'Cinzel',serif; font-size:9px; letter-spacing:.35em; text-transform:uppercase;
+    color:var(--text-dim); padding:16px 22px; transition:all .3s; position:relative;
+  }
+  .char-view-toggle button.active { color:var(--gold-light); background:rgba(201,168,76,.06); }
+  .char-view-toggle button.active::after {
+    content:''; position:absolute; bottom:-1px; left:12%; right:12%; height:1px; background:var(--gold);
+  }
+  .char-view-toggle button:hover:not(.active) { color:var(--lavender); }
+
+  /* CHARACTER FILTER GROUPS */
+  .char-view { display:none; }
+  .char-view.active { display:block; }
+
+  .char-group { margin-bottom:44px; }
+  .char-group-header {
+    display:flex; align-items:baseline; gap:18px; margin-bottom:22px;
+    padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,.05);
+  }
+  .char-group-title {
+    font-family:'Cinzel',serif; font-size:12px; letter-spacing:.4em; text-transform:uppercase; color:var(--gold-light);
+  }
+  .char-group-count { font-family:'Cinzel',serif; font-size:8px; letter-spacing:.35em; color:var(--text-dim); }
+  .char-group-desc {
+    flex:1; font-family:'Cormorant Garamond',serif; font-style:italic;
+    font-size:13px; color:var(--text-dim); text-align:right; line-height:1.4;
+  }
+
+  .char-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:2px; }
+  .char-card { position:relative; padding:30px 22px; border:1px solid rgba(255,255,255,.05); overflow:hidden; cursor:pointer; text-decoration:none; display:block; transition:all .4s; }
   .char-card::before { content:''; position:absolute; inset:0; opacity:0; transition:opacity .4s; }
   .char-card:hover { border-color:rgba(255,255,255,.11); }
   .char-card:hover::before { opacity:1; }
-  .char-allura   { background:rgba(13,15,26,.85); }  .char-allura::before   { background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(196,181,212,.05)); }
-  .char-reign    { background:rgba(10,10,14,.92); }  .char-reign::before    { background:linear-gradient(135deg,rgba(139,26,26,.1),rgba(58,172,240,.04)); }
-  .char-harrison { background:rgba(13,15,26,.85); }  .char-harrison::before { background:linear-gradient(135deg,rgba(58,172,240,.08),rgba(201,168,76,.04)); }
-  .char-riven    { background:rgba(10,12,14,.92); }  .char-riven::before    { background:linear-gradient(135deg,rgba(212,168,50,.08),rgba(192,72,40,.05)); }
-  .char-kaelith  { background:rgba(10,10,14,.92); }  .char-kaelith::before  { background:linear-gradient(135deg,rgba(122,143,166,.08),rgba(212,160,160,.05)); }
-  .char-thane    { background:rgba(10,10,14,.92); }  .char-thane::before    { background:linear-gradient(135deg,rgba(74,96,128,.08),rgba(201,168,76,.04)); }
-  .char-calder   { background:rgba(12,18,24,.88); }  .char-calder::before { background:linear-gradient(135deg,rgba(90,154,196,.08),rgba(212,168,74,.05)); }
-  .char-orrin    { background:rgba(20,24,16,.88); }  .char-orrin::before { background:linear-gradient(135deg,rgba(138,168,120,.08),rgba(216,200,154,.05)); }
-  .char-vaelor   { background:rgba(11,13,20,.9); }   .char-vaelor::before { background:linear-gradient(135deg,rgba(192,128,48,.08),rgba(138,143,152,.05)); }
-  .char-anastasia { background:rgba(31,35,40,.88); } .char-anastasia::before { background:linear-gradient(135deg,rgba(200,196,188,.08),rgba(168,152,120,.05)); }
-  .char-athena   { background:rgba(34,29,24,.88); }  .char-athena::before { background:linear-gradient(135deg,rgba(212,168,74,.08),rgba(224,200,144,.05)); }
-  .char-cellean  { background:rgba(31,40,32,.88); }  .char-cellean::before { background:linear-gradient(135deg,rgba(212,160,74,.08),rgba(200,184,144,.05)); }
-  .char-eudora   { background:rgba(31,42,34,.88); }  .char-eudora::before { background:linear-gradient(135deg,rgba(154,176,144,.08),rgba(176,192,168,.05)); }
-  .char-lyrianna { background:rgba(26,13,8,.9); }    .char-lyrianna::before { background:linear-gradient(135deg,rgba(255,107,61,.1),rgba(232,135,46,.06)); }
-  .char-neris    { background:rgba(42,20,24,.9); }   .char-neris::before { background:linear-gradient(135deg,rgba(176,72,72,.1),rgba(196,128,128,.05)); }
-  .char-renne { background:rgba(10,12,24,.88); } .char-renne::before { background:linear-gradient(135deg,rgba(216,212,224,.10),rgba(232,208,138,.06)); }
-  .char-sable { background:rgba(18,16,30,.88); } .char-sable::before { background:linear-gradient(135deg,rgba(154,126,192,.10),rgba(196,181,212,.06)); }
-  .char-seraphael { background:rgba(31,19,16,.88); } .char-seraphael::before { background:linear-gradient(135deg,rgba(232,154,60,.10),rgba(176,138,85,.06)); }
-  .char-slayton { background:rgba(29,23,18,.88); } .char-slayton::before { background:linear-gradient(135deg,rgba(200,154,106,.10),rgba(228,188,142,.06)); }
-  .char-talisen { background:rgba(31,14,11,.88); } .char-talisen::before { background:linear-gradient(135deg,rgba(224,84,46,.10),rgba(255,61,26,.06)); }
-  .char-xeomere { background:rgba(16,22,32,.88); } .char-xeomere::before { background:linear-gradient(135deg,rgba(168,200,216,.10),rgba(216,228,236,.06)); }
-  
-  .char-allura   .char-bar { background:linear-gradient(to right,var(--gold),var(--lavender)); }         .char-allura   .char-name { color:var(--gold-light); }    .char-allura   .char-link { color:var(--gold); }
-  .char-reign    .char-bar { background:linear-gradient(to right,var(--blood-bright),rgba(58,172,240,.5)); } .char-reign    .char-name { color:var(--blood-bright); } .char-reign    .char-link { color:var(--blood-bright); }
-  .char-harrison .char-bar { background:linear-gradient(to right,var(--electric),var(--gold)); }         .char-harrison .char-name { color:var(--electric); }     .char-harrison .char-link { color:var(--electric); }
-  .char-riven    .char-bar { background:linear-gradient(to right,var(--gold-warm),var(--blood-bright)); } .char-riven    .char-name { color:var(--gold-light); }    .char-riven    .char-link { color:var(--gold-warm); }
-  .char-kaelith  .char-bar { background:linear-gradient(to right,#7A8FA6,#D4A0A0); }                    .char-kaelith  .char-name { color:#A8BFD0; }              .char-kaelith  .char-link { color:#7A8FA6; }
-  .char-thane    .char-bar { background:linear-gradient(to right,#4A6080,var(--gold)); }                 .char-thane    .char-name { color:#8FAFC8; }              .char-thane    .char-link { color:#8FAFC8; }
-  .char-calder   .char-bar { background:linear-gradient(to right,#5A9AC4,#D4A84A); }         .char-calder .char-name { color:#E8C578; } .char-calder .char-link { color:#5A9AC4; }
-  .char-orrin    .char-bar { background:linear-gradient(to right,#8AA878,#D8C89A); }     .char-orrin .char-name { color:#C4B896; } .char-orrin .char-link { color:#8AA878; }
-  .char-vaelor .char-bar { background:linear-gradient(to right,#C08030,#8A8F98); }  .char-vaelor .char-name { color:#D4A060; }  .char-vaelor .char-link { color:#C08030; }
-  .char-anastasia .char-bar { background:linear-gradient(to right,#C8C4BC,#1F2328); }  .char-anastasia .char-name { color:#E0DCD4; }  .char-anastasia .char-link { color:#C8C4BC; }
-  .char-athena .char-bar { background:linear-gradient(to right,#D4A84A,#221D18); }  .char-athena .char-name { color:#E8C578; }  .char-athena .char-link { color:#D4A84A; }
-  .char-cellean .char-bar { background:linear-gradient(to right,#D4A04A,#2A2218); }  .char-cellean .char-name { color:#E8C076; }  .char-cellean .char-link { color:#D4A04A; }
-  .char-eudora .char-bar { background:linear-gradient(to right,#9AB090,#8A8880); }  .char-eudora .char-name { color:#DCE6D0; }  .char-eudora .char-link { color:#9AB090; }
-  .char-lyrianna .char-bar { background:linear-gradient(to right,#FF6B3D,#E88A2E); }  .char-lyrianna .char-name { color:#F5B56A; }  .char-lyrianna .char-link { color:#FF6B3D; }
-  .char-neris .char-bar { background:linear-gradient(to right,#8A2828,#C48080); }  .char-neris .char-name { color:#D07070; }  .char-neris .char-link { color:#8A2828; }
-  .char-renne .char-bar { background:linear-gradient(to right,#D8D4E0,#E8D08A,#1A2038); } .char-renne .char-name { color:#E8D08A; } .char-renne .char-link { color:#D8D4E0; }
-  .char-sable .char-bar { background:linear-gradient(to right,#9A7EC0,#1E1A2E); } .char-sable .char-name { color:#C4B5D4; } .char-sable .char-link { color:#9A7EC0; }
-  .char-seraphael .char-bar { background:linear-gradient(to right,#E89A3C,#2A1810); } .char-seraphael .char-name { color:#F5C177; } .char-seraphael .char-link { color:#E89A3C; }
-  .char-slayton .char-bar { background:linear-gradient(to right,#C89A6A,#8A7058); } .char-slayton .char-name { color:#E4BC8E; } .char-slayton .char-link { color:#C89A6A; }
-  .char-talisen .char-bar { background:linear-gradient(to right,#E0542E,#2A1408); } .char-talisen .char-name { color:#F07C52; } .char-talisen .char-link { color:#E0542E; }
-  .char-xeomere .char-bar { background:linear-gradient(to right,#A8C8D8,#6E8A9E); } .char-xeomere .char-name { color:#D8E4EC; } .char-xeomere .char-link { color:#A8C8D8; }
-  
+
+  /* Character color schemes — kept from original + extended */
+  .char-allura    { background:rgba(13,15,26,.85); }  .char-allura::before    { background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(196,181,212,.05)); }
+  .char-reign     { background:rgba(10,10,14,.92); }  .char-reign::before     { background:linear-gradient(135deg,rgba(139,26,26,.1),rgba(58,172,240,.04)); }
+  .char-harrison  { background:rgba(13,15,26,.85); }  .char-harrison::before  { background:linear-gradient(135deg,rgba(58,172,240,.08),rgba(201,168,76,.04)); }
+  .char-riven     { background:rgba(10,12,14,.92); }  .char-riven::before     { background:linear-gradient(135deg,rgba(212,168,50,.08),rgba(192,72,40,.05)); }
+  .char-kaelith   { background:rgba(10,10,14,.92); }  .char-kaelith::before   { background:linear-gradient(135deg,rgba(122,143,166,.08),rgba(212,160,160,.05)); }
+  .char-slayton   { background:rgba(10,14,14,.92); }  .char-slayton::before   { background:linear-gradient(135deg,rgba(232,133,86,.08),rgba(201,168,76,.05)); }
+  .char-lyrianna  { background:rgba(14,10,10,.92); }  .char-lyrianna::before  { background:linear-gradient(135deg,rgba(224,84,46,.08),rgba(232,208,138,.05)); }
+  .char-renne     { background:rgba(10,12,16,.92); }  .char-renne::before     { background:linear-gradient(135deg,rgba(196,181,212,.08),rgba(184,174,196,.05)); }
+  .char-thane     { background:rgba(10,10,14,.92); }  .char-thane::before     { background:linear-gradient(135deg,rgba(74,96,128,.08),rgba(201,168,76,.04)); }
+  .char-whitis    { background:rgba(12,12,14,.92); }  .char-whitis::before    { background:linear-gradient(135deg,rgba(232,208,138,.08),rgba(201,168,76,.05)); }
+  .char-vaelor    { background:rgba(8,10,12,.94); }   .char-vaelor::before    { background:linear-gradient(135deg,rgba(196,181,212,.08),rgba(90,154,196,.05)); }
+  .char-ambrose   { background:rgba(12,8,10,.92); }   .char-ambrose::before   { background:linear-gradient(135deg,rgba(139,26,26,.1),rgba(200,112,74,.05)); }
+  .char-moonfang  { background:rgba(10,12,16,.92); }  .char-moonfang::before  { background:linear-gradient(135deg,rgba(200,196,212,.08),rgba(196,181,212,.05)); }
+  .char-shadowfang { background:rgba(8,10,14,.94); }  .char-shadowfang::before { background:linear-gradient(135deg,rgba(106,100,128,.1),rgba(139,26,26,.05)); }
+  .char-emberclaw { background:rgba(14,10,10,.92); }  .char-emberclaw::before { background:linear-gradient(135deg,rgba(224,84,46,.08),rgba(232,133,86,.05)); }
+  .char-niraphael { background:rgba(12,10,10,.92); }  .char-niraphael::before { background:linear-gradient(135deg,rgba(212,168,50,.08),rgba(232,208,138,.05)); }
+  .char-seraphael { background:rgba(10,12,10,.92); }  .char-seraphael::before { background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(122,152,112,.05)); }
+  .char-goldbeak  { background:rgba(12,10,8,.92); }   .char-goldbeak::before  { background:linear-gradient(135deg,rgba(232,208,138,.08),rgba(200,168,90,.05)); }
+  .char-wexley    { background:rgba(10,10,12,.92); }  .char-wexley::before    { background:linear-gradient(135deg,rgba(196,181,212,.08),rgba(58,172,240,.04)); }
+  .char-rainfeather { background:rgba(10,12,14,.92); } .char-rainfeather::before { background:linear-gradient(135deg,rgba(168,184,212,.08),rgba(196,181,212,.05)); }
+  .char-ripple    { background:rgba(10,10,14,.94); }  .char-ripple::before    { background:linear-gradient(135deg,rgba(106,100,128,.1),rgba(196,181,212,.05)); }
+  .char-thornwill { background:rgba(10,12,10,.92); }  .char-thornwill::before { background:linear-gradient(135deg,rgba(122,152,112,.08),rgba(168,196,212,.05)); }
+  .char-wexley-prof { background:rgba(10,12,14,.92); } .char-wexley-prof::before { background:linear-gradient(135deg,rgba(196,181,212,.08),rgba(232,208,138,.04)); }
+  .char-ambrose-prof { background:rgba(12,8,10,.92); } .char-ambrose-prof::before { background:linear-gradient(135deg,rgba(139,26,26,.1),rgba(200,112,74,.05)); }
+
+  /* Character bar + text colors */
+  .char-allura    .char-bar { background:linear-gradient(to right,var(--gold),var(--lavender)); }            .char-allura    .char-name { color:var(--gold-light); }   .char-allura    .char-link { color:var(--gold); }
+  .char-reign     .char-bar { background:linear-gradient(to right,var(--blood-bright),rgba(58,172,240,.5)); } .char-reign     .char-name { color:var(--blood-bright); }  .char-reign     .char-link { color:var(--blood-bright); }
+  .char-harrison  .char-bar { background:linear-gradient(to right,var(--electric),var(--gold)); }            .char-harrison  .char-name { color:var(--electric); }       .char-harrison  .char-link { color:var(--electric); }
+  .char-riven     .char-bar { background:linear-gradient(to right,var(--gold-warm),var(--blood-bright)); }   .char-riven     .char-name { color:var(--gold-light); }    .char-riven     .char-link { color:var(--gold-warm); }
+  .char-kaelith   .char-bar { background:linear-gradient(to right,#7A8FA6,#D4A0A0); }                        .char-kaelith   .char-name { color:#A8BFD0; }              .char-kaelith   .char-link { color:#7A8FA6; }
+  .char-slayton   .char-bar { background:linear-gradient(to right,#E88556,var(--gold)); }                    .char-slayton   .char-name { color:#E8A76C; }              .char-slayton   .char-link { color:#E88556; }
+  .char-lyrianna  .char-bar { background:linear-gradient(to right,var(--ember),var(--gold-light)); }         .char-lyrianna  .char-name { color:#F4A87A; }              .char-lyrianna  .char-link { color:var(--ember); }
+  .char-renne     .char-bar { background:linear-gradient(to right,var(--lavender),#B8AEC4); }                .char-renne     .char-name { color:var(--lavender); }      .char-renne     .char-link { color:var(--lavender); }
+  .char-thane     .char-bar { background:linear-gradient(to right,#4A6080,var(--gold)); }                    .char-thane     .char-name { color:#8FAFC8; }              .char-thane     .char-link { color:#8FAFC8; }
+  .char-whitis    .char-bar { background:linear-gradient(to right,var(--gold-light),var(--gold)); }          .char-whitis    .char-name { color:var(--gold-light); }    .char-whitis    .char-link { color:var(--gold); }
+  .char-vaelor    .char-bar { background:linear-gradient(to right,var(--lavender),#5A9AC4); }                .char-vaelor    .char-name { color:var(--moonstone); }     .char-vaelor    .char-link { color:var(--lavender); }
+  .char-ambrose   .char-bar { background:linear-gradient(to right,var(--blood-bright),#C8704A); }            .char-ambrose   .char-name { color:#E87A5A; }              .char-ambrose   .char-link { color:var(--blood-bright); }
+  .char-moonfang  .char-bar { background:linear-gradient(to right,#C8C4D4,var(--lavender)); }                .char-moonfang  .char-name { color:#C8C4D4; }              .char-moonfang  .char-link { color:#C8C4D4; }
+  .char-shadowfang .char-bar { background:linear-gradient(to right,#6A6480,var(--blood-bright)); }           .char-shadowfang .char-name { color:#A89EB8; }             .char-shadowfang .char-link { color:#8A82A0; }
+  .char-emberclaw .char-bar { background:linear-gradient(to right,var(--ember),#E88556); }                   .char-emberclaw .char-name { color:#F08756; }              .char-emberclaw .char-link { color:var(--ember); }
+  .char-niraphael .char-bar { background:linear-gradient(to right,var(--gold-warm),var(--gold-light)); }     .char-niraphael .char-name { color:var(--gold-light); }    .char-niraphael .char-link { color:var(--gold-warm); }
+  .char-seraphael .char-bar { background:linear-gradient(to right,var(--gold),#7A9870); }                    .char-seraphael .char-name { color:#C8B870; }              .char-seraphael .char-link { color:var(--gold); }
+  .char-goldbeak  .char-bar { background:linear-gradient(to right,var(--gold-light),#C8A85A); }              .char-goldbeak  .char-name { color:var(--gold-light); }    .char-goldbeak  .char-link { color:#C8A85A; }
+  .char-wexley    .char-bar { background:linear-gradient(to right,var(--lavender),var(--electric)); }        .char-wexley    .char-name { color:var(--lavender); }      .char-wexley    .char-link { color:var(--lavender); }
+  .char-rainfeather .char-bar { background:linear-gradient(to right,#A8B8D4,var(--lavender)); }              .char-rainfeather .char-name { color:#B8C8DC; }            .char-rainfeather .char-link { color:#A8B8D4; }
+  .char-ripple    .char-bar { background:linear-gradient(to right,#6A6480,var(--lavender)); }                .char-ripple    .char-name { color:#A89EB8; }              .char-ripple    .char-link { color:#8A82A0; }
+  .char-thornwill .char-bar { background:linear-gradient(to right,#7A9870,#A8C4D4); }                        .char-thornwill .char-name { color:#B8D0A8; }              .char-thornwill .char-link { color:#7A9870; }
+  .char-wexley-prof .char-bar { background:linear-gradient(to right,var(--lavender),var(--gold-light)); }    .char-wexley-prof .char-name { color:var(--lavender); }    .char-wexley-prof .char-link { color:var(--lavender); }
+  .char-ambrose-prof .char-bar { background:linear-gradient(to right,var(--blood-bright),#C8704A); }         .char-ambrose-prof .char-name { color:#E87A5A; }           .char-ambrose-prof .char-link { color:var(--blood-bright); }
+
   .char-bar { height:2px; width:38px; margin-bottom:18px; transition:width .4s; }
   .char-card:hover .char-bar { width:68px; }
   .char-species { font-family:'Cinzel',serif; font-size:7px; letter-spacing:.4em; text-transform:uppercase; color:var(--text-dim); margin-bottom:7px; }
   .char-name { font-family:'Cinzel Decorative',serif; font-size:clamp(16px,1.8vw,22px); margin-bottom:6px; }
-  .char-epithet { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:13px; color:var(--text-dim); margin-bottom:16px; line-height:1.45; }
-  .char-desc { font-size:13px; color:var(--text-body); opacity:.68; line-height:1.65; margin-bottom:22px; }
+  .char-epithet { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:12px; color:var(--text-dim); margin-bottom:14px; line-height:1.45; }
+  .char-desc { font-size:12.5px; color:var(--text-body); opacity:.68; line-height:1.6; margin-bottom:18px; }
   .char-link { font-family:'Cinzel',serif; font-size:7px; letter-spacing:.3em; text-transform:uppercase; opacity:0; transition:opacity .3s; }
   .char-card:hover .char-link { opacity:.7; }
+
+  /* CULTURES SECTION */
+  .cultures-section { padding:100px 48px; max-width:1200px; margin:0 auto; position:relative; z-index:1; }
+  .cultures-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:2px; margin-top:44px; }
+  .culture-card {
+    position:relative; padding:36px 28px; border:1px solid rgba(255,255,255,.05);
+    text-decoration:none; display:block; transition:all .4s; overflow:hidden;
+  }
+  .culture-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:2px;
+    opacity:0; transition:opacity .4s;
+  }
+  .culture-card:hover { border-color:rgba(255,255,255,.12); transform:translateY(-2px); }
+  .culture-card:hover::before { opacity:1; }
+
+  .culture-dragons { background:rgba(14,8,6,.88); }
+  .culture-dragons::before { background:linear-gradient(to right,var(--ember),#F08756); }
+  .culture-dragons .culture-icon { color:var(--ember); }
+  .culture-dragons .culture-name { color:#F08756; }
+  .culture-dragons .culture-arrow { color:var(--ember); }
+
+  .culture-lycari { background:rgba(8,10,14,.9); }
+  .culture-lycari::before { background:linear-gradient(to right,var(--moon-silver),var(--gold-light)); }
+  .culture-lycari .culture-icon { color:var(--moon-silver); }
+  .culture-lycari .culture-name { color:var(--moon-silver); }
+  .culture-lycari .culture-arrow { color:var(--moon-silver); }
+
+  .culture-stryxians { background:rgba(10,12,16,.88); }
+  .culture-stryxians::before { background:linear-gradient(to right,var(--lavender),#A8B8D4); }
+  .culture-stryxians .culture-icon { color:var(--lavender); }
+  .culture-stryxians .culture-name { color:var(--lavender); }
+  .culture-stryxians .culture-arrow { color:var(--lavender); }
+
+  .culture-fae { background:rgba(12,10,14,.88); }
+  .culture-fae::before { background:linear-gradient(to right,var(--gold),var(--lavender)); }
+  .culture-fae .culture-icon { color:var(--gold-light); }
+  .culture-fae .culture-name { color:var(--gold-light); }
+  .culture-fae .culture-arrow { color:var(--gold); }
+
+  .culture-sirens { background:rgba(6,10,14,.92); }
+  .culture-sirens::before { background:linear-gradient(to right,var(--tide),var(--bioluma)); }
+  .culture-sirens .culture-icon { color:var(--bioluma); }
+  .culture-sirens .culture-name { color:#A8D0E8; }
+  .culture-sirens .culture-arrow { color:var(--bioluma); }
+
+  .culture-nexus { background:rgba(10,8,14,.9); }
+  .culture-nexus::before { background:linear-gradient(to right,var(--moonstone),var(--starfire)); }
+  .culture-nexus .culture-icon { color:var(--moonstone); }
+  .culture-nexus .culture-name { color:var(--moonstone); }
+  .culture-nexus .culture-arrow { color:var(--moonstone); }
+
+  .culture-icon { font-size:32px; margin-bottom:14px; display:block; filter:drop-shadow(0 0 10px currentColor); opacity:.85; }
+  .culture-label { font-family:'Cinzel',serif; font-size:8px; letter-spacing:.45em; text-transform:uppercase; color:var(--text-dim); margin-bottom:7px; }
+  .culture-name { font-family:'Cinzel Decorative',serif; font-size:22px; margin-bottom:6px; line-height:1.2; }
+  .culture-region { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:13px; color:var(--text-dim); margin-bottom:16px; }
+  .culture-desc { font-size:13px; color:var(--text-body); opacity:.72; line-height:1.65; margin-bottom:20px; }
+  .culture-arrow { font-family:'Cinzel',serif; font-size:8px; letter-spacing:.3em; text-transform:uppercase; opacity:0; transition:opacity .3s; }
+  .culture-card:hover .culture-arrow { opacity:.75; }
+
+  .culture-status {
+    position:absolute; top:20px; right:20px;
+    font-family:'Cinzel',serif; font-size:6.5px; letter-spacing:.35em; text-transform:uppercase;
+    color:var(--text-dim); opacity:.6; border:1px solid currentColor; padding:3px 8px;
+  }
+  .culture-status.preview { color:var(--bioluma); }
 
   /* SERIES */
   .series-section { padding:100px 48px; max-width:1200px; margin:0 auto; position:relative; z-index:1; }
@@ -264,12 +377,14 @@
     nav{padding:14px 20px;} .nav-links{display:none;}
     .book1-section{grid-template-columns:1fr;gap:36px;padding:60px 24px;}
     .book1-cover-frame{max-width:260px;margin:0 auto;}
-    .characters-section,.series-section,.world-section,.connect-section{padding:60px 24px;}
+    .characters-section,.series-section,.world-section,.connect-section,.cultures-section{padding:60px 24px;}
     .world-grid{grid-template-columns:1fr;}
     footer{grid-template-columns:1fr;text-align:center;gap:14px;} .footer-right{text-align:center;}
     .series-grid{grid-template-columns:1fr 1fr;}
+    .char-group-header{flex-direction:column;align-items:flex-start;gap:6px;} .char-group-desc{text-align:left;}
+    .char-view-toggle button{padding:14px 10px; font-size:8px;}
   }
-  @media(max-width:480px){ .series-grid,.char-grid{grid-template-columns:1fr;} }
+  @media(max-width:480px){ .series-grid,.char-grid,.cultures-grid{grid-template-columns:1fr;} }
 </style>
 </head>
 <body>
@@ -280,6 +395,7 @@
   <ul class="nav-links">
     <li><a href="#book1">Book One</a></li>
     <li><a href="#characters">Characters</a></li>
+    <li><a href="#cultures">Cultures</a></li>
     <li><a href="#series">Series</a></li>
     <li><a href="#world">World</a></li>
     <li><a href="#connect">Connect</a></li>
@@ -344,210 +460,581 @@
 
 <div class="sep"><div class="sep-line"></div><div class="sep-gem"></div><div class="sep-line"></div></div>
 
+<!-- CHARACTERS -->
 <div id="characters" class="characters-section">
   <p class="section-label">Meet the Cast</p>
   <h2 class="section-title">The People of Xiphos</h2>
-  <div class="char-grid">
+  <p class="section-sub">Browse the cast two ways — <em>by role</em> to see who drives the story, or <em>by species</em> to see the shape of the realm. Every name links to a full visual canon page.</p>
 
-    <a href="allura_visual_canon.html" class="char-card char-allura">
-      <div class="char-bar"></div>
-      <p class="char-species">Fae · Auric & Sanguine Font</p>
-      <h3 class="char-name">Allura Starling</h3>
-      <p class="char-epithet">"She reached for blood and touched the light instead."</p>
-      <p class="char-desc">A fae student from a quiet mountain town with magic she doesn't understand and a pull toward a wolf she can't explain.</p>
-      <span class="char-link">View Canon →</span>
+  <div class="char-view-toggle">
+    <button data-view="role" class="active">By Role</button>
+    <button data-view="species">By Species</button>
+  </div>
+
+  <!-- BY ROLE VIEW -->
+  <div class="char-view active" data-view="role">
+
+    <!-- MAIN CHARACTERS -->
+    <div class="char-group">
+      <div class="char-group-header">
+        <h3 class="char-group-title">Main Characters</h3>
+        <span class="char-group-count">5</span>
+        <p class="char-group-desc">The five at the heart of the saga.</p>
+      </div>
+      <div class="char-grid">
+
+        <a href="allura_visual_canon.html" class="char-card char-allura">
+          <div class="char-bar"></div>
+          <p class="char-species">Fae · Auric & Sanguine Font</p>
+          <h3 class="char-name">Allura Starling</h3>
+          <p class="char-epithet">"She reached for blood and touched the light instead."</p>
+          <p class="char-desc">A fae student from a quiet mountain town with magic she doesn't understand and a pull toward a wolf she can't explain.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="reign_visual_canon.html" class="char-card char-reign">
+          <div class="char-bar"></div>
+          <p class="char-species">Lycari · Sovereign · Sanguine Font</p>
+          <h3 class="char-name">Reign Stormveil</h3>
+          <p class="char-epithet">"You don't clock the size until it's too late."</p>
+          <p class="char-desc">Storm-born. Raised in secrecy. A wolf who has spent his whole life holding the beast back — until her scent made that impossible.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="harrison_visual_canon.html" class="char-card char-harrison">
+          <div class="char-bar"></div>
+          <p class="char-species">Fae · Tidal Font</p>
+          <h3 class="char-name">Harrison Starling</h3>
+          <p class="char-epithet">"The scholar who becomes the hero nobody saw coming."</p>
+          <p class="char-desc">Allura's brother. Curious to a fault. Here for the books, the magic theory, and whatever ancient thing just woke up under the university.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="riven_visual_canon.html" class="char-card char-riven">
+          <div class="char-bar"></div>
+          <p class="char-species">Lycari · Sovereign · Chaos-Gifted</p>
+          <h3 class="char-name">Riven Stormveil</h3>
+          <p class="char-epithet">"Chaos with a loyalty so deep it reads as violence."</p>
+          <p class="char-desc">Reign's brother in every way that counts. Runs toward danger, laughs at the wrong moment, would die for his pack without thinking twice.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="kaelith_visual_canon.html" class="char-card char-kaelith">
+          <div class="char-bar"></div>
+          <p class="char-species">Lycari · Sovereign · Storm-Touched</p>
+          <h3 class="char-name">Kaelith Stormveil</h3>
+          <p class="char-epithet">"She doesn't protect you loudly. She makes sure nothing gets close enough to try."</p>
+          <p class="char-desc">The pack's blade. Quiet where Riven is loud, strategic where Reign is instinct. She sees everything and says only what matters.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- STUDENTS -->
+    <div class="char-group">
+      <div class="char-group-header">
+        <h3 class="char-group-title">Students &amp; Side Characters</h3>
+        <span class="char-group-count">3</span>
+        <p class="char-group-desc">Classmates, rivals, future allies. More to come.</p>
+      </div>
+      <div class="char-grid">
+
+        <a href="slayton_ashby_visual_canon.html" class="char-card char-slayton">
+          <div class="char-bar"></div>
+          <p class="char-species">Fae · Dragon-Bonded</p>
+          <h3 class="char-name">Slayton Ashby</h3>
+          <p class="char-epithet">"Bonded the wrong dragon. Found the right one anyway."</p>
+          <p class="char-desc">Allura's first almost-boyfriend. A sweet, earnest fae boy who cracked a pink dragon egg and has to now live with whatever that means.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="lyrianna_emberveil_visual_canon.html" class="char-card char-lyrianna">
+          <div class="char-bar"></div>
+          <p class="char-species">Fae · Ember Font</p>
+          <h3 class="char-name">Lyrianna Emberveil</h3>
+          <p class="char-epithet">"Too much fire for a single year to hold."</p>
+          <p class="char-desc">Upper-year fire-fae. Renne's partner. The most dangerous party in any room and the warmest person Allura will ever meet.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="renne_feathermane_visual_canon.html" class="char-card char-renne">
+          <div class="char-bar"></div>
+          <p class="char-species">Stryxian · Owl-Fae</p>
+          <h3 class="char-name">Renne Feathermane</h3>
+          <p class="char-epithet">"Every feather she wore, she wove herself."</p>
+          <p class="char-desc">Upper-year Stryxian from the Strixian Isles. Lyrianna's partner. The first owl-fae Allura has ever met — and the first one to see her clearly.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- FACULTY -->
+    <div class="char-group">
+      <div class="char-group-header">
+        <h3 class="char-group-title">Faculty of Selenari Nexus</h3>
+        <span class="char-group-count">15</span>
+        <p class="char-group-desc">The instructors shaping this generation.</p>
+      </div>
+      <div class="char-grid">
+
+        <a href="banister_whitis.html" class="char-card char-whitis">
+          <div class="char-bar"></div>
+          <p class="char-species">Fae · Auric Font · Headmaster</p>
+          <h3 class="char-name">Banister Whitis</h3>
+          <p class="char-epithet">"The headmaster who knows exactly what's coming."</p>
+          <p class="char-desc">Headmaster of Selenari Nexus. Oversees Enlightenment. Knows more about the Blight than he's ever said aloud.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="vaelor_thornfang_visual_canon.html" class="char-card char-vaelor">
+          <div class="char-bar"></div>
+          <p class="char-species">Lycari · Pack Leadership</p>
+          <h3 class="char-name">Vaelor Thornfang</h3>
+          <p class="char-epithet">"The uncle who raised him quietly, in plain sight."</p>
+          <p class="char-desc">Reign's maternal uncle. Pack Leadership professor. Royal-line twin alpha, founder of the Thornfang pack. Lost his mate and unborn pups to the Blight long ago.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="neris_ambrose_visual_canon.html" class="char-card char-ambrose">
+          <div class="char-bar"></div>
+          <p class="char-species">Fae · Sanguine Font</p>
+          <h3 class="char-name">Neris Ambrose</h3>
+          <p class="char-epithet">"Font Mastery. Ethics of Power. Theatrical with rules."</p>
+          <p class="char-desc">Charismatic Sanguine-Font professor. Clove-and-old-books. Witty, dramatic, occasionally terrifying. Office immaculate except for a locked cabinet no one has seen opened.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="cellean_moonfang_visual_canon.html" class="char-card char-moonfang">
+          <div class="char-bar"></div>
+          <p class="char-species">Lycari · Young Instructor</p>
+          <h3 class="char-name">Cellean Moonfang</h3>
+          <p class="char-epithet">"The young wolf whose aunt raised the Stormveils."</p>
+          <p class="char-desc">Youngest Lycari professor. Eudora's niece. Approaches Reign one day with a question he cannot possibly be ready for.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="anastasia_shadowfang_visual_canon.html" class="char-card char-shadowfang">
+          <div class="char-bar"></div>
+          <p class="char-species">Lycari · Weapons &amp; Combat</p>
+          <h3 class="char-name">Anastasia Shadowfang</h3>
+          <p class="char-epithet">"Weapons Handling. Combat Fundamentals. No mercy."</p>
+          <p class="char-desc">Wolf-fae combat professor. Precise, dangerous, quietly affectionate toward students who survive her first week.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="talisen_emberclaw_visual_canon.html" class="char-card char-emberclaw">
+          <div class="char-bar"></div>
+          <p class="char-species">Lycari · Fire-Touched</p>
+          <h3 class="char-name">Talisen Emberclaw</h3>
+          <p class="char-epithet">"Fiery wolf professor. Runs hot. Runs hotter."</p>
+          <p class="char-desc">Lycari instructor with an Ember-adjacent gift. Leads the advanced physical tracks. Knows all of Reign's tells.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="niraphael_visual_canon.html" class="char-card char-niraphael">
+          <div class="char-bar"></div>
+          <p class="char-species">Dragon-Bonded · Egg-Caller</p>
+          <h3 class="char-name">Niraphael Cypress</h3>
+          <p class="char-epithet">"Field Survival. Egg-Caller. Quietly watching."</p>
+          <p class="char-desc">Dragon-bonded survival specialist. Calls eggs to their people. Has held the position longer than anyone remembers. Declines to clarify.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="thane_morrow.html" class="char-card char-thane">
+          <div class="char-bar"></div>
+          <p class="char-species">Dragon-Bonded · Don't Die 101</p>
+          <h3 class="char-name">Thane Morrow</h3>
+          <p class="char-epithet">"Professor. Former something. Currently watching."</p>
+          <p class="char-desc">Combat instructor. Meteor-dragon bonded. Former warrior. Has been in rooms where something ancient was waking up before.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="seraphael_pallas_visual_canon.html" class="char-card char-seraphael">
+          <div class="char-bar"></div>
+          <p class="char-species">Dragon-Bonded · Warrior</p>
+          <h3 class="char-name">Seraphael Pallas</h3>
+          <p class="char-epithet">"Dragon-bonded warrior. Steel and patience."</p>
+          <p class="char-desc">Dragon-bonded professor. Teaches advanced combat alongside draconic tactics. Partners often with Thane.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="athena_goldbeak_visual_canon.html" class="char-card char-goldbeak">
+          <div class="char-bar"></div>
+          <p class="char-species">Stryxian · Celestial Mapping</p>
+          <h3 class="char-name">Athena Goldbeak</h3>
+          <p class="char-epithet">"Celestial Mapping. Lost Civilizations. Stillness."</p>
+          <p class="char-desc">Senior Stryxian scholar. Teaches celestial mapping and Xiphos lore. Can still a room by walking into it.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="orrin_wexley_visual_canon.html" class="char-card char-wexley">
+          <div class="char-bar"></div>
+          <p class="char-species">Stryxian · Field Survival</p>
+          <h3 class="char-name">Orrin Wexley</h3>
+          <p class="char-epithet">"Field Survival — group sections. Charming menace."</p>
+          <p class="char-desc">Owl-fae professor. Charismatic, handsome, teaches the survival class that students either worship or fail spectacularly.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="xeomere_rainfeather_visual_canon.html" class="char-card char-rainfeather">
+          <div class="char-bar"></div>
+          <p class="char-species">Stryxian · Navigation &amp; Ecology</p>
+          <h3 class="char-name">Xeomere Rainfeather</h3>
+          <p class="char-epithet">"Navigation. Magical Ecology. Gentle, brilliant."</p>
+          <p class="char-desc">Young Stryxian professor. Teaches magical ecology and navigation. Unusually kind to first-years who feel lost.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="sable_ripple_visual_canon.html" class="char-card char-ripple">
+          <div class="char-bar"></div>
+          <p class="char-species">Fae · Umbral Font</p>
+          <h3 class="char-name">Sable Ripple</h3>
+          <p class="char-epithet">"Spellwork. Illusion. Don't trust what you see."</p>
+          <p class="char-desc">Umbral-Font professor. Teaches supervised spellwork and illusion. Known to appear in two places at once during exams.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="calder_thornwill_visual_canon.html" class="char-card char-thornwill">
+          <div class="char-bar"></div>
+          <p class="char-species">Fae · Storm Font</p>
+          <h3 class="char-name">Calder Thornwill</h3>
+          <p class="char-epithet">"Rune Literacy. Sparring rotation. Quietly gifted."</p>
+          <p class="char-desc">Storm-Font fae professor. Teaches rune literacy and rotates through sparring instruction. Has an uncanny sense for when a rune is about to misfire.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="eudora_visual_canon.html" class="char-card char-moonfang">
+          <div class="char-bar"></div>
+          <p class="char-species">Wild Fae · Deceased</p>
+          <h3 class="char-name">Eudora Moonfang</h3>
+          <p class="char-epithet">"The woman who found three pups on a storm-night."</p>
+          <p class="char-desc">Wild Fae. Raised the Stormveil trio in secret. Died when the pups were teenagers. Remembered — quietly, reverently — by everyone who knew what she protected.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BY SPECIES VIEW -->
+  <div class="char-view" data-view="species">
+
+    <!-- LYCARI -->
+    <div class="char-group">
+      <div class="char-group-header">
+        <h3 class="char-group-title">Lycari · Wolf-Fae</h3>
+        <span class="char-group-count">8</span>
+        <p class="char-group-desc">Three castes. One throne. A species reckoning with a king who has gone quiet.</p>
+      </div>
+      <div class="char-grid">
+
+        <a href="reign_visual_canon.html" class="char-card char-reign">
+          <div class="char-bar"></div>
+          <p class="char-species">Sovereign · Sanguine</p>
+          <h3 class="char-name">Reign Stormveil</h3>
+          <p class="char-desc">Storm-born. Hidden Stormfang royal. Alpha of the Stormveil pack.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="riven_visual_canon.html" class="char-card char-riven">
+          <div class="char-bar"></div>
+          <p class="char-species">Sovereign · Chaos</p>
+          <h3 class="char-name">Riven Stormveil</h3>
+          <p class="char-desc">Reign's Tactician. Chaos. Loyalty like a blade.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="kaelith_visual_canon.html" class="char-card char-kaelith">
+          <div class="char-bar"></div>
+          <p class="char-species">Sovereign · Storm</p>
+          <h3 class="char-name">Kaelith Stormveil</h3>
+          <p class="char-desc">Reign's Diplomat. Blade. Strategic silence.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="vaelor_thornfang_visual_canon.html" class="char-card char-vaelor">
+          <div class="char-bar"></div>
+          <p class="char-species">Sovereign · Royal Line</p>
+          <h3 class="char-name">Vaelor Thornfang</h3>
+          <p class="char-desc">Reign's uncle. Pack Leadership. Quiet grief.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="cellean_moonfang_visual_canon.html" class="char-card char-moonfang">
+          <div class="char-bar"></div>
+          <p class="char-species">Warborn · Young Instructor</p>
+          <h3 class="char-name">Cellean Moonfang</h3>
+          <p class="char-desc">Eudora's niece. Asks the question Reign was not ready for.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="anastasia_shadowfang_visual_canon.html" class="char-card char-shadowfang">
+          <div class="char-bar"></div>
+          <p class="char-species">Warborn · Combat</p>
+          <h3 class="char-name">Anastasia Shadowfang</h3>
+          <p class="char-desc">Weapons Handling. Ruthless. Reluctantly fond.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="talisen_emberclaw_visual_canon.html" class="char-card char-emberclaw">
+          <div class="char-bar"></div>
+          <p class="char-species">Warborn · Fire-Touched</p>
+          <h3 class="char-name">Talisen Emberclaw</h3>
+          <p class="char-desc">Fiery wolf professor. Reads Reign like a familiar book.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="eudora_visual_canon.html" class="char-card char-moonfang">
+          <div class="char-bar"></div>
+          <p class="char-species">Wild Fae · Memory Only</p>
+          <h3 class="char-name">Eudora Moonfang</h3>
+          <p class="char-desc">Wild Fae who raised the Stormveil trio. Deceased.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- DRAGON-BONDED -->
+    <div class="char-group">
+      <div class="char-group-header">
+        <h3 class="char-group-title">Dragon-Bonded</h3>
+        <span class="char-group-count">4</span>
+        <p class="char-group-desc">Witcher-coded pairs. Weather that has learned to walk beside you.</p>
+      </div>
+      <div class="char-grid">
+
+        <a href="slayton_ashby_visual_canon.html" class="char-card char-slayton">
+          <div class="char-bar"></div>
+          <p class="char-species">Student · First Bond</p>
+          <h3 class="char-name">Slayton Ashby</h3>
+          <p class="char-desc">Pink dragon egg. Bigger story than he's ready for.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="niraphael_visual_canon.html" class="char-card char-niraphael">
+          <div class="char-bar"></div>
+          <p class="char-species">Faculty · Egg-Caller</p>
+          <h3 class="char-name">Niraphael Cypress</h3>
+          <p class="char-desc">Calls eggs to their people. Has held the post longer than anyone alive.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="thane_morrow.html" class="char-card char-thane">
+          <div class="char-bar"></div>
+          <p class="char-species">Faculty · Don't Die 101</p>
+          <h3 class="char-name">Thane Morrow</h3>
+          <p class="char-desc">Meteor-dragon bonded. Former warrior. Quiet eyes.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="seraphael_pallas_visual_canon.html" class="char-card char-seraphael">
+          <div class="char-bar"></div>
+          <p class="char-species">Faculty · Warrior</p>
+          <h3 class="char-name">Seraphael Pallas</h3>
+          <p class="char-desc">Draconic combat instructor. Patient. Exacting.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- STRYXIANS -->
+    <div class="char-group">
+      <div class="char-group-header">
+        <h3 class="char-group-title">Stryxians · Owl-Fae</h3>
+        <span class="char-group-count">4</span>
+        <p class="char-group-desc">Two-natured warrior-scholars of Nyctaine &amp; the Strixian Isles.</p>
+      </div>
+      <div class="char-grid">
+
+        <a href="renne_feathermane_visual_canon.html" class="char-card char-renne">
+          <div class="char-bar"></div>
+          <p class="char-species">Student · Isle-Born</p>
+          <h3 class="char-name">Renne Feathermane</h3>
+          <p class="char-desc">Upper-year. Lyrianna's partner. Wove her ball gown from her own discarded plumage.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="athena_goldbeak_visual_canon.html" class="char-card char-goldbeak">
+          <div class="char-bar"></div>
+          <p class="char-species">Faculty · Celestial</p>
+          <h3 class="char-name">Athena Goldbeak</h3>
+          <p class="char-desc">Senior scholar. Celestial Mapping. The stillness in the room.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="orrin_wexley_visual_canon.html" class="char-card char-wexley">
+          <div class="char-bar"></div>
+          <p class="char-species">Faculty · Field Survival</p>
+          <h3 class="char-name">Orrin Wexley</h3>
+          <p class="char-desc">Field Survival. The charming menace. Mid-expedition disappearances.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="xeomere_rainfeather_visual_canon.html" class="char-card char-rainfeather">
+          <div class="char-bar"></div>
+          <p class="char-species">Faculty · Navigation</p>
+          <h3 class="char-name">Xeomere Rainfeather</h3>
+          <p class="char-desc">Gentle. Brilliant. Magical Ecology.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- FAE -->
+    <div class="char-group">
+      <div class="char-group-header">
+        <h3 class="char-group-title">Fae · The Root Lineage</h3>
+        <span class="char-group-count">7</span>
+        <p class="char-group-desc">The species all others branched from. Two courts. Seven Fonts. Wings that emerge late.</p>
+      </div>
+      <div class="char-grid">
+
+        <a href="allura_visual_canon.html" class="char-card char-allura">
+          <div class="char-bar"></div>
+          <p class="char-species">Student · Auric &amp; Sanguine</p>
+          <h3 class="char-name">Allura Starling</h3>
+          <p class="char-desc">Touched two Fonts. Carrying at least three bonds.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="harrison_visual_canon.html" class="char-card char-harrison">
+          <div class="char-bar"></div>
+          <p class="char-species">Student · Tidal</p>
+          <h3 class="char-name">Harrison Starling</h3>
+          <p class="char-desc">Allura's brother. Tidal Font. Sea calling quietly.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="lyrianna_emberveil_visual_canon.html" class="char-card char-lyrianna">
+          <div class="char-bar"></div>
+          <p class="char-species">Student · Ember</p>
+          <h3 class="char-name">Lyrianna Emberveil</h3>
+          <p class="char-desc">Upper-year fire-fae. Renne's partner. Warmth made person.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="banister_whitis.html" class="char-card char-whitis">
+          <div class="char-bar"></div>
+          <p class="char-species">Faculty · Auric · Headmaster</p>
+          <h3 class="char-name">Banister Whitis</h3>
+          <p class="char-desc">Headmaster. Knows more than he says.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="neris_ambrose_visual_canon.html" class="char-card char-ambrose-prof">
+          <div class="char-bar"></div>
+          <p class="char-species">Faculty · Sanguine</p>
+          <h3 class="char-name">Neris Ambrose</h3>
+          <p class="char-desc">Font Mastery. Ethics. The locked cabinet in his office.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="sable_ripple_visual_canon.html" class="char-card char-ripple">
+          <div class="char-bar"></div>
+          <p class="char-species">Faculty · Umbral</p>
+          <h3 class="char-name">Sable Ripple</h3>
+          <p class="char-desc">Spellwork. Illusion. Two-places-at-once.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+        <a href="calder_thornwill_visual_canon.html" class="char-card char-thornwill">
+          <div class="char-bar"></div>
+          <p class="char-species">Faculty · Storm</p>
+          <h3 class="char-name">Calder Thornwill</h3>
+          <p class="char-desc">Rune Literacy. Sparring rotation. Quietly gifted.</p>
+          <span class="char-link">View Canon →</span>
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="sep"><div class="sep-line"></div><div class="sep-gem"></div><div class="sep-line"></div></div>
+
+<!-- CULTURES -->
+<div id="cultures" class="cultures-section">
+  <p class="section-label">The World Bible</p>
+  <h2 class="section-title">Cultures of Xiphos</h2>
+  <p class="section-sub">Four species. Five cultures. One academy at the center. Each card opens a full canon page — identity, homeland, tradition, iron rules, and <em>tavern rumors you might overhear</em> if you drank at the right inn.</p>
+
+  <div class="cultures-grid">
+
+    <a href="dragons_miradrassa_culture_canon.html" class="culture-card culture-dragons">
+      <span class="culture-icon">🐉</span>
+      <p class="culture-label">Book 1 Canon</p>
+      <h3 class="culture-name">Dragons</h3>
+      <p class="culture-region">Miradrassa · Volcanic Home</p>
+      <p class="culture-desc">Witcher-coded bonded pairs. Seven lineages. A thousand-year path that ends as fae, dragon, or <em>land itself</em>. The first ten became Miradrassa.</p>
+      <span class="culture-arrow">Enter Miradrassa →</span>
     </a>
 
-    <a href="reign_visual_canon.html" class="char-card char-reign">
-      <div class="char-bar"></div>
-      <p class="char-species">Wolf Shifter · Sanguine Font</p>
-      <h3 class="char-name">Reign Stormveil</h3>
-      <p class="char-epithet">"You don't clock the size until it's too late."</p>
-      <p class="char-desc">Storm-born. Raised in secrecy. A wolf who has spent his whole life holding the beast back — until her scent made that impossible.</p>
-      <span class="char-link">View Canon →</span>
+    <a href="lycari_kaios_culture_canon.html" class="culture-card culture-lycari">
+      <span class="culture-icon">🐺</span>
+      <p class="culture-label">Book 1 Canon</p>
+      <h3 class="culture-name">Lycari</h3>
+      <p class="culture-region">Kaios · The Urban Forest</p>
+      <p class="culture-desc">Three castes: Grounded, Warborn, Sovereign. One throne. The Stormfang line. A king who has gone quiet. Pack is everything.</p>
+      <span class="culture-arrow">Enter Kaios →</span>
     </a>
 
-    <a href="harrison_visual_canon.html" class="char-card char-harrison">
-      <div class="char-bar"></div>
-      <p class="char-species">Fae · Tidal Font</p>
-      <h3 class="char-name">Harrison Starling</h3>
-      <p class="char-epithet">"The scholar who becomes the hero nobody saw coming."</p>
-      <p class="char-desc">Allura's brother. Curious to a fault. Here for the books, the magic theory, and whatever ancient thing just woke up under the university.</p>
-      <span class="char-link">View Canon →</span>
+    <a href="stryxians_nyctaine_culture_canon.html" class="culture-card culture-stryxians">
+      <span class="culture-icon">🦉</span>
+      <p class="culture-label">Book 1 Canon</p>
+      <h3 class="culture-name">Stryxians</h3>
+      <p class="culture-region">Nyctaine &amp; the Strixian Isles</p>
+      <p class="culture-desc">Valkyrie-Harpy two-natured scholars. Courtly presentation or primal plumage. Memory Trees, moonglass, the Perch Council. Two moons, always.</p>
+      <span class="culture-arrow">Enter Nyctaine →</span>
     </a>
 
-    <a href="riven_visual_canon.html" class="char-card char-riven">
-      <div class="char-bar"></div>
-      <p class="char-species">Wolf Shifter · Chaos-Gifted</p>
-      <h3 class="char-name">Riven Stormveil</h3>
-      <p class="char-epithet">"Chaos with a loyalty so deep it reads as violence."</p>
-      <p class="char-desc">Reign's brother in every way that counts. Runs toward danger, laughs at the wrong moment, would die for his pack without thinking twice.</p>
-      <span class="char-link">View Canon →</span>
+    <a href="fae_courts_culture_canon.html" class="culture-card culture-fae">
+      <span class="culture-icon">🧚</span>
+      <p class="culture-label">Book 1 Canon</p>
+      <h3 class="culture-name">The Fae</h3>
+      <p class="culture-region">Nulune · Ameliora · Wild Enclaves</p>
+      <p class="culture-desc">The root lineage. Two courts — Aureate &amp; Lazuline. Seven Fonts. Four Bonds. Wings that emerge late. A Parade that honors beings still walking the alley outside.</p>
+      <span class="culture-arrow">Enter the Courts →</span>
     </a>
 
-    <a href="kaelith_visual_canon.html" class="char-card char-kaelith">
-      <div class="char-bar"></div>
-      <p class="char-species">Wolf Shifter · Storm-Touched</p>
-      <h3 class="char-name">Kaelith Stormveil</h3>
-      <p class="char-epithet">"She doesn't protect you loudly. She makes sure nothing gets close enough to try."</p>
-      <p class="char-desc">The pack's blade. Quiet where Riven is loud, strategic where Reign is instinct. She sees everything and says only what matters.</p>
-      <span class="char-link">View Canon →</span>
+    <a href="sirens_zyradreesa_culture_canon.html" class="culture-card culture-sirens">
+      <span class="culture-status preview">Preview</span>
+      <span class="culture-icon">🌊</span>
+      <p class="culture-label">Book 6+ Canon</p>
+      <h3 class="culture-name">The Sirens</h3>
+      <p class="culture-region">Zyradreesa · The Tideborn</p>
+      <p class="culture-desc">Pearl Court, Coral Court. Every Siren carries one song that is theirs alone. Tidal Font is siren-coded magic. The sea has opinions.</p>
+      <span class="culture-arrow">Enter Zyradreesa →</span>
     </a>
 
-    <a href="thane_morrow.html" class="char-card char-thane">
-      <div class="char-bar"></div>
-      <p class="char-species">Fae · Faculty · Combat Arts</p>
-      <h3 class="char-name">Thane Morrow</h3>
-      <p class="char-epithet">"Professor. Former something. Currently watching."</p>
-      <p class="char-desc">Combat instructor at Selenari Nexus. He's been in rooms where something ancient was waking up before. He knows exactly what it means.</p>
-      <span class="char-link">View Canon →</span>
-    </a>
-    
-   <a href="calder_thornwill_visual_canon.html" class="char-card char-calder">
-      <div class="char-bar"></div>
-      <p class="char-species">Fae · Faculty · Magical Cooking</p>
-      <h3 class="char-name">Calder Thornwill</h3>
-      <p class="char-epithet">"Enthusiastic Professor at Large"</p>
-      <p class="char-desc">Professor at Selenari Nexus. He’s always intrigued by what the students are up to.</p>
-      <span class="char-link">View Canon →</span>
+    <a href="selenari_nexus_bible.html" class="culture-card culture-nexus">
+      <span class="culture-icon">🏛</span>
+      <p class="culture-label">The Academy</p>
+      <h3 class="culture-name">Selenari Nexus</h3>
+      <p class="culture-region">Hidden University · Moonstone &amp; Living Tree</p>
+      <p class="culture-desc">Grown from living trees and moonstone, deep in an ancient forest. Four factions. The Scholar's Oath. Site of the Ashfall Betrayal. Where all four species study side by side.</p>
+      <span class="culture-arrow">Enter the Nexus →</span>
     </a>
 
-   <a href="orrin_wexley_visual_canon.html" class="char-card char-orrin">
-      <div class="char-bar"></div>
-      <p class="char-species">Stryxian· Faculty · Runes</p>
-      <h3 class="char-name">Orrin Wexley</h3>
-      <p class="char-epithet">"So that just happened. Okay. Listen Up.”</p>
-      <p class="char-desc">Professor of Runes and Magical Curiosities. He is always disappearing to find a new artifact.</p>
-      <span class="char-link">View Canon →</span>
-    </a>
-
-   <a href="vaelor_thornfang_visual_canon.html" class="char-card char-vaelor">
-      <div class="char-bar"></div>
-      <p class="char-species">Lycari· Faculty ·Pack Leadership</p>
-      <h3 class="char-name">Vaelor Thornfang</h3>
-      <p class="char-epithet">"Without control you are nothing but a beast."</p>
-      <p class="char-desc">Retired Alpha turned professor of the Lycari Arts.</p>
-      <span class="char-link">View Canon →</span>
-    </a>
-
-   <a href="anastasia_shadowfang_visual_canon.html" class="char-card char-anastasia">
-      <div class="char-bar"></div>
-      <p class="char-species">Lycari · Faculty · Combat Weapons</p>
-      <h3 class="char-name">Anastasia Shadowfang</h3>
-      <p class="char-epithet">"Anything can be a weapon with the proper balance."</p>
-      <p class="char-desc">Wolves and Weapons, what more do you need?</p>
-      <span class="char-link">View Canon →</span>
-    </a>
-
-  <a href="athena_goldbeak_visual_canon.html" class="char-card char-athena">
-      <div class="char-bar"></div>
-      <p class="char-species">Stryxian· Faculty · Histories & Mythology</p>
-      <h3 class="char-name">Athena Goldbeak</h3>
-      <p class="char-epithet">"You didnt think this was going to be easy did you?"</p>
-      <p class="char-desc">Stryxian professor of history, to question her is to prepare for a gutting.</p>
-      <span class="char-link">View Canon →</span>
-    </a>
-
-  <a href="cellean_moonfang_visual_canon.html" class="char-card char-cellean">
-      <div class="char-bar"></div>
-      <p class="char-species">Lycari· Faculty · Advanced Tracking</p>
-      <h3 class="char-name">Cellean Moonfang</h3>
-      <p class="char-epithet">"Your nose always knows what its seeking. Follow it."</p>
-      <p class="char-desc">You can usually find him with Orrin on a treasure hunt.</p>
-      <span class="char-link">View Canon →</span>
-    </a>
-
-  <a href="eudora_visual_canon.html" class="char-card char-eudora">
-      <div class="char-bar"></div>
-      <p class="char-species">Lycari· Adoptive Parent·Pack Cohesion</p>
-      <h3 class="char-name">Eudora Moonfang</h3>
-      <p class="char-epithet">"The woods are always listening, the forest never forgets."</p>
-      <p class="char-desc">She is a lone wolf living a peaceful life in the woods until the Stormveil pack shows up.</p>
-      <span class="char-link">View Canon →</span>
-    </a>
-
-  <a href="lyrianna_emberveil_visual_canon.html" class="char-card char-lyrianna">
-      <div class="char-bar"></div>
-      <p class="char-species">Fae· Student· Musical Arts</p>
-      <h3 class="char-name">Lyrianna Emberveil</h3>
-      <p class="char-epithet">"If Im not playing dancing or creating what is the point?"</p>
-      <p class="char-desc">One of the most musically talented Fae in a century.</p>
-      <span class="char-link">View Canon →</span>
-    </a>
-
-  <a href="neris_ambrose_visual_canon.html" class="char-card char-neris">
-      <div class="char-bar"></div>
-      <p class="char-species">Fae · Faculty · Font Magic</p>
-      <h3 class="char-name">Neris Ambrose</h3>
-      <p class="char-epithet">"Really darling is that the best you can do? Please try harder for starlight’s sake."</p>
-      <p class="char-desc">Professor Ambrose is not the one to be trifled with. He chose the blood font.</p>
-      <span class="char-link">View Canon →</span>
-    </a>
-    
-    <a href="renne_feathermane_visual_canon.html" class="char-card char-renne">
-      <div class="char-bar"></div>
-      <p class="char-species">Stryxian· Student Y2· Tactician</p>
-      <h3 class="char-name">Renne Feathermane</h3>
-      <p class="char-epithet">"I could gut you with my claw if I cared enough to move."</p>
-      <p class="char-desc">Renne always has the high ground.</p>
-      <span class="char-link">View Canon →</span>
-    </a>
-
-  <a href="sable_ripple_visual_canon.html" class="char-card char-sable">
-      <div class="char-bar"></div>
-      <p class="char-species">Fae · Faculty · Magical Spellwork</p>
-      <h3 class="char-name">Sable Ripple</h3>
-      <p class="char-epithet">"The best thing I can teach you is to be silent and listen."</p>
-      <p class="char-desc">Professor Ripple is one of the least verbose teachers, and never far from her lavender tea.</p>
-      <span class="char-link">View Canon →</span>
-    </a>
-
-  <a href="seraphael_pallas_visual_canon.html" class="char-card char-seraphael">
-      <div class="char-bar"></div>
-      <p class="char-species">Drake Fae· Faculty · Dragons</p>
-      <h3 class="char-name">Seraphael Pallas</h3>
-      <p class="char-epithet">"I am unavailable on Sundays, but always willing to teach."</p>
-      <p class="char-desc">Professor Pallas is one of the few dragon bonded fae to walk the drake path.</p>
-      <span class="char-link">View Canon →</span>
-    </a>
-
-  <a href="slayton_ashby_visual_canon.html" class="char-card char-slayton">
-      <div class="char-bar"></div>
-      <p class="char-species">Fae · Student· </p>
-      <h3 class="char-name">Slayton Ashyby</h3>
-      <p class="char-epithet">"Why is it pink?"</p>
-      <p class="char-desc">Slayton is your typical confused college kid.</p>
-      <span class="char-link">View Canon →</span>
-    </a>
-
-  <a href="talisen_emberclaw_visual_canon.html" class="char-card char-talisen">
-      <div class="char-bar"></div>
-      <p class="char-species">Lycari· Faculty · Women in Combat</p>
-      <h3 class="char-name">Talisen Emberclaw</h3>
-      <p class="char-epithet">"You strike like fire, hot, fast, kill them before they even realize they’re burning."</p>
-      <p class="char-desc">Fight like fire. Consume. This is Professor Emberclaws methodology.</p>
-      <span class="char-link">View Canon →</span>
-    </a>
-
-  <a href="xeomere_rainfeather_visual_canon.html" class="char-card char-xeomere">
-      <div class="char-bar"></div>
-      <p class="char-species">Stryxian· Faculty · Runes</p>
-      <h3 class="char-name">Xeomere Rainfeather</h3>
-      <p class="char-epithet">"The more you know the less often youll face death."</p>
-      <p class="char-desc">Professor Rainfeather is always walking the grounds.</p>
-      <span class="char-link">View Canon →</span>
-    </a>
   </div>
 </div>
 
 <div class="sep"><div class="sep-line"></div><div class="sep-gem"></div><div class="sep-line"></div></div>
 
+<!-- SERIES -->
 <div id="series" class="series-section">
   <p class="section-label">Ten Books · One Saga</p>
   <h2 class="section-title">The Faeheart Chronicles</h2>
   <div class="series-grid">
 
-    <div class="arc-divider">Books 1 – 3</div>
+    <div class="arc-divider">Books 1 – 3 · The Academy Years</div>
 
     <div class="series-book sb1">
       <p class="book-num">Book 01</p>
@@ -580,7 +1067,7 @@
       <span class="book-status status-outlined">Outlined</span>
     </div>
 
-    <div class="arc-divider">Books 4 – 6</div>
+    <div class="arc-divider">Books 4 – 6 · The Crown Years</div>
 
     <div class="series-book sb4">
       <p class="book-num">Book 04</p>
@@ -612,7 +1099,7 @@
       <span class="book-status status-coming">Forthcoming</span>
     </div>
 
-    <div class="arc-divider">Books 7 – 10</div>
+    <div class="arc-divider">Books 7 – 10 · The Sea &amp; The Legacy</div>
 
     <div class="series-book sb7">
       <p class="book-num">Book 07</p>
@@ -696,14 +1183,35 @@
 
 </div>
 <script>
+  // Character view toggle
+  document.querySelectorAll('.char-view-toggle button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const view = btn.dataset.view;
+      document.querySelectorAll('.char-view-toggle button').forEach(b => b.classList.toggle('active', b === btn));
+      document.querySelectorAll('.char-view').forEach(v => v.classList.toggle('active', v.dataset.view === view));
+      // Re-trigger scroll reveal for newly-visible cards
+      document.querySelectorAll('.char-view.active .char-card').forEach(el => {
+        if (el.style.opacity !== '1') {
+          el.style.opacity='0'; el.style.transform='translateY(22px)';
+          requestAnimationFrame(() => {
+            el.style.opacity='1'; el.style.transform='translateY(0)';
+          });
+        }
+      });
+    });
+  });
+
+  // Scroll reveal
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if(e.isIntersecting){ e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; } });
   }, { threshold: 0.08 });
-  document.querySelectorAll('.char-card,.series-book,.world-card,.social-card').forEach(el => {
+  document.querySelectorAll('.char-card,.series-book,.world-card,.social-card,.culture-card').forEach(el => {
     el.style.opacity='0'; el.style.transform='translateY(22px)';
     el.style.transition='opacity .65s ease,transform .65s ease,border-color .4s,background .4s';
     obs.observe(el);
   });
+
+  // Mouse glow
   const glow = document.createElement('div');
   glow.style.cssText='position:fixed;width:320px;height:320px;background:radial-gradient(circle,rgba(201,168,76,.035) 0%,transparent 70%);pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:left .12s ease,top .12s ease;';
   document.body.appendChild(glow);

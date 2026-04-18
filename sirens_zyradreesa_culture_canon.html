@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sirens & Zyradreesa — Culture Canon</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=EB+Garamond:ital@1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --tide:         #2A6A8A;
+    --tide-light:   #5A9AC4;
+    --tide-pale:    #A8D0E8;
+    --abyss:        #04060B;
+    --deep-sea:     #08111A;
+    --sea-mid:      #0E1A28;
+    --pearl:        #E8F0F4;
+    --pearl-dim:    #B8C8D4;
+    --bioluma:      #5DE8B8;
+    --bioluma-dim:  #38A88A;
+    --foam:         #F0F8FA;
+    --coral:        #C8704A;
+    --coral-deep:   #8A4830;
+    --text-body:    #B8C4D0;
+    --text-dim:     #5C6878;
+    --rumor:        #88A0B0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--abyss);
+    color: var(--text-body);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Bioluminescent abyss starfield — sea-flecked, plankton-glow */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 8% 12%, rgba(168,208,232,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 38%, rgba(93,232,184,0.35) 0%, transparent 100%),
+      radial-gradient(1px 1px at 38% 8%, rgba(168,208,232,0.45) 0%, transparent 100%),
+      radial-gradient(1px 1px at 52% 60%, rgba(93,232,184,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 68% 25%, rgba(168,208,232,0.55) 0%, transparent 100%),
+      radial-gradient(1px 1px at 82% 50%, rgba(90,154,196,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 18% 75%, rgba(168,208,232,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 80%, rgba(93,232,184,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 35% 90%, rgba(168,208,232,0.35) 0%, transparent 100%),
+      radial-gradient(1px 1px at 62% 85%, rgba(90,154,196,0.3) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 48% 33%, rgba(93,232,184,0.45) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 78% 65%, rgba(168,208,232,0.45) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 20% 55%, rgba(56,168,138,0.4) 0%, transparent 100%),
+      radial-gradient(2px 2px at 12% 22%, rgba(93,232,184,0.4) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page { position: relative; z-index: 1; max-width: 920px; margin: 0 auto; padding: 60px 40px 100px; }
+  .header { text-align: center; margin-bottom: 70px; animation: fadeDown 1s ease both; }
+  .series-label {
+    font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.4em;
+    text-transform: uppercase; color: var(--tide-light); opacity: 0.85; margin-bottom: 20px;
+  }
+  .culture-name {
+    font-family: 'Cinzel', serif; font-size: clamp(48px, 7vw, 76px); font-weight: 400;
+    color: var(--tide-pale); letter-spacing: 0.06em; line-height: 1; margin-bottom: 12px;
+    text-shadow: 0 0 80px rgba(90,154,196,0.4), 0 2px 4px rgba(0,0,0,0.95);
+  }
+  .culture-subtitle {
+    font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--bioluma); margin-bottom: 18px; opacity: 0.85;
+  }
+  .culture-epithet {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 22px;
+    color: var(--pearl); letter-spacing: 0.03em; margin: 0 auto 30px; max-width: 600px; line-height: 1.5;
+  }
+  .culture-epithet em { color: var(--bioluma); font-style: normal; }
+
+  .divider { display: flex; align-items: center; gap: 16px; justify-content: center; margin: 24px 0; }
+  .divider-line { height: 1px; width: 80px; background: linear-gradient(to right, transparent, var(--tide-light)); }
+  .divider-line.reverse { background: linear-gradient(to left, transparent, var(--tide-light)); }
+  .divider-gem {
+    width: 7px; height: 7px; background: var(--bioluma); transform: rotate(45deg);
+    box-shadow: 0 0 14px var(--bioluma), 0 0 28px rgba(93,232,184,0.4);
+  }
+
+  .section { margin-bottom: 56px; animation: fadeUp 0.8s ease both; }
+  .section-title {
+    font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.35em;
+    text-transform: uppercase; color: var(--tide-light); margin-bottom: 22px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, rgba(90,154,196,0.45), transparent); }
+
+  .canon-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--bioluma); border: 1px solid rgba(93,232,184,0.4);
+    padding: 4px 10px; margin-left: 12px; vertical-align: middle; background: rgba(93,232,184,0.05);
+  }
+  .canon-badge::before { content: '◆'; font-size: 7px; }
+  .canon-badge.locked { color: var(--coral); border-color: rgba(200,112,74,0.4); background: rgba(200,112,74,0.05); }
+  .canon-badge.preview { color: var(--pearl-dim); border-color: rgba(184,200,212,0.35); background: rgba(184,200,212,0.04); }
+
+  .prose { font-size: 17px; color: var(--text-body); line-height: 1.8; margin-bottom: 18px; }
+  .prose strong { color: var(--tide-pale); font-weight: 600; }
+  .prose em { color: var(--pearl); }
+
+  .quote-block {
+    background: rgba(14, 26, 40, 0.55); border-left: 2px solid var(--tide-light);
+    padding: 22px 28px; font-style: italic; font-size: 17px;
+    color: var(--pearl); line-height: 1.8; margin: 16px 0;
+  }
+  .quote-block .attribution {
+    display: block; margin-top: 12px; font-family: 'Cinzel', serif;
+    font-style: normal; font-size: 10px; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--bioluma); opacity: 0.85;
+  }
+
+  .lore-card {
+    background: rgba(14, 26, 40, 0.45); border: 1px solid rgba(90,154,196,0.18);
+    padding: 26px 30px; margin-bottom: 16px; position: relative; overflow: hidden;
+  }
+  .lore-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(to right, var(--tide-light), transparent);
+  }
+  .lore-card-name {
+    font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 0.15em;
+    color: var(--bioluma); margin-bottom: 14px;
+  }
+  .lore-card-body { font-size: 16px; color: var(--text-body); line-height: 1.75; }
+  .lore-card-body strong { color: var(--tide-pale); }
+
+  .iron-rule {
+    background: linear-gradient(135deg, rgba(93,232,184,0.07), rgba(90,154,196,0.04));
+    border: 1px solid rgba(93,232,184,0.3); padding: 22px 28px; margin: 18px 0; position: relative;
+  }
+  .iron-rule::before {
+    content: '⚠ IRON RULE'; position: absolute; top: -10px; left: 20px;
+    background: var(--abyss); padding: 0 10px;
+    font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.3em; color: var(--bioluma);
+  }
+  .iron-rule-text { font-size: 16px; color: var(--pearl); line-height: 1.7; }
+  .iron-rule-text strong { color: var(--bioluma); font-weight: 600; }
+
+  .preview-banner {
+    background: rgba(184,200,212,0.05); border: 1px dashed rgba(184,200,212,0.3);
+    padding: 18px 24px; margin-bottom: 30px; text-align: center;
+    font-style: italic; color: var(--pearl-dim); font-size: 14px; line-height: 1.7;
+  }
+  .preview-banner strong { color: var(--tide-pale); font-style: normal; font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; display: block; margin-bottom: 8px; }
+
+  .rumor-section {
+    background: rgba(8, 17, 26, 0.6); border: 1px dashed rgba(136,160,176,0.25);
+    padding: 26px 30px; margin-top: 18px;
+  }
+  .rumor-intro {
+    font-style: italic; font-size: 14px; color: var(--text-dim);
+    margin-bottom: 16px; line-height: 1.6;
+  }
+  .rumor {
+    font-style: italic; font-size: 15px; color: var(--rumor); line-height: 1.65;
+    margin-bottom: 12px; padding-left: 22px; position: relative;
+  }
+  .rumor::before {
+    content: '"'; position: absolute; left: 0; top: -4px;
+    font-family: 'EB Garamond', serif; font-size: 32px; color: var(--tide-light);
+    opacity: 0.5; line-height: 1;
+  }
+  .rumor-source {
+    display: block; font-style: normal; font-family: 'Cinzel', serif;
+    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--text-dim); margin-top: 4px; opacity: 0.7;
+  }
+
+  .hook-block {
+    background: rgba(93,232,184,0.04); border: 1px dashed rgba(93,232,184,0.25);
+    padding: 18px 22px; font-size: 14px; color: var(--text-dim);
+    font-style: italic; margin-top: 14px; line-height: 1.7;
+  }
+  .hook-block::before {
+    content: '✦ Saga hook: '; color: var(--bioluma); font-style: normal;
+    font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
+  }
+
+  .footer { text-align: center; margin-top: 80px; padding-top: 30px; border-top: 1px solid rgba(90,154,196,0.15); }
+  .footer-text { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--text-dim); }
+
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 700px) { .page { padding: 40px 22px 80px; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="series-label">Of Stormsalt &amp; Smoke — Faeheart Chronicles</div>
+    <div class="culture-name">The Sirens</div>
+    <div class="culture-subtitle">Zyradreesa &amp; The Tideborn</div>
+    <div class="culture-epithet">"The sea is sentient. The sea has <em>opinions</em>. The sea will, eventually, share them with you."</div>
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-gem"></div>
+      <div class="divider-line reverse"></div>
+    </div>
+    <div class="series-label" style="opacity:0.55; font-size:9px;">Culture Canon · Preview Reference · Faeheart World Bible</div>
+  </div>
+
+  <div class="preview-banner">
+    <strong>Preview Bible</strong>
+    Sirens enter the saga in late <strong>Book 6</strong> as the force needed to defeat the Stormfang king, train Harrison's Tidal magic, and complicate the politics of Xiphos for the rest of the series. Books <strong>7-8</strong> are Harrison's Zyradreesa arc in full. The page below is sparse on purpose — only what is canon-true in <em>Book 1's present day</em>, plus the rumors the surface world tells about the deep.
+  </div>
+
+  <!-- IDENTITY -->
+  <div class="section">
+    <div class="section-title">Identity <span class="canon-badge locked">Canon-Locked</span></div>
+    <p class="prose">The Sirens are a Faekin lineage that branched off the Fae root and went <em>down</em>. They are the people of Zyradreesa — the great ocean ringing the eastern half of Xiphos — and they call themselves, almost without exception, <strong>Tideborn</strong>. They do not use surnames. A Siren is who their crew is, who their tide is, who their song answers to. A name is a stanza. The full song is the life.</p>
+
+    <p class="prose">They are not, in the surface-world sense, <em>monsters</em>. They are not even, in the strict sense, <em>aquatic</em> — they breathe air, walk on land when they need to, and bond mates the way other Faekin do. What sets them apart is the <strong>song</strong>. Every Siren carries a song that is theirs alone. The song can soothe. The song can compel. The song can drown a sailor or bring her safely home. The song is what makes a Siren a Siren. Lose your song and you lose your name with it.</p>
+
+    <div class="quote-block">
+      A Tideborn doesn't ask for your trust. A Tideborn earns it the way the sea earns it — slowly, daily, with patience and the occasional reminder of what happens when you forget who you are standing in.
+      <span class="attribution">— Old Zyradreesan saying, attributed to no one in particular</span>
+    </div>
+  </div>
+
+  <!-- ZYRADREESA -->
+  <div class="section">
+    <div class="section-title">Zyradreesa — The Ocean Realm <span class="canon-badge">World Canon</span></div>
+    <p class="prose">Zyradreesa is not a country. Zyradreesa is a <strong>sea</strong> — vast, deep, currents shaped by forces no surface fae has ever charted. The Tideborn live in floating cities anchored to coral reefs, in island archipelagos that rise and fall with the moons, in submerged settlements where bioluminescent corals provide both light and law.</p>
+
+    <p class="prose">Two great factions divide the realm. The surface-world has heard of them only in fragments. The Tideborn rarely correct the fragments. <strong>The Pearl Court</strong> — diplomats, scholars, sky-readers — holds the upper-water settlements and most contact with the surface. <strong>The Coral Court</strong> — warriors, deep-divers, song-keepers of the abyss — holds the deeper reefs and the sacred song-vaults. The two courts have not been at peace in three generations. They have not been at war in two. Whatever they currently are, the surface fae have not been allowed to learn the word for it.</p>
+
+    <div class="hook-block">Harrison Starling will, by the end of Book 6, be the first surface fae in nine hundred years to bond Tideborn from <em>both courts</em>. The Pearl heir and the Coral heir. The political consequences begin before the bond completes. The romantic consequences will take both books to resolve. Harrison will need them both. He will not be allowed to choose only one.</div>
+  </div>
+
+  <!-- THE SONG -->
+  <div class="section">
+    <div class="section-title">The Song <span class="canon-badge locked">Canon-Locked</span></div>
+    <p class="prose">Every Siren is born with a song that no other Siren has ever sung or will ever sing again. The song <em>arrives</em> — not learned, not chosen, simply present from infancy. A Siren's song is the truest expression of who they are. To <em>hear</em> a Siren's full song is to know them in a way no spoken language could permit.</p>
+
+    <p class="prose">Sirens use their songs for many things. They sing the tides. They sing storms calm and storms wild. They sing wounds closed and wounds open. They sing memory into water and water into memory. The most experienced song-keepers of the Coral Court are said to be able to sing a person's <em>name</em> back into them — restoring identity to the lost, the forgotten, the broken. The Pearl Court considers this practice ethically borderline and politically inconvenient. The Coral Court considers it a sacred duty.</p>
+
+    <div class="iron-rule">
+      <div class="iron-rule-text"><strong>A Siren cannot sing another Siren's song.</strong> Not even once. Not even partially. To attempt it is to invite something the Tideborn call <em>the silencing</em> — a slow erosion of the attempted singer's own song, until they are left voiceless, nameless, and wandering the deep. There has not been an attempted theft of a song in three hundred years. The last person who tried is, supposedly, still walking the abyss floor. Looking for the song they took. Looking for any song at all.</div>
+    </div>
+  </div>
+
+  <!-- TIDAL MAGIC -->
+  <div class="section">
+    <div class="section-title">The Tidal Font &amp; The Sirens <span class="canon-badge">Cross-Canon</span></div>
+    <p class="prose">The <strong>Tidal Font</strong> — one of the seven Fonts of Power — is, in its deepest expression, <em>siren-coded magic</em>. Most Tidal-Font fae will never know this. They cast water-shaping, mist illusion, memory-reading, and emotional resonance their entire lives without realizing the original source of the magic was a Tideborn teaching the surface fae how to listen.</p>
+
+    <p class="prose">A Tidal-Font fae who eventually meets the Tideborn will, almost without exception, find the encounter <em>destabilizing</em>. Their magic will shift. Their dreams will change. Their water will start to <em>answer</em> in a way it didn't before. Some Tidal-Font fae have, after such encounters, awakened a kind of song-magic of their own — never a true Siren song, but something close. Something the Tideborn recognize.</p>
+
+    <p class="prose">Harrison Starling chose Tidal Font in his first year at SNU. His instructors observed that his magic was unusually <em>resonant</em> for so early in training. Niraphael Cypress, who has seen many things, said nothing. She had seen this before. She knew where it ended.</p>
+  </div>
+
+  <!-- TRADITIONS -->
+  <div class="section">
+    <div class="section-title">Traditions of the Tideborn <span class="canon-badge">Cultural Canon</span></div>
+
+    <div class="lore-card">
+      <div class="lore-card-name">🐚 The Sunken Pilgrimage</div>
+      <div class="lore-card-body">An annual rite where Tideborn divers descend to the wreckage of ships lost to the Abyss Murmurs, hoping to reclaim lost souls or recover lost songs. The Pilgrimage is sacred. To interrupt one is taboo across both courts. The dive lasts seven days. The divers return changed.</div>
+    </div>
+
+    <div class="lore-card">
+      <div class="lore-card-name">🪶 Pearl Ink Tattoos</div>
+      <div class="lore-card-body">Nautical tattoos infused with bioluminescent algae from the deep coral-fields. The ink glows softly in the dark. Tideborn use it to mark the life-events that matter — first crossings, first songs heard, first mates met, first songs lost. A Tideborn body is, by middle age, a constellation map of their personal history. Reading it without permission is a serious offense.</div>
+    </div>
+
+    <div class="lore-card">
+      <div class="lore-card-name">⚖ The Law of the Waves</div>
+      <div class="lore-card-body">An unwritten code of honor among Tideborn. Demands fairness in trade, honesty in song, and the absolute sanctity of a guest at one's tide. To break the Law of the Waves is to be marked <em>oathless</em> — and the sea, the Tideborn say, knows the names of the oathless. They are not welcome at any port.</div>
+    </div>
+  </div>
+
+  <!-- THE ABYSS MURMURS -->
+  <div class="section">
+    <div class="section-title">The Abyss Murmurs &amp; The Ghost Tide <span class="canon-badge">Historical Canon</span></div>
+    <p class="prose">Centuries past, an unnatural event came to be known as <strong>The Abyss Murmurs</strong> — whispers in the waves that lured ships to their doom. Some believed it was a forgotten god awakening. Others believed the Tideborn themselves had tampered with forces beyond their understanding. Entire fleets vanished. The event ended as mysteriously as it began. The Sunken Pilgrimage was instituted in its aftermath.</p>
+
+    <p class="prose">Sailors still whisper of <strong>The Ghost Tide</strong> — voices in the water claimed to belong to mariners still searching for home. Some say the murmurs are warnings. Others say they are tricksters. Tideborn shrug when asked. Tideborn always shrug when asked. <em>It is not the kind of question they answer for surface folk.</em></p>
+
+    <div class="hook-block">The Abyss Murmurs were not an accident. They were not a god. They were something the Tideborn caused, contained, and have spent centuries quietly making sure does not happen again. What happens to a quiet containment that has held for centuries when something <em>massive</em> stirs in the deeps? Book 6 will, eventually, get to that.</div>
+  </div>
+
+  <!-- TAVERN RUMORS -->
+  <div class="section">
+    <div class="section-title">Tavern Rumors &amp; Half-Truths</div>
+    <div class="rumor-section">
+      <p class="rumor-intro">What sailors say about the Tideborn after a long crossing. What surface fae say about the deep when they think they're being clever. What the Tideborn would, if asked, neither confirm nor deny — though they might, if you bought them the right drink, smile in a way that meant something.</p>
+
+      <div class="rumor">
+        I heard a Siren can sing a man home from the dead. Just once. Just one man. The catch is they have to give up their own name to do it. My grandmother said her great-uncle came back that way. He never spoke again. But he was <em>back</em>.
+        <span class="rumor-source">— A Lazuline coastal fisher, three drinks in</span>
+      </div>
+
+      <div class="rumor">
+        Throw a silver coin into the water before a long voyage. <em>Always.</em> The Ghost Tide remembers who pays its toll and who doesn't. My uncle skipped it once. Came home missing two days he can't account for.
+        <span class="rumor-source">— Every dock-mother in every port</span>
+      </div>
+
+      <div class="rumor">
+        The Pearl Court and the Coral Court hate each other. Or love each other. Or both. Nobody on the surface knows for sure. They've never agreed long enough to tell us.
+        <span class="rumor-source">— A Stryxian diplomat, frustrated after a failed delegation</span>
+      </div>
+
+      <div class="rumor">
+        Don't bond a Siren. I don't care how good her song is. The sea takes what the sea wants and bonded fae who marry Tideborn end up <em>walking the deep</em> within twenty years. Every time. Look it up.
+        <span class="rumor-source">— Lazuline matron, lying badly</span>
+      </div>
+
+      <div class="rumor">
+        I sailed past the Strixian Isles once and heard a song from the water that wasn't a Siren song. Wasn't fae either. Wasn't <em>anything</em>. Old. So old. Felt like the sea was clearing its throat. Hasn't been a song like that in three hundred years.
+        <span class="rumor-source">— Aging captain, about to retire</span>
+      </div>
+
+      <div class="rumor">
+        There's a song down there. <em>The</em> song. Older than the courts, older than the Tideborn themselves. They keep it locked in the Coral Court vaults. They say if it's ever sung in full, the abyss <em>opens</em>.
+        <span class="rumor-source">— A drunk diver, possibly correct</span>
+      </div>
+
+      <div class="rumor">
+        A fae with Tidal Font who hasn't met the Tideborn yet doesn't know what their magic is. Not really. Met a kid like that at SNU last year. He was good. He'll be <em>terrifying</em> when the sea finally calls him home.
+        <span class="rumor-source">— A retired Tidal instructor, Pearl Court trained</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- IRON CANON -->
+  <div class="section">
+    <div class="section-title">Iron Canon — What Cannot Change</div>
+    <p class="prose">The rules below shape the Sirens across Books 6-10. Sparse on purpose — much of Tideborn culture remains to be revealed in the books themselves. But these are the bones. These are the truths the surface world will, eventually, have to reckon with.</p>
+
+    <div class="lore-card">
+      <div class="lore-card-name">The Six Iron Rules</div>
+      <div class="lore-card-body" style="margin-top:8px;">
+        <p style="margin-bottom:10px;"><strong>1.</strong> All Sirens are Tideborn. Tideborn do not use surnames — a name is a stanza, the full song is the life.</p>
+        <p style="margin-bottom:10px;"><strong>2.</strong> Every Siren has one song that is theirs alone. To sing another Siren's song invites <em>the silencing</em>.</p>
+        <p style="margin-bottom:10px;"><strong>3.</strong> Two courts: Pearl (upper-water, diplomatic) and Coral (deep-water, song-keeping). Their relationship to each other defies surface-world labeling.</p>
+        <p style="margin-bottom:10px;"><strong>4.</strong> The Tidal Font is siren-coded magic. Tidal-Font fae who meet the Tideborn are changed by the encounter.</p>
+        <p style="margin-bottom:10px;"><strong>5.</strong> Sirens can bond non-Tideborn mates. The bond is unusual. The political consequences are <em>always</em> significant.</p>
+        <p style="margin-bottom:0;"><strong>6.</strong> The Sunken Pilgrimage, Pearl Ink, and the Law of the Waves are the three pillars of Tideborn cultural life. Break any of the three and the sea, eventually, knows.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="divider" style="margin-bottom:20px;">
+      <div class="divider-line" style="width:40px;"></div>
+      <div class="divider-gem"></div>
+      <div class="divider-line reverse" style="width:40px;"></div>
+    </div>
+    <div class="footer-text">Faeheart Chronicles · Culture Canon · Sirens &amp; Zyradreesa · © 2026 Zoey Alexis Caine</div>
+  </div>
+
+</div>
+</body>
+</html>

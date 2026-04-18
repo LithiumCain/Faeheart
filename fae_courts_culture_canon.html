@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Fae & The Two Courts — Culture Canon</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=EB+Garamond:ital@1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold:         #C9A84C;
+    --gold-light:   #E8D08A;
+    --gold-pale:    #F5EAC8;
+    --midnight:     #08090E;
+    --deep-navy:    #0D0F1A;
+    --navy-mid:     #1C2640;
+    --lazuline:     #4A6FA8;
+    --lazuline-deep:#2A436A;
+    --aureate:      #D4A832;
+    --aureate-deep: #8A6818;
+    --lavender:     #C4B5D4;
+    --lavender-dim: #8B7AA0;
+    --moss:         #7A9870;
+    --bone:         #F4EFD8;
+    --cream:        #F8F2E6;
+    --text-body:    #D4C9B0;
+    --text-dim:     #7A7060;
+    --rumor:        #B8A878;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--midnight);
+    color: var(--text-body);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Gold-and-lavender starfield with court accent */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 8% 12%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 38%, rgba(196,181,212,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 38% 8%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 52% 60%, rgba(232,208,138,0.35) 0%, transparent 100%),
+      radial-gradient(1px 1px at 68% 25%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 82% 50%, rgba(74,111,168,0.35) 0%, transparent 100%),
+      radial-gradient(1px 1px at 18% 75%, rgba(255,255,255,0.35) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 80%, rgba(232,208,138,0.45) 0%, transparent 100%),
+      radial-gradient(1px 1px at 35% 90%, rgba(196,181,212,0.35) 0%, transparent 100%),
+      radial-gradient(1px 1px at 62% 85%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 48% 33%, rgba(201,168,76,0.55) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 78% 65%, rgba(196,181,212,0.45) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 20% 55%, rgba(74,111,168,0.4) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page { position: relative; z-index: 1; max-width: 920px; margin: 0 auto; padding: 60px 40px 100px; }
+  .header { text-align: center; margin-bottom: 70px; animation: fadeDown 1s ease both; }
+  .series-label {
+    font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.4em;
+    text-transform: uppercase; color: var(--gold); opacity: 0.8; margin-bottom: 20px;
+  }
+  .culture-name {
+    font-family: 'Cinzel', serif; font-size: clamp(48px, 7vw, 76px); font-weight: 400;
+    color: var(--gold-light); letter-spacing: 0.06em; line-height: 1; margin-bottom: 12px;
+    text-shadow: 0 0 80px rgba(201,168,76,0.4), 0 2px 4px rgba(0,0,0,0.9);
+  }
+  .culture-subtitle {
+    font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--lavender); margin-bottom: 18px; opacity: 0.85;
+  }
+  .culture-epithet {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 22px;
+    color: var(--bone); letter-spacing: 0.03em; margin: 0 auto 30px; max-width: 600px; line-height: 1.5;
+  }
+  .culture-epithet em { color: var(--gold-light); font-style: normal; }
+
+  .divider { display: flex; align-items: center; gap: 16px; justify-content: center; margin: 24px 0; }
+  .divider-line { height: 1px; width: 80px; background: linear-gradient(to right, transparent, var(--gold)); }
+  .divider-line.reverse { background: linear-gradient(to left, transparent, var(--gold)); }
+  .divider-gem {
+    width: 7px; height: 7px; background: var(--gold); transform: rotate(45deg);
+    box-shadow: 0 0 14px var(--gold), 0 0 28px rgba(201,168,76,0.4);
+  }
+
+  .section { margin-bottom: 56px; animation: fadeUp 0.8s ease both; }
+  .section-title {
+    font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.35em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 22px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, rgba(201,168,76,0.45), transparent); }
+
+  .canon-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--gold); border: 1px solid rgba(201,168,76,0.4);
+    padding: 4px 10px; margin-left: 12px; vertical-align: middle; background: rgba(201,168,76,0.05);
+  }
+  .canon-badge::before { content: '◆'; font-size: 7px; }
+  .canon-badge.locked { color: var(--lavender); border-color: rgba(196,181,212,0.4); background: rgba(196,181,212,0.05); }
+
+  .prose { font-size: 17px; color: var(--text-body); line-height: 1.8; margin-bottom: 18px; }
+  .prose strong { color: var(--gold-light); font-weight: 600; }
+  .prose em { color: var(--bone); }
+
+  .quote-block {
+    background: rgba(28, 38, 64, 0.55); border-left: 2px solid var(--gold);
+    padding: 22px 28px; font-style: italic; font-size: 17px;
+    color: var(--bone); line-height: 1.8; margin: 16px 0;
+  }
+  .quote-block .attribution {
+    display: block; margin-top: 12px; font-family: 'Cinzel', serif;
+    font-style: normal; font-size: 10px; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--lavender); opacity: 0.8;
+  }
+
+  .lore-card {
+    background: rgba(28, 38, 64, 0.45); border: 1px solid rgba(201,168,76,0.18);
+    padding: 26px 30px; margin-bottom: 16px; position: relative; overflow: hidden;
+  }
+  .lore-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(to right, var(--gold), transparent);
+  }
+  .lore-card-name {
+    font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 0.15em;
+    color: var(--gold-light); margin-bottom: 14px;
+  }
+  .lore-card-body { font-size: 16px; color: var(--text-body); line-height: 1.75; }
+  .lore-card-body strong { color: var(--gold-light); }
+
+  /* Two courts grid */
+  .court-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .court-card {
+    background: rgba(13, 15, 26, 0.7); border: 1px solid; padding: 28px 26px; position: relative;
+  }
+  .court-card.aureate { border-color: rgba(212,168,50,0.4); }
+  .court-card.aureate::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(to right, var(--aureate-deep), var(--aureate), var(--aureate-deep));
+  }
+  .court-card.lazuline { border-color: rgba(74,111,168,0.45); }
+  .court-card.lazuline::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(to right, var(--lazuline-deep), var(--lazuline), var(--lazuline-deep));
+  }
+  .court-label {
+    font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px;
+  }
+  .court-name {
+    font-family: 'Cinzel', serif; font-size: 20px; letter-spacing: 0.1em; margin-bottom: 6px;
+  }
+  .court-name.aureate { color: var(--aureate); }
+  .court-name.lazuline { color: var(--lazuline); }
+  .court-city {
+    font-style: italic; font-size: 14px; color: var(--bone);
+    margin-bottom: 14px; opacity: 0.85;
+  }
+  .court-body { font-size: 14px; color: var(--text-body); line-height: 1.7; margin-bottom: 12px; }
+  .court-detail { font-size: 13px; color: var(--text-dim); line-height: 1.55; }
+  .court-detail strong { color: var(--bone); font-weight: 500; }
+
+  /* Fonts grid */
+  .font-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 10px; margin-bottom: 18px;
+  }
+  .font-tile {
+    background: rgba(28, 38, 64, 0.5); border: 1px solid rgba(201,168,76,0.15);
+    padding: 18px 20px; transition: border-color 0.3s, transform 0.3s;
+  }
+  .font-tile:hover { border-color: rgba(201,168,76,0.4); transform: translateY(-2px); }
+  .font-icon { font-size: 22px; margin-bottom: 8px; display: block; }
+  .font-name {
+    font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 0.18em;
+    color: var(--gold-light); margin-bottom: 4px;
+  }
+  .font-element {
+    font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px;
+  }
+  .font-desc { font-size: 13px; color: var(--text-body); line-height: 1.55; font-style: italic; }
+
+  /* Iron rule */
+  .iron-rule {
+    background: linear-gradient(135deg, rgba(196,181,212,0.08), rgba(201,168,76,0.04));
+    border: 1px solid rgba(196,181,212,0.3); padding: 22px 28px; margin: 18px 0; position: relative;
+  }
+  .iron-rule::before {
+    content: '⚠ IRON RULE'; position: absolute; top: -10px; left: 20px;
+    background: var(--midnight); padding: 0 10px;
+    font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.3em; color: var(--lavender);
+  }
+  .iron-rule-text { font-size: 16px; color: var(--bone); line-height: 1.7; }
+  .iron-rule-text strong { color: var(--lavender); font-weight: 600; }
+
+  .rumor-section {
+    background: rgba(13, 15, 26, 0.5); border: 1px dashed rgba(184,168,120,0.25);
+    padding: 26px 30px; margin-top: 18px;
+  }
+  .rumor-intro {
+    font-style: italic; font-size: 14px; color: var(--text-dim);
+    margin-bottom: 16px; line-height: 1.6;
+  }
+  .rumor {
+    font-style: italic; font-size: 15px; color: var(--rumor); line-height: 1.65;
+    margin-bottom: 12px; padding-left: 22px; position: relative;
+  }
+  .rumor::before {
+    content: '"'; position: absolute; left: 0; top: -4px;
+    font-family: 'EB Garamond', serif; font-size: 32px; color: var(--gold);
+    opacity: 0.5; line-height: 1;
+  }
+  .rumor-source {
+    display: block; font-style: normal; font-family: 'Cinzel', serif;
+    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--text-dim); margin-top: 4px; opacity: 0.7;
+  }
+
+  .hook-block {
+    background: rgba(201,168,76,0.04); border: 1px dashed rgba(201,168,76,0.25);
+    padding: 18px 22px; font-size: 14px; color: var(--text-dim);
+    font-style: italic; margin-top: 14px; line-height: 1.7;
+  }
+  .hook-block::before {
+    content: '✦ Saga hook: '; color: var(--gold); font-style: normal;
+    font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
+  }
+
+  .footer { text-align: center; margin-top: 80px; padding-top: 30px; border-top: 1px solid rgba(201,168,76,0.15); }
+  .footer-text { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--text-dim); }
+
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 700px) {
+    .page { padding: 40px 22px 80px; }
+    .court-grid { grid-template-columns: 1fr; }
+    .font-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="series-label">Of Stormsalt &amp; Smoke — Faeheart Chronicles</div>
+    <div class="culture-name">The Fae</div>
+    <div class="culture-subtitle">Nulune · Ameliora · The Wild Enclaves</div>
+    <div class="culture-epithet">"Every Faekin lineage <em>began</em> here. The wolves remember it. The owls remember it. The fae have <em>forgotten</em>."</div>
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-gem"></div>
+      <div class="divider-line reverse"></div>
+    </div>
+    <div class="series-label" style="opacity:0.55; font-size:9px;">Culture Canon · Book 1 Reference · Faeheart World Bible</div>
+  </div>
+
+  <!-- IDENTITY -->
+  <div class="section">
+    <div class="section-title">Identity <span class="canon-badge locked">Canon-Locked</span></div>
+    <p class="prose">The fae are the <strong>root</strong> of every Faekin lineage in Xiphos. Wolves branched from fae. Owls branched from fae. Sirens branched from fae. Even the dragon-bonded are fae who have learned to hold sky-fire inside themselves. Every other people in this world is a <em>chapter</em> of the fae story. The fae themselves are the spine.</p>
+
+    <p class="prose">They have, of course, almost entirely forgotten this. The fae of the courts — the urbane, refined, glittering populations of Nulune and Ameliora — do not believe wolves still exist outside myth. They are aware of dragons in an abstract, decorative way. They know Stryxians live somewhere up in the cliffs but rarely encounter one. Wild Fae, to a court-raised fae, are a children's story. The whole world is alive outside their city walls and they have, collectively, drunk the koolaid that says it isn't.</p>
+
+    <p class="prose">This is the <em>joke</em> of the Faerie Parade. This is the joke of the entire opening of <em>Of Stormsalt &amp; Smoke</em>. A fae city throws a celebration honoring "lost" magical beings — and Reign Stormveil is crouched on a spire above them, watching. The legends are walking around. The fae just don't <em>look up</em>.</p>
+
+    <div class="quote-block">
+      We celebrate what we lost. We do not check, before celebrating, whether what we lost is still <em>standing in the alley behind the parade route</em>.
+      <span class="attribution">— A Lazuline historian, posthumously</span>
+    </div>
+  </div>
+
+  <!-- THE TWO COURTS -->
+  <div class="section">
+    <div class="section-title">The Two Courts <span class="canon-badge locked">Canon-Locked</span></div>
+    <p class="prose">There are two great fae cities in Xiphos. The fae will tell you these are the only two. They are mostly correct. There are smaller villages, hamlets, and at least three rumored hidden enclaves of <strong>Wild Fae</strong> — but the courts of Nulune and Ameliora are the political and cultural <em>centers</em> of fae civilization, and they have been locked in <strong>uneasy mirror</strong> for as long as anyone can remember.</p>
+
+    <div class="court-grid">
+      <div class="court-card aureate">
+        <div class="court-label">Gold</div>
+        <div class="court-name aureate">The Aureate Court</div>
+        <div class="court-city">Ameliora — City of Golden Spires</div>
+        <div class="court-body">Day-aligned. Sun-coded. Architecture of golden spires and glass bridges. Court of light, diplomacy, polish, and the kind of careful smile that has never once meant exactly what it says.</div>
+        <div class="court-detail"><strong>Crafts:</strong> Threadweaving, Dreamsteel, sun-glass. <strong>Famous for:</strong> the Ascension Gala, golden-hour rituals, and the densest political subtext in Xiphos.</div>
+      </div>
+      <div class="court-card lazuline">
+        <div class="court-label">Sapphire</div>
+        <div class="court-name lazuline">The Lazuline Court</div>
+        <div class="court-city">Nulune — City of Moonglass</div>
+        <div class="court-body">Night-aligned. Moon-coded. Towers outlined in enchanted silver vines. Court of midnight-blue glow, contemplation, art, and the kind of long silence that means the conversation is far from over.</div>
+        <div class="court-detail"><strong>Crafts:</strong> Threadweaving, Moonglass-work (imported from the Strixian Isles), star-mapping. <strong>Famous for:</strong> the Parade of the Lost Light, lantern-festival magic, and the most beautiful night-sky in Xiphos.</div>
+      </div>
+    </div>
+
+    <div class="iron-rule">
+      <div class="iron-rule-text"><strong>The Shattered Accord.</strong> Centuries past, the two courts coexisted peacefully. A dispute over <em>The Throne of Echoes</em> — an ancient relic said to grant dominion over fate — broke that peace. The conflict that followed was not war but <strong>centuries of political sabotage, assassinations, and hidden warfare</strong>. The courts now exist in fragile peace. Neither has forgotten the betrayals. Every diplomatic meeting between them is veiled in suspicion. The Throne of Echoes itself has not been seen in five hundred years. <em>Nobody wants to admit they're still looking for it.</em></div>
+    </div>
+  </div>
+
+  <!-- WINGS -->
+  <div class="section">
+    <div class="section-title">Wings &amp; The Late Bloom <span class="canon-badge locked">Canon-Locked</span></div>
+    <p class="prose">Every fae <em>can</em> have wings. Not every fae <em>does</em>. Wings emerge late — usually between ages twenty-two and twenty-six — through a combination of <strong>Font awakening</strong>, <strong>maturation</strong>, and what the elders call <em>"the body finishing its sentence."</em> A young fae arriving at Selenari Nexus is almost certainly wingless. By the time they graduate, most have flown for the first time. Some haven't. Some never will. The reasons vary.</p>
+
+    <p class="prose">When wings emerge, they emerge <strong>in the style of the fae they belong to</strong>. Butterfly. Dragonfly. Moth. Iridescent gossamer. Some fae sprout wings of unique design — flame-edged, leaf-veined, starlight-translucent. The shape and color are not chosen consciously, but they are deeply <em>personal</em>. A fae's wings are read, by other fae, as a kind of identity statement. Wings cannot be hidden by glamour for long. They can be folded, tucked, draped — but they cannot be made to disappear without exhausting the caster.</p>
+
+    <p class="prose">Most fae bond their <strong>mate</strong> at age twenty-five. This is the species norm — late by Lycari standards, on-time by Aether-tradition standards, considered "almost too soon" by some Stryxian elders. A fae who bonds before twenty-five is <em>uncommon</em>. A fae who bonds at <strong>twenty</strong> — like Allura Starling, like Reign Stormveil — is what the courts would call, if they understood what was happening, <em>catastrophic</em>.</p>
+
+    <div class="hook-block">Allura's wings have not emerged. Yet. There are at least three reasons this is significant. The most obvious one is that her bond ignited five years too early. The other two reasons are not yet known to the courts. They will become very, very known.</div>
+  </div>
+
+  <!-- THE SEVEN FONTS -->
+  <div class="section">
+    <div class="section-title">The Seven Fonts of Power <span class="canon-badge locked">Canon-Locked</span></div>
+    <p class="prose">At mid-year of their first year at Selenari Nexus, every fae student chooses a <strong>Font</strong> — a primary alignment of magic that will shape their casting for the rest of their lives. The choice is irrevocable. The choice is sacred. The choice is, in theory, theirs alone. Most students choose what calls to them. A few are <em>chosen by</em> their Font instead — the rune flares, the magic surges, the decision is made before the student is.</p>
+
+    <p class="prose">There are seven Fonts. Each is an element. Each carries an emotional register. Each grants a distinct family of magic. A fae bonds to one. A fae of unusual heritage may, in extraordinary circumstance, touch a second. A fae who touches three has not happened in recorded history. (Yet.)</p>
+
+    <div class="font-grid">
+      <div class="font-tile">
+        <span class="font-icon">✨</span>
+        <div class="font-name">Auric</div>
+        <div class="font-element">Light · Aura</div>
+        <div class="font-desc">Courage, clarity, protection. Radiant shields. Light-forged weapons. Healing bursts.</div>
+      </div>
+      <div class="font-tile">
+        <span class="font-icon">🩸</span>
+        <div class="font-name">Sanguine</div>
+        <div class="font-element">Blood · Life-Force</div>
+        <div class="font-desc">Instinct, hunger, precision. Blood-shaping. Predator senses. Lethal artistry.</div>
+      </div>
+      <div class="font-tile">
+        <span class="font-icon">🌊</span>
+        <div class="font-name">Tidal</div>
+        <div class="font-element">Water · Memory</div>
+        <div class="font-desc">Empathy, intuition, reflection. Water-shaping. Mist illusions. Memory reading.</div>
+      </div>
+      <div class="font-tile">
+        <span class="font-icon">🔥</span>
+        <div class="font-name">Ember</div>
+        <div class="font-element">Fire · Motion</div>
+        <div class="font-desc">Passion, momentum, expression. Flame ribbons. Heat pulses. Performance magic.</div>
+      </div>
+      <div class="font-tile">
+        <span class="font-icon">🌿</span>
+        <div class="font-name">Primal</div>
+        <div class="font-element">Nature · Beast · Growth</div>
+        <div class="font-desc">Instinct, grounding, wildness. Vines, brambles, beast-empathy, growth-healing.</div>
+      </div>
+      <div class="font-tile">
+        <span class="font-icon">🕳️</span>
+        <div class="font-name">Umbral</div>
+        <div class="font-element">Shadow · Space · Stealth</div>
+        <div class="font-desc">Cunning, silence, precision. Shadow-stepping. Cloaking. Spatial folding.</div>
+      </div>
+      <div class="font-tile">
+        <span class="font-icon">🌀</span>
+        <div class="font-name">Aether</div>
+        <div class="font-element">Mind · Spirit · Fate</div>
+        <div class="font-desc">Insight, truth, intuition. Premonition. Telepathy. Truthsense. Astral sight.</div>
+      </div>
+    </div>
+
+    <p class="prose">Dragon-bonded fae are <strong>permitted but not required</strong> to choose a Font. Many do, layering their dragon-resonance with chosen magic. Some forgo the choice entirely, declaring the dragon their alignment. Niraphael Cypress is one of these. She has <em>opinions</em> about Font ethics that she rarely shares because she finds the conversation tiresome.</p>
+  </div>
+
+  <!-- THE FOUR BONDS -->
+  <div class="section">
+    <div class="section-title">The Four Bonds <span class="canon-badge">Mythic Canon</span></div>
+    <p class="prose">The Faebond is not one magic. It is <strong>four ancient expressions</strong> of the same primal force — the binding-power that ties soul to soul, body to body, fate to fate. Most bonded pairs experience one of the four. The rare pairs that experience more than one become legend. The pair that experiences <em>all four</em> has not been recorded since the founding of the courts.</p>
+
+    <div class="lore-card">
+      <div class="lore-card-name">💗 Heartsong</div>
+      <div class="lore-card-body">Pulse + blood + devotion. The bond of the body. Mated pairs feel each other's heartbeat across distance, sense each other's pain, share scent over time. The most common Faekin bond. The Lycari bond is almost always Heartsong-rooted.</div>
+    </div>
+
+    <div class="lore-card">
+      <div class="lore-card-name">🔮 Future</div>
+      <div class="lore-card-body">Vision + fate + prophecy. The bond of <em>seeing</em>. Pairs touched by Future-bond catch glimpses of one another's deaths, of choices not yet made, of children not yet born. Aether-Font fae are most prone. Stryxian elders are said to develop it spontaneously in old age.</div>
+    </div>
+
+    <div class="lore-card">
+      <div class="lore-card-name">⚔ Warrior</div>
+      <div class="lore-card-body">Heat + battle + discipline. The bond of <em>shared combat</em>. Warrior-bonded pairs fight as one creature in two bodies — anticipating, covering, finishing each other's strikes. Dragon-bonded pairs almost always carry Warrior-bond. So do the rare wolf-pairs in the field.</div>
+    </div>
+
+    <div class="lore-card">
+      <div class="lore-card-name">🩸 Reaver</div>
+      <div class="lore-card-body">Desire + emotion + death. The most dangerous of the four. Reaver-bonded pairs feel each other's longing as physical hunger, each other's grief as physical wound, each other's death as their own. Sanguine-Font fae are most prone. Reaver-bond has, throughout history, been the bond that <em>ends civilizations</em> when one half dies and the other refuses to.</div>
+    </div>
+
+    <div class="hook-block">Reign Stormveil and Allura Starling appear, to the eyes that can read these things, to be carrying <em>at least three</em> of the four. This is not supposed to be possible. Vaelor has noticed. Banister has noticed. The Perch Council, which has not met in eleven years, has begun receiving feathered letters about it.</div>
+  </div>
+
+  <!-- WILD FAE -->
+  <div class="section">
+    <div class="section-title">The Wild Fae <span class="canon-badge">Hidden Canon</span></div>
+    <p class="prose">Beyond the courts, beyond the cities, beyond the polished glamour of Aureate and Lazuline society — there are fae who never joined either court. They predate both. They live in old forests and hidden valleys, in cottages woven from willow-branch and moonlit stone. They speak the oldest dialects. They remember things the courts have <em>chosen</em> to forget.</p>
+
+    <p class="prose">The Wild Fae are not unified. They are not numerous. They do not wear court colors and they do not pay tribute to either throne. Most lowland fae believe they are myth. The Wild Fae find this convenient.</p>
+
+    <p class="prose"><strong>Eudora was Wild Fae.</strong> She raised three royal Lycari pups in a willow-vine cabin and spoke to the forest in a tongue the courts no longer recognize. She knew enough about pack dynamics to suspect the truth of what those pups were, and she said nothing — not because she didn't care, but because she knew the moment she said anything, the world would <em>arrive</em> for them. She kept them safe by giving them a placeholder name and letting the forest hide them. She died when the pups were teenagers. They raised themselves the rest of the way.</p>
+
+    <p class="prose">Other Wild Fae remain. Some travel. Some keep enclaves. <strong>Ysennra</strong> — a Wild Fae princess of an enclave the courts do not officially recognize — will appear in Books 4-5, hunting an egg she believes is hers. Her relationship to Eudora's lineage, and to the Stormveil pack, will turn out to be more entangled than anyone yet realizes.</p>
+
+    <div class="hook-block">A Wild Fae is, in the courts' polite phrasing, "a fae who hasn't been civilized." In the Wild Fae's phrasing, the courts are a fae who has forgotten what fae <em>are</em>. Both phrasings are technically correct. Only one of them is going to age well.</div>
+  </div>
+
+  <!-- THREADWEAVING & DREAMSTEEL -->
+  <div class="section">
+    <div class="section-title">Crafts of the Courts <span class="canon-badge">Cultural Canon</span></div>
+
+    <div class="lore-card">
+      <div class="lore-card-name">🧵 Threadweaving</div>
+      <div class="lore-card-body">A fae craft of <em>stitching magic into fabric</em>. A properly threadwoven garment is not enchanted in the way a rune is enchanted — it is <strong>meaning made physical</strong>. A Threadwoven cloak can carry a memory. A Threadwoven gown can carry an emotion. A Threadwoven binding can hold a vow. Both courts practice it. Aureate Threadweaving tends toward courage and protection. Lazuline Threadweaving tends toward truth and reflection. The most masterful Threadweavers can stitch <em>fate</em>, but doing so is forbidden by both courts and quietly punished when discovered.</div>
+    </div>
+
+    <div class="lore-card">
+      <div class="lore-card-name">⚒ Dreamsteel</div>
+      <div class="lore-card-body">A shimmering metal forged only in the Aureate Court that <em>reacts to emotion</em>. Dreamsteel changes color subtly with the wielder's mood — flushing warm in love, darkening in grief, sharpening to silver-bright in fury. Dreamsteel weapons are rare, expensive, and prized by court warriors. A Dreamsteel blade in a stranger's hand will tell you what they are about to do, if you know how to read it. Most don't. Most also don't realize they're being read.</div>
+    </div>
+
+    <div class="lore-card">
+      <div class="lore-card-name">🌟 The Parade of the Lost Light</div>
+      <div class="lore-card-body">Nulune's annual festival, held under both moons when alignment permits. The Parade ostensibly honors <em>lost</em> ancient species — wolves, dragons, Wild Fae — beings the city believes belong to legend. The whole event is essentially a polite memorial to peoples the city is incorrect about. Reign Stormveil watched the most recent Parade from a Nulune spire. He found it funny in a way he did not have words for. He still doesn't.</div>
+    </div>
+  </div>
+
+  <!-- TAVERN RUMORS -->
+  <div class="section">
+    <div class="section-title">Tavern Rumors &amp; Half-Truths</div>
+    <div class="rumor-section">
+      <p class="rumor-intro">What the courts say about each other. What the lowlands whisper about the Wild Fae. What both fae cities collectively pretend is not happening. Some are accurate. Some are slander. Some are quiet panic dressed up as gossip.</p>
+
+      <div class="rumor">
+        I heard the Aureate ambassador to Nulune has been wearing the same Threadwoven brooch for two years and it has <em>changed color</em> three times. They say the third change was last month. Nobody knows what it means. Everyone is pretending it means nothing.
+        <span class="rumor-source">— Lazuline market gossip, peak season</span>
+      </div>
+
+      <div class="rumor">
+        Wild Fae aren't real, dear. They're a story your grandmother told you. There are no fae living in the deep woods. The deep woods are <em>empty</em>. We've checked.
+        <span class="rumor-source">— A perfectly polite Aureate noblewoman, lying through her teeth</span>
+      </div>
+
+      <div class="rumor">
+        Wings emerge on their own time, but I'll tell you a secret — they emerge faster when you're <em>seen</em>. Properly seen. By someone who knows what you are. My wings came in the night I met my mate. Six years early. Couldn't fold them flat for a week.
+        <span class="rumor-source">— A late-bloom fae, six wines deep</span>
+      </div>
+
+      <div class="rumor">
+        The Throne of Echoes is in Nulune. Has been the whole time. Hidden under the Lazuline observatory. Every Aureate diplomat who's been allowed near it goes home and forgets they were looking.
+        <span class="rumor-source">— Aureate scholar, almost certainly wrong, possibly correct</span>
+      </div>
+
+      <div class="rumor">
+        The Reaver bond is a curse. Don't let anyone tell you otherwise. My great-aunt was Reaver-bonded. When her mate died she <em>followed him</em> three days later. Walked into the lake fully dressed and never came out.
+        <span class="rumor-source">— A grieving cousin at a wake</span>
+      </div>
+
+      <div class="rumor">
+        I saw a girl at SNU whose runes lit up at the ball. <em>Lit up.</em> She wasn't even casting. The lanterns swept past her and her arms <em>answered</em>. They say she touched two Fonts. Two. Nobody touches two. Except — apparently — her.
+        <span class="rumor-source">— A Stryxian first-year, breathless</span>
+      </div>
+
+      <div class="rumor">
+        The Wild Fae raised wolves once. Years ago. Three pups. Black, cream, and shadow. Probably a story. Probably not.
+        <span class="rumor-source">— A village elder near the Eastern Wilds</span>
+      </div>
+
+      <div class="rumor">
+        The Parade of the Lost Light is a <em>memorial</em>. We hold it every year for the lost ones. The wolves. The dragons. The Wild Fae. Don't tell me they're still out there. They aren't. They <em>can't</em> be. We'd know.
+        <span class="rumor-source">— A Lazuline ceremonial herald, very firmly</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- IRON CANON -->
+  <div class="section">
+    <div class="section-title">Iron Canon — What Cannot Change</div>
+    <p class="prose">The rules below shape every fae scene across all ten books. The fae are the root of the Faekin tree — the species that forgot it was a root, and the species that is going to remember.</p>
+
+    <div class="lore-card">
+      <div class="lore-card-name">The Seven Iron Rules</div>
+      <div class="lore-card-body" style="margin-top:8px;">
+        <p style="margin-bottom:10px;"><strong>1.</strong> All Faekin lineages branch from the Fae. Wolves, owls, dragons, sirens — all are fae who chose differently.</p>
+        <p style="margin-bottom:10px;"><strong>2.</strong> Two great courts: Aureate (Ameliora, gold/sun) and Lazuline (Nulune, sapphire/moon). Locked in mirror by the Shattered Accord.</p>
+        <p style="margin-bottom:10px;"><strong>3.</strong> Wings emerge late — usually 22-26 — through Font awakening and maturation. Cannot be hidden by glamour for long.</p>
+        <p style="margin-bottom:10px;"><strong>4.</strong> Most fae bond mates at 25. Earlier bonding is rare and often catastrophic.</p>
+        <p style="margin-bottom:10px;"><strong>5.</strong> Each fae chooses one of seven Fonts at SNU mid-year. The choice is irrevocable. Touching two Fonts is recorded as legend, not norm.</p>
+        <p style="margin-bottom:10px;"><strong>6.</strong> Four Bonds: Heartsong, Future, Warrior, Reaver. Most bonded pairs carry one. Carrying multiple is mythic.</p>
+        <p style="margin-bottom:0;"><strong>7.</strong> Wild Fae exist. The courts pretend they do not. The Wild Fae prefer it that way.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="divider" style="margin-bottom:20px;">
+      <div class="divider-line" style="width:40px;"></div>
+      <div class="divider-gem"></div>
+      <div class="divider-line reverse" style="width:40px;"></div>
+    </div>
+    <div class="footer-text">Faeheart Chronicles · Culture Canon · The Fae &amp; The Two Courts · © 2026 Zoey Alexis Caine</div>
+  </div>
+
+</div>
+</body>
+</html>
