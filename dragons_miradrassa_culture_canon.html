@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dragons & Miradrassa — Culture Canon</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=EB+Garamond:ital@1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ember:        #E0542E;
+    --ember-light:  #F08756;
+    --ember-pale:   #F8B894;
+    --obsidian:     #08070A;
+    --deep-stone:   #14100E;
+    --stone-mid:    #241814;
+    --gold-warm:    #D4A050;
+    --gold-bright:  #F0C878;
+    --bone:         #E8DCC4;
+    --molten:       #FF3D1A;
+    --molten-dim:   #B82F10;
+    --cream:        #FFF2E0;
+    --text-body:    #D4BCA0;
+    --text-dim:     #7A6655;
+    --rumor:        #C8A07A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--obsidian);
+    color: var(--text-body);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Ember-flecked starfield — ash and embers in the dark */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 8% 12%, rgba(255,200,140,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 38%, rgba(232,135,46,0.35) 0%, transparent 100%),
+      radial-gradient(1px 1px at 38% 8%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 52% 60%, rgba(232,135,46,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 68% 25%, rgba(255,200,140,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 82% 50%, rgba(255,107,61,0.35) 0%, transparent 100%),
+      radial-gradient(1px 1px at 18% 75%, rgba(232,135,46,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 80%, rgba(255,200,140,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 35% 90%, rgba(255,107,61,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 62% 85%, rgba(255,255,255,0.25) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 48% 33%, rgba(255,61,26,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 78% 65%, rgba(232,135,46,0.45) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 20% 55%, rgba(212,160,80,0.45) 0%, transparent 100%),
+      radial-gradient(2px 2px at 12% 92%, rgba(255,107,61,0.3) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 60px 40px 100px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 70px;
+    animation: fadeDown 1s ease both;
+  }
+
+  .series-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--ember);
+    opacity: 0.8;
+    margin-bottom: 20px;
+  }
+
+  .culture-name {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(48px, 7vw, 76px);
+    font-weight: 400;
+    color: var(--ember-light);
+    letter-spacing: 0.06em;
+    line-height: 1;
+    margin-bottom: 12px;
+    text-shadow: 0 0 80px rgba(232,84,46,0.4), 0 2px 4px rgba(0,0,0,0.9);
+  }
+
+  .culture-subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-warm);
+    margin-bottom: 18px;
+    opacity: 0.85;
+  }
+
+  .culture-epithet {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--bone);
+    letter-spacing: 0.03em;
+    margin: 0 auto 30px;
+    max-width: 580px;
+    line-height: 1.5;
+  }
+
+  .culture-epithet em {
+    color: var(--ember-light);
+    font-style: normal;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: center;
+    margin: 24px 0;
+  }
+
+  .divider-line {
+    height: 1px;
+    width: 80px;
+    background: linear-gradient(to right, transparent, var(--ember));
+  }
+
+  .divider-line.reverse {
+    background: linear-gradient(to left, transparent, var(--ember));
+  }
+
+  .divider-gem {
+    width: 7px;
+    height: 7px;
+    background: var(--ember);
+    transform: rotate(45deg);
+    box-shadow: 0 0 14px var(--ember), 0 0 28px rgba(255,61,26,0.4);
+  }
+
+  /* Sections */
+  .section {
+    margin-bottom: 56px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--ember);
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, rgba(232,84,46,0.45), transparent);
+  }
+
+  .canon-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-warm);
+    border: 1px solid rgba(212,160,80,0.4);
+    padding: 4px 10px;
+    margin-left: 12px;
+    vertical-align: middle;
+    background: rgba(212,160,80,0.05);
+  }
+
+  .canon-badge::before {
+    content: '◆';
+    font-size: 7px;
+  }
+
+  .canon-badge.locked {
+    color: var(--molten);
+    border-color: rgba(255,61,26,0.4);
+    background: rgba(255,61,26,0.05);
+  }
+
+  /* Body prose */
+  .prose {
+    font-size: 17px;
+    color: var(--text-body);
+    line-height: 1.8;
+    margin-bottom: 18px;
+  }
+
+  .prose strong {
+    color: var(--ember-light);
+    font-weight: 600;
+  }
+
+  .prose em {
+    color: var(--bone);
+  }
+
+  /* Quote / epithet block */
+  .quote-block {
+    background: rgba(36, 24, 20, 0.55);
+    border-left: 2px solid var(--ember);
+    padding: 22px 28px;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--bone);
+    line-height: 1.8;
+    margin: 16px 0;
+  }
+
+  .quote-block .attribution {
+    display: block;
+    margin-top: 12px;
+    font-family: 'Cinzel', serif;
+    font-style: normal;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-warm);
+    opacity: 0.8;
+  }
+
+  /* Lore card */
+  .lore-card {
+    background: rgba(36, 24, 20, 0.45);
+    border: 1px solid rgba(232,84,46,0.18);
+    padding: 26px 30px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .lore-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--ember), transparent);
+  }
+
+  .lore-card-name {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    letter-spacing: 0.15em;
+    color: var(--gold-bright);
+    margin-bottom: 14px;
+  }
+
+  .lore-card-body {
+    font-size: 16px;
+    color: var(--text-body);
+    line-height: 1.75;
+  }
+
+  .lore-card-body strong {
+    color: var(--ember-light);
+  }
+
+  /* Dragon-type grid */
+  .dragon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .dragon-tile {
+    background: rgba(36, 24, 20, 0.55);
+    border: 1px solid rgba(232,84,46,0.15);
+    padding: 18px 20px;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+
+  .dragon-tile:hover {
+    border-color: rgba(232,84,46,0.4);
+    transform: translateY(-2px);
+  }
+
+  .dragon-tile-icon {
+    font-size: 22px;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .dragon-tile-name {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    color: var(--gold-bright);
+    margin-bottom: 4px;
+  }
+
+  .dragon-tile-color {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 10px;
+  }
+
+  .dragon-tile-desc {
+    font-size: 13px;
+    color: var(--text-body);
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  /* Path branches — 1000 year split */
+  .path-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .path-card {
+    background: rgba(20, 16, 14, 0.7);
+    border: 1px solid rgba(232,84,46,0.2);
+    padding: 22px 20px;
+    text-align: center;
+    position: relative;
+  }
+
+  .path-card-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-warm);
+    margin-bottom: 8px;
+  }
+
+  .path-card-name {
+    font-family: 'Cinzel', serif;
+    font-size: 16px;
+    letter-spacing: 0.1em;
+    color: var(--ember-light);
+    margin-bottom: 14px;
+  }
+
+  .path-card-body {
+    font-size: 14px;
+    color: var(--text-body);
+    line-height: 1.65;
+    font-style: italic;
+  }
+
+  /* Iron rule callout */
+  .iron-rule {
+    background: linear-gradient(135deg, rgba(255,61,26,0.08), rgba(232,84,46,0.04));
+    border: 1px solid rgba(255,61,26,0.3);
+    padding: 22px 28px;
+    margin: 18px 0;
+    position: relative;
+  }
+
+  .iron-rule::before {
+    content: '⚠ IRON RULE';
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    background: var(--obsidian);
+    padding: 0 10px;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--molten);
+  }
+
+  .iron-rule-text {
+    font-size: 16px;
+    color: var(--bone);
+    line-height: 1.7;
+  }
+
+  .iron-rule-text strong {
+    color: var(--molten);
+    font-weight: 600;
+  }
+
+  /* Tavern rumors — special treatment */
+  .rumor-section {
+    background: rgba(20, 14, 10, 0.5);
+    border: 1px dashed rgba(200,160,122,0.25);
+    padding: 26px 30px;
+    margin-top: 18px;
+  }
+
+  .rumor-intro {
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+
+  .rumor {
+    font-style: italic;
+    font-size: 15px;
+    color: var(--rumor);
+    line-height: 1.65;
+    margin-bottom: 12px;
+    padding-left: 22px;
+    position: relative;
+  }
+
+  .rumor::before {
+    content: '"';
+    position: absolute;
+    left: 0;
+    top: -4px;
+    font-family: 'EB Garamond', serif;
+    font-size: 32px;
+    color: var(--ember);
+    opacity: 0.5;
+    line-height: 1;
+  }
+
+  .rumor-source {
+    display: block;
+    font-style: normal;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 4px;
+    opacity: 0.7;
+  }
+
+  /* Hook seeds */
+  .hook-block {
+    background: rgba(232,84,46,0.04);
+    border: 1px dashed rgba(232,84,46,0.25);
+    padding: 18px 22px;
+    font-size: 14px;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-top: 14px;
+    line-height: 1.7;
+  }
+
+  .hook-block::before {
+    content: '✦ Saga hook: ';
+    color: var(--ember);
+    font-style: normal;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    margin-top: 80px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(232,84,46,0.15);
+  }
+
+  .footer-text {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  /* Animations */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 700px) {
+    .page { padding: 40px 22px 80px; }
+    .path-grid { grid-template-columns: 1fr; }
+    .dragon-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="series-label">Of Stormsalt &amp; Smoke — Faeheart Chronicles</div>
+    <div class="culture-name">Dragons</div>
+    <div class="culture-subtitle">&amp; The Realm of Miradrassa</div>
+    <div class="culture-epithet">"A dragon is not a beast you ride. A dragon is <em>weather you have learned to walk beside</em>."</div>
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-gem"></div>
+      <div class="divider-line reverse"></div>
+    </div>
+    <div class="series-label" style="opacity:0.55; font-size:9px;">Culture Canon · Book 1 Reference · Faeheart World Bible</div>
+  </div>
+
+  <!-- IDENTITY -->
+  <div class="section">
+    <div class="section-title">Identity <span class="canon-badge locked">Canon-Locked</span></div>
+    <p class="prose">Dragons are not a species so much as a <strong>force of nature given a body</strong>. Each one hatches from an egg that has waited — sometimes years, sometimes centuries — for the right person to draw close enough to crack it. They do not breed in herds. They do not fly in formations. They do not raise warriors. They <em>arrive</em>, one at a time, when the world bends correctly.</p>
+    <p class="prose">A dragon-bonded fae is called many things across Xiphos — <em>wyrm-walker</em>, <em>ember-kin</em>, <em>skybound</em> — but in Miradrassa they are simply called <strong>bonded</strong>. The bond is the only title that matters. Everything else is regional flavor.</p>
+    <p class="prose">Bonded pairs travel the world. They take contracts the way Witcher monsters do — solitary, paid, dangerous, often misunderstood. They never ride in armies. They never serve a crown. The Skyborn Accord, written in dragon-blood after the Sundering, forbids it. <strong>Dragons cannot hold seats of power.</strong> They are too old, too vast, and too prone to outliving every government they touch.</p>
+
+    <div class="quote-block">
+      The dragon does not ride for kings. The dragon does not bow to crowns. The dragon arrives, the dragon answers, and the dragon leaves before the dust has settled.
+      <span class="attribution">— First verse of the Skyborn Accord</span>
+    </div>
+  </div>
+
+  <!-- MIRADRASSA — THE HOMELAND -->
+  <div class="section">
+    <div class="section-title">Miradrassa — The Homeland <span class="canon-badge locked">Canon-Locked</span></div>
+    <p class="prose">Miradrassa is the only place in Xiphos a dragon-bonded pair can call <strong>home</strong>. It is not a city. It is not a school. It is not a kingdom. It is a <em>volcanic ridge complex</em> reachable only by dragon flight, where the bonded return to rest, to heal, to grieve, and to listen.</p>
+    <p class="prose">The terrain itself is impossible. Black-glass cliffs rise from rivers of slow-cooled basalt. Vents breathe sulphur and warm ash that smells, somehow, like cedar and old smoke. Hot springs run obsidian-dark and salt-bright at the same time. Lava-fed forges glow blue-white in caves no fae could survive without a dragon's breath at their back.</p>
+
+    <div class="iron-rule">
+      <div class="iron-rule-text"><strong>Miradrassa is alive.</strong> The first ten dragons to bond, ten thousand years ago, chose at the end of their thousand-year span to become <em>land</em>. Their bodies are now the obsidian ridges, the lava-fed forges, the warm springs, the cliffs themselves. The land remembers them. Bonded pairs returning home are walking on the literal remains of their elders. The Ember Hearth — the great central hall of Miradrassa — sits inside what was once the chest cavity of the eldest of the ten. The hearth-fire has burned, without going out, for ten thousand years.</div>
+    </div>
+
+    <p class="prose">Miradrassa was built by fae hands and dragon breath together — but its <em>foundation</em> is older than fae civilization. The bonded do not build over their elders. They build <em>with</em> them. Stairs are carved into spines. Halls are hollowed between ribs. The young learn the names of the ten by walking through them.</p>
+  </div>
+
+  <!-- THE BOND -->
+  <div class="section">
+    <div class="section-title">The Bond <span class="canon-badge locked">Canon-Locked</span></div>
+    <p class="prose">A dragon bond is not chosen. It is not earned. It is not, in the traditional sense, <em>summoned</em>. The egg simply <strong>knows</strong>, and when its person comes near enough, it cracks.</p>
+    <p class="prose">Some eggs hatch the moment they are laid eyes upon. Most wait — quietly, dormant, sometimes for decades — until the right resonance walks past. A bond can happen at age six or age twenty-six. It can happen mid-class, mid-meal, mid-sentence. It cannot be predicted. It cannot be forced. It cannot be denied.</p>
+    <p class="prose">At Selenari Nexus, eggs are kept in the care of <strong>Professor Niraphael Cypress</strong>, the current <em>Egg-Caller</em> — a dragon-bonded fae whose particular gift is <em>summoning</em> dormant eggs to wake, and bringing them within range of the students who might be theirs. She has held the position for so long that nobody at the Nexus is entirely sure when she began. She declines to clarify.</p>
+
+    <div class="iron-rule">
+      <div class="iron-rule-text"><strong>Wolves cannot bond dragons.</strong> This is not custom. It is biology. The Lycari soul is too wolf-bright, too pack-bound, too earth-rooted for the sky-fire of a dragon to anchor in it. Bonded pairs are <em>always</em> fae. <em>Always.</em> Across ten thousand years of recorded bonding, no exception has ever held.</div>
+    </div>
+
+    <div class="hook-block">An egg that keeps appearing in the wrong room is not a malfunctioning egg. It is an egg that has scented something close to its person and is trying to close the gap. What the egg is willing to break, in order to find its bonded, is a question Miradrassa has not yet had to answer.</div>
+  </div>
+
+  <!-- THE SEVEN TYPES -->
+  <div class="section">
+    <div class="section-title">The Seven Lineages <span class="canon-badge">Canon-Locked</span></div>
+    <p class="prose">Dragons hatch into seven recognized lineages. The lineage is not chosen by the bonded — it is whatever the egg has been, sleeping, all along. A bonded fae's personality, magic, or temperament does not determine the dragon. The dragon arrives as itself. The fae adjusts.</p>
+
+    <div class="dragon-grid">
+      <div class="dragon-tile">
+        <span class="dragon-tile-icon">✨</span>
+        <div class="dragon-tile-name">Celestial</div>
+        <div class="dragon-tile-color">Blue · Gold</div>
+        <div class="dragon-tile-desc">Star-flecked scales. Fly highest. Said to navigate by constellations no fae can see.</div>
+      </div>
+      <div class="dragon-tile">
+        <span class="dragon-tile-icon">🌊</span>
+        <div class="dragon-tile-name">Oceanic</div>
+        <div class="dragon-tile-color">Blue · White</div>
+        <div class="dragon-tile-desc">Sea-bound. Swim as readily as fly. Their breath cools instead of burns.</div>
+      </div>
+      <div class="dragon-tile">
+        <span class="dragon-tile-icon">🔥</span>
+        <div class="dragon-tile-name">Molten</div>
+        <div class="dragon-tile-color">Black · Orange</div>
+        <div class="dragon-tile-desc">Volcanic-born. Glow from within. Their veins run lava-bright when angered.</div>
+      </div>
+      <div class="dragon-tile">
+        <span class="dragon-tile-icon">🌿</span>
+        <div class="dragon-tile-name">Naturistic</div>
+        <div class="dragon-tile-color">Green Iridescent</div>
+        <div class="dragon-tile-desc">Forest-blooded. Their scales shift with the seasons. Most often bonded to Primal-Font fae.</div>
+      </div>
+      <div class="dragon-tile">
+        <span class="dragon-tile-icon">🌞</span>
+        <div class="dragon-tile-name">Luminari</div>
+        <div class="dragon-tile-color">White · Gold</div>
+        <div class="dragon-tile-desc">Daylight-bound. Heal as easily as harm. Their breath is bone-warm, not flame.</div>
+      </div>
+      <div class="dragon-tile">
+        <span class="dragon-tile-icon">⚡</span>
+        <div class="dragon-tile-name">Stormbound</div>
+        <div class="dragon-tile-color">Silver · Indigo</div>
+        <div class="dragon-tile-desc">Born of weather. Their scales hum before lightning strikes. They <em>are</em> lightning, sometimes.</div>
+      </div>
+      <div class="dragon-tile">
+        <span class="dragon-tile-icon">🩸</span>
+        <div class="dragon-tile-name">Dreadscale</div>
+        <div class="dragon-tile-color">Red · Green · Black</div>
+        <div class="dragon-tile-desc">Rarest. Dangerous. Their bonds are uneven; their bonded fae are often marked. The order watches them closely.</div>
+      </div>
+    </div>
+
+    <p class="prose">Beyond lineage, every dragon is its own creature. <strong>An egg cracks and the dragon is whatever it is.</strong> No two are alike. Hatchlings of the same lineage may differ in size, temperament, color, breath, and intelligence. Miradrassa records every dragon by name; no dragon is ever called by lineage alone.</p>
+  </div>
+
+  <!-- THE 1000-YEAR PATH -->
+  <div class="section">
+    <div class="section-title">The Thousand-Year Path <span class="canon-badge locked">Canon-Locked</span></div>
+    <p class="prose">A dragon lives, on average, one thousand years. Their bonded fae lives — through the bond — alongside them, often outliving the natural fae span by centuries. When the millennium nears, the dragon must choose. There are three paths. There have only ever been three.</p>
+
+    <div class="path-grid">
+      <div class="path-card">
+        <div class="path-card-label">Path of the Fae</div>
+        <div class="path-card-name">The Walker</div>
+        <div class="path-card-body">The dragon enters the fae fully, surrendering scale for skin. They live out their final years in fae-form, often as wandering elders, advisors, or recluses. They may pass on memory but rarely teach.</div>
+      </div>
+      <div class="path-card">
+        <div class="path-card-label">Path of the Dragon</div>
+        <div class="path-card-name">The Wanderer</div>
+        <div class="path-card-body">The dragon takes their bonded's soul into themselves, becoming a single creature with two minds. They wander forever — vast, ancient, rarely seen, almost mythic. The fae voice survives inside the dragon-form.</div>
+      </div>
+      <div class="path-card">
+        <div class="path-card-label">Path of the Land</div>
+        <div class="path-card-name">The Becoming</div>
+        <div class="path-card-body">The dragon and bonded together transform into <em>place</em>. A forest. A meadow. A volcano. A river-bend. They become geography. The first ten chose this. They are Miradrassa.</div>
+      </div>
+    </div>
+
+    <p class="prose">Bonded pairs do not announce their choice. They simply <em>go</em>, and one day Miradrassa knows that another elder has joined the ridge, the spring, the sky. New shrines are not built. The land was always going to be them.</p>
+
+    <div class="hook-block">A corrupted dragon cannot complete the cycle. The Path requires the bond intact. What happens to a dragon whose bond has rotted from the inside is something the order does not speak of openly. The phrase used, when it must be used, is <em>"trapped between."</em></div>
+  </div>
+
+  <!-- TRADITIONS & LAW -->
+  <div class="section">
+    <div class="section-title">Traditions, Pacts &amp; Law</div>
+
+    <div class="lore-card">
+      <div class="lore-card-name">⚔ The Ember Pact</div>
+      <div class="lore-card-body">A sacred oath sworn after the Dragonblood Wars. It forbids: <strong>blood-binding magic</strong>, <strong>multi-rider control</strong>, <strong>using dragons for conquest</strong>, and <strong>group missions except in world-ending emergency</strong>. Every newly bonded pair swears it within their first year. To break it is to be unmade — refused entry to Miradrassa, refused name in the Ballad, refused the Path.</div>
+    </div>
+
+    <div class="lore-card">
+      <div class="lore-card-name">🔥 The Skyborn Accord</div>
+      <div class="lore-card-body">Older than the Pact. Written by the surviving dragons themselves at the close of the Sundering. The Accord forbids bonded pairs from holding political seats, military rank, or court office. <strong>Dragons cannot rule.</strong> A bonded pair offered a crown must refuse it or surrender the bond. There is no recorded case of refusal. There is also no recorded case of surrender.</div>
+    </div>
+
+    <div class="lore-card">
+      <div class="lore-card-name">🪶 Scorched Ink</div>
+      <div class="lore-card-body">Glowing tattoos etched into bonded fae. The pigment is dragon-blood mixed with volcanic ash from Miradrassa's hearth. Each mark records a bonded moment, a victory, a loss, a flight that mattered. The ink glows in firelight and dims in grief. A bonded pair's body becomes a <em>book</em> of their life together. When the bond ends, the ink fades to black.</div>
+    </div>
+
+    <div class="lore-card">
+      <div class="lore-card-name">🎶 The Ballad of Skyborn</div>
+      <div class="lore-card-body">A living oral epic, sung at the Ember Hearth across generations. Each fallen warrior's verse is added by the bonded who knew them best. The Ballad has no end. It is sung in turn — every bonded pair returning to Miradrassa is expected to sit and listen for at least one full verse, even if they have heard it a thousand times. Especially then.</div>
+    </div>
+
+    <div class="lore-card">
+      <div class="lore-card-name">💔 The Ballad of Ashwing</div>
+      <div class="lore-card-body">A separate, shorter song — the most solemn in Miradrassa. Tells of <em>Ashwing</em>, a warrior who refused blood-binding during the Dragonblood Wars, exiled herself to the mountains, and returned with her dragon to end the war. Her name is invoked in oaths. Bonded pairs who must do something terrible swear <em>"by Ashwing's flight"</em> before they do it. It is the closest thing to a prayer the order has.</div>
+    </div>
+
+    <div class="lore-card">
+      <div class="lore-card-name">🌅 The Celestial Wake</div>
+      <div class="lore-card-body">When a bonded pair rides into battle, the sky shifts color in the direction they fly — flecked with the hue of the dragon's lineage. A Stormbound flight turns the horizon silver-violet. A Molten flight burns the sunset red days early. The Wake is a warning and a promise: <em>weather is coming, and it has chosen sides.</em></div>
+    </div>
+  </div>
+
+  <!-- HISTORY -->
+  <div class="section">
+    <div class="section-title">The Dragonblood Wars &amp; The Sundering <span class="canon-badge">Historical Canon</span></div>
+    <p class="prose">Before the Pact and the Accord, dragons were nearly broken. Rival warlords attempted to <strong>bind dragons through blood ritual</strong>, forcing bonds where the egg had not chosen, twisting fae-dragon resonance into something obedient. The dragons endured this for less than a generation.</p>
+    <p class="prose">Then they <em>rebelled</em>.</p>
+    <p class="prose">The event came to be called <strong>the Sundering</strong>. Volcanic ridges cracked. The sky turned red for nine days. Entire armies were burned to glass. Blood-binders were the first to die — torn apart by the very dragons they had tried to chain. The bonded fae who had remained loyal to their dragons survived. Those who had joined the binders did not.</p>
+    <p class="prose">From the ash, the survivors gathered. They wrote the Skyborn Accord in dragon-blood and oath-fire, and from it they built the Ember Pact. Every bonded pair since has sworn both. There has not been a successful blood-binding attempt in nine thousand years.</p>
+
+    <div class="hook-block">There has not been a <em>successful</em> attempt. There have been attempts.</div>
+  </div>
+
+  <!-- TAVERN RUMORS -->
+  <div class="section">
+    <div class="section-title">Tavern Rumors &amp; Half-Truths</div>
+    <div class="rumor-section">
+      <p class="rumor-intro">What the bonded actually believe and what the average fae <em>thinks</em> they believe are not always the same. These are the whispers — overheard in roadside inns, market squares, and the back booths of taverns where someone's had one cup of wine too many. Some are true. Some are wildly wrong. Some are the kind of half-true that's worse than a lie.</p>
+
+      <div class="rumor">
+        I heard a Celestial dragon can blend right into the stars at dusk. Disappear like a thought. My cousin's wife saw one over the cliffs and swore the whole sky <em>blinked</em>.
+        <span class="rumor-source">— A drunk shepherd, somewhere outside Nulune</span>
+      </div>
+
+      <div class="rumor">
+        Don't look a Dreadscale in the eye. Not even a hatchling. They remember every face that's seen them, and one day they'll come asking what you wanted.
+        <span class="rumor-source">— A Lazuline market vendor, refusing to display dragon-art</span>
+      </div>
+
+      <div class="rumor">
+        The Ember Hearth never goes out. They say a bonded pair tried to put it out once, just to see if it could be done. The dragon refused. The fae went home and never spoke of it. The hearth was warmer the next day.
+        <span class="rumor-source">— A retired bonded, now a fae-form elder</span>
+      </div>
+
+      <div class="rumor">
+        Drink dragon-blood and you live forever. Or you go mad. Either one's a deal, depending on the day, isn't it?
+        <span class="rumor-source">— Always a fool, always at last call</span>
+      </div>
+
+      <div class="rumor">
+        Niraphael's been at that school for three hundred years. Three <em>hundred</em>. They say the eggs talk to her. I think she talks back.
+        <span class="rumor-source">— A first-year owl student who has had quite enough of midterms</span>
+      </div>
+
+      <div class="rumor">
+        There are unbonded dragons out there. Wild ones. Old ones. Ones the Pact never reached. My grandfather saw one over the Strixian Isles when he was a boy. Black-and-gold. Bigger than the moon. He never went back to sea.
+        <span class="rumor-source">— Almost certainly a tall tale. Almost.</span>
+      </div>
+
+      <div class="rumor">
+        You know what they say about Miradrassa? You can hear the elders breathing if you sleep on the cliffs. Slow. Patient. Like the mountain itself is waiting for something.
+        <span class="rumor-source">— A bonded fae, drunk, at the Ember Hearth</span>
+      </div>
+
+      <div class="rumor">
+        I heard there's a dragon out there waiting on a wolf. I know, I know. Wolves don't bond dragons. Just telling you what I heard.
+        <span class="rumor-source">— A Stryxian scholar, already regretting saying it aloud</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- IRON CANON SUMMARY -->
+  <div class="section">
+    <div class="section-title">Iron Canon — What Cannot Change</div>
+    <p class="prose">The rules below are <em>load-bearing</em>. Every dragon scene in every book must respect them. They are the rules that make the breaking of them, when it comes, mean something.</p>
+
+    <div class="lore-card">
+      <div class="lore-card-name">The Five Iron Rules</div>
+      <div class="lore-card-body" style="margin-top:8px;">
+        <p style="margin-bottom:10px;"><strong>1.</strong> Wolves cannot bond dragons. Bonded pairs are always fae.</p>
+        <p style="margin-bottom:10px;"><strong>2.</strong> Dragons cannot hold seats of political power. The Skyborn Accord forbids it.</p>
+        <p style="margin-bottom:10px;"><strong>3.</strong> A dragon bond cannot be forced. The egg chooses. Blood-binding is the worst crime in the order's history.</p>
+        <p style="margin-bottom:10px;"><strong>4.</strong> Bonded pairs do not ride in formation. They do not serve armies. The Ember Pact forbids group missions except in world-ending emergency.</p>
+        <p style="margin-bottom:0;"><strong>5.</strong> A dragon-bonded fae lives as long as the dragon. When the bond ends — by death, severance, or corruption — both of them go.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="divider" style="margin-bottom:20px;">
+      <div class="divider-line" style="width:40px;"></div>
+      <div class="divider-gem"></div>
+      <div class="divider-line reverse" style="width:40px;"></div>
+    </div>
+    <div class="footer-text">Faeheart Chronicles · Culture Canon · Dragons &amp; Miradrassa · © 2026 Zoey Alexis Caine</div>
+  </div>
+
+</div>
+</body>
+</html>
